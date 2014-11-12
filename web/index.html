@@ -62,6 +62,8 @@
                     var select;
                     var markers = [];
                     var apiKey = "AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM";
+                    var times = [];
+                    var taxi = [];
 
 
                     //start initalize
@@ -274,9 +276,11 @@
                                     setRecommendPlaceBox(place.array.length);
                                     console.log(place);
                                     for (var i = 0; i < place.array.length; i++) {
-                                        var dest = "( " + place.array[i].lat + ", " + place.array[i].lng + ")";
-                                        var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + address + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKey;
+                                        var dest = "(" + place.array[i].lat + "," + place.array[i].lng + ")";
+                                        var src = "(" + lat + "," + lng + ")";
+                                        var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKey;
                                         console.log(requestDistance);
+                                        requestDirection(requestDistance);
                                         lats.push(place.array[i].lat);
                                         lngs.push(place.array[i].lng);
                                         names.push(place.array[i].name);
@@ -331,6 +335,20 @@
 
                     function clearMarkers() {
                         setAllMap(null);
+                    }
+
+                    function requestDirection(link) {
+                        var servlet = 'ParseJSON?link=';
+                        var url = servlet + link;
+                        var distance;
+                        var time;
+                        console.log(url);
+                        jQuery.getJSON(url, function (data) {
+                            console.log(data);
+                            distance = data.routes[0].legs[0].distance.value;
+                            time = data.routes[0].legs[0].distance.text;
+                            console.log(distance);
+                        });
                     }
 
 
