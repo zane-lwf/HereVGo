@@ -61,6 +61,7 @@
                     var links = [];
                     var select;
                     var markers = [];
+                    var apiKey = "AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM";
 
 
                     //start initalize
@@ -213,7 +214,7 @@
                             infowindow.open(map, marker);
                             map.setCenter(myLatlng);
                         });
-                        
+
                         markers.push(marker);
                     }
                     //end marker
@@ -262,6 +263,7 @@
                         }
                         var address = document.getElementById('start').value;
                         var radius = document.getElementById('radius').value;
+                        var money = document.getElementById('money').value;
                         geocoder.geocode({'address': address}, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
                                 console.log(results[0].geometry.location.k + " & " + results[0].geometry.location.B);
@@ -272,6 +274,9 @@
                                     setRecommendPlaceBox(place.array.length);
                                     console.log(place);
                                     for (var i = 0; i < place.array.length; i++) {
+                                        var dest = "( " + place.array[i].lat + ", " + place.array[i].lng + ")";
+                                        var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + address + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKey;
+                                        console.log(requestDistance);
                                         lats.push(place.array[i].lat);
                                         lngs.push(place.array[i].lng);
                                         names.push(place.array[i].name);
@@ -290,7 +295,7 @@
                     }
 
                     function calTaxi(distance) {
-
+                        return 35 + distance * 5;
                     }
 
                     window.onload = function () {
