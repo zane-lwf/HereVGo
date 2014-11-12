@@ -1,0 +1,232 @@
+@charset "utf-8";
+/* CSS Document */
+
+	
+#all {
+	height: 1500px;
+	width: 1140px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	z-index: 2;
+	padding-top: 130px;
+	position: relative;
+}
+#head1 {
+	width: 769px;
+	height: 538px;
+	position: absolute;
+	left: 366px;
+	top: 154px;
+	background-color: #C9C;
+}
+body {
+	position: relative;
+	background-image: url(img/bkkfull.png);
+	background-repeat: no-repeat;
+	background-repeat: no-repeat;
+	background-color: #FFFFFF;
+	background-position: center;
+}
+#det {
+	height: 900px;
+	width: 1140px;
+	position: relative;
+}
+#lt1 {
+	height: 309px;
+	width: 284px;
+	position: absolute;
+	left: 55px;
+	top: 386px;
+	background-color: #F96;
+}
+#ct {
+	height: auto;
+	width: auto;
+	margin-left: 320px;
+}
+#spic1 {
+	height: 487px;
+	width: 784px;
+	position: absolute;
+	left: 354px;
+	top: 842px;
+	background-color: #669;
+}
+#spic {
+	height: 102px;
+	width: 1079px;
+	position: absolute;
+	top: 716px;
+	left: 52px;
+	background-color: #3C6;
+}
+#pic02 {
+	height: 216px;
+	width: 281px;
+	position: absolute;
+	z-index: auto;
+	left: 56px;
+	top: 156px;
+	background-repeat: no-repeat;
+	background-color: #0CF;
+}
+#pic03 {
+	height: 270px;
+	width: 634px;
+	background-image: url(img/MessageCover.png);
+	z-index: 3;
+}
+#pic04 {
+	height: 156px;
+	width: 286px;
+	position: absolute;
+	z-index: 5;
+	left: 308px;
+	top: 76px;
+}
+#bott {
+	height: 90px;
+	width: auto;
+	position: relative;
+}
+#LogoProj {
+	position: absolute;
+	width: 187px;
+	height: 75px;
+	left: 916px;
+	top: 571px;
+	background-image: url(img/cropped%20logo.png);
+	background-size: cover;
+	background-position: center;
+	z-index: 5;
+	background-repeat: no-repeat;
+}
+#formQSearch {
+	position: absolute;
+	width: 437px;
+	height: 36px;
+	left: 73px;
+	top: 19px;
+}
+#picLocate {
+	position: absolute;
+	width: 731px;
+	height: 424px;
+	left: 26px;
+	top: 21px;
+	background-color: #999;
+	z-index: 2;
+	background-image: url(img/ecotourism-128088-1.jpg);
+	background-size: cover;
+	background-position: center;
+}
+#picDisc {
+	position: absolute;
+	z-index: 3;
+	width: 712px;
+	height: 60px;
+	left: 26px;
+	top: 366px;
+	background-color: #FFF;
+	opacity: 0.8;
+	padding: 10px;
+}
+#botAddLocate {
+	position: absolute;
+	width: 189px;
+	height: 57px;
+	left: 54px;
+	top: 70px;
+	background-image: url(img/Botton/addLocate.png);
+	background-repeat: no-repeat;
+}
+#suggHead {
+	position: absolute;
+	width: 190px;
+	height: 57px;
+	left: 56px;
+	top: 8px;
+	background-image: url(img/Botton/sugLogo.png);
+}
+#suggBkList {
+	width: 263px;
+	height: 222px;
+	position: absolute;
+	left: 11px;
+	top: 75px;
+	overflow: scroll;
+	overflow-style: marquee-line;
+}
+#suggDetail {
+	position: absolute;
+	width: 230px;
+	height: 103px;
+	left: 1px;
+	top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#iconQsearch {
+	width : 40px;
+	height: 40px;
+	float: left;
+	background-color: #09C;
+	margin-right: 20px;
+}
+#map-canvas {
+	height: 455px;
+	width: 1029px;
+	padding: 0px;
+	position: absolute;
+	left: 46px;
+	top: 42px;
+}
+#panel {
+	position: absolute;
+	top: 5px;
+	left: 50%;
+	z-index: 5;
+	background-color: #fff;
+	padding: 5px;
+	border: 1px solid #999;
+}
+#directions-panel {
+	height: 100%;
+	float: right;
+	width: 390px;
+	overflow: auto;
+}
+#control {
+	padding: 5px;
+	font-size: 14px;
+	font-family: Arial;
+	z-index: 100;
+	position: absolute;
+	left: 215px;
+	top: 25px;
+	width: 534px;
+}
+#directions-panel {
+	float: none;
+	width: auto;
+}
+
+#BottWeb{
+	position: absolute;
+	height: 138px;
+	width: 1089px;
+	top: 1363px;
+	left: 53px;
+	background-color: #C93;
+	}
+
+#showCost{
+	position: absolute;
+	height: 481px;
+	width: 274px;
+	left: 53px;
+	top: 845px;
+	background-color: #696;
+}
