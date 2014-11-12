@@ -54,6 +54,9 @@
                     var map;
                     var onSelect;
                     var geocoder;
+                    var lats = [];
+                    var lngs = [];
+                    var select;
                     //start initalize
                     function initialize() {
                         //about map
@@ -113,14 +116,15 @@
 
                     //start set direction
                     function calcRoute() {
+                        var i = select;
                         var start = document.getElementById('start').value;
-                        var end = document.getElementById('end').value;
+                        var end = '('+lats[i]+','+lngs[i]+')';
                         var request = {
                             origin: start,
                             destination: end,
-                            travelMode: google.maps.TravelMode.DRIVING
-                            //avoidHighways: true,
-                            //avoidTolls: true
+                            travelMode: google.maps.TravelMode.DRIVING,
+                            avoidHighways: true,
+                            avoidTolls: true
                         };
                         directionsService.route(request, function(response, status) {
                             if (status == google.maps.DirectionsStatus.OK) {
@@ -149,6 +153,7 @@
                                 map.setZoom(11);
                                 map.setCenter(pos);
                                 document.getElementById('start').value = pos;
+                                findPlaces();
                             }, function() {
                                 handleNoGeolocation(true);
                             });
@@ -177,24 +182,26 @@
                     //end get current location
 
                     //set recomend place
-                    function recPlaces() {
-                        var text = 'place';
-                        jQuery.getJSON('messenger?cmd=all', function(place) {
-                            setRecommendPlaceBox(place.array.length);
-                            console.log(place);
-                            for (var i = 0; i < place.array.length; i++) {
-                                document.getElementById(text + (i)).innerHTML = "<B>" + place.array[i].name + "</B>";
-                                document.getElementById("place" + i).style.backgroundImage = "url(" + place.array[i].link + ")";
-                                marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i);
-                            }
-                        });
-                    }
+//                    function recPlaces() {
+//                        var text = 'place';
+//                        jQuery.getJSON('messenger?cmd=all', function(place) {
+//                            setRecommendPlaceBox(place.array.length);
+//                            console.log(place);
+//                            for (var i = 0; i < place.array.length; i++) {
+//                                document.getElementById(text + (i)).innerHTML = "<B>" + place.array[i].name + "</B>";
+//                                document.getElementById("place" + i).style.backgroundImage = "url(" + place.array[i].link + ")";
+//                                marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i,place.array[i].link );
+//                            }
+//                        });
+//                    }
                     //end recomend place
 
                     var infowindow = null;
                     //set marker
-                    function marker(lat, lng, title, number) {
-                        myLatlng = new google.maps.LatLng(lat, lng);
+                    function marker(lat, lng, title, number, pic) {
+                       var myLatlng = new google.maps.LatLng(lat, lng);
+                        lats.push(lat);
+                        lngs.push(lng);
                         var marker = new google.maps.Marker({
                             position: myLatlng,
                             map: map,
@@ -205,12 +212,14 @@
 
                         google.maps.event.addListener(marker, 'click', function() {
                             document.getElementById('end').value=title;
-                            calcRoute();
+                            select=number;
                             if(infowindow !=null) infowindow.close();
                             infowindow = new google.maps.InfoWindow({
-                                content: '<strong>'+title+'</strong>'
+                                content: '<strong>'+title+'</strong>'+'<br><center> <img src='+pic+' width=200></center>'
                             });
                             infowindow.open(map,marker);
+                            map.setCenter(myLatlng);
+                            
                         });
                     }
                     //end marker
@@ -256,7 +265,7 @@
                                     for (var i = 0; i < place.array.length; i++) {
                                         document.getElementById("place" + i).innerHTML = "<B>" + place.array[i].name + "</B>";
                                         document.getElementById("place" + i).style.backgroundImage = "url(" + place.array[i].link + ")";
-                                        marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i);
+                                        marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i,place.array[i].link);
                                     }
                                 });
                             } else {
@@ -272,10 +281,10 @@
                     window.onload = function() {
                         //set recommend place
                         loading();
-                        getCurrentLocation();
+                        //getCurrentLocation();
                         //recPlaces();
                         //findPlaces();
-                        setInfo(0);
+                       //setInfo(0);
 
                     };
 
@@ -298,8 +307,7 @@
                         <div id="LogoProj" ></div>
                         <div id="pic02" >
                             <div id="control">
-                                <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();
-                                        findPlaces()"/>
+                                <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();"/>
                                 <BR />
                                 <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" /><BR />
                                 <input class="textbox"  id="end"  style="width: 190px" type="text" placeholder="ปลายทาง" /><BR />
