@@ -64,6 +64,7 @@
                     var apiKey = "AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM";
                     var times = [];
                     var taxi = [];
+                    var count;
 
 
                     //start initalize
@@ -273,25 +274,34 @@
                                 var lng = results[0].geometry.location.B;
                                 var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
                                 jQuery.getJSON(request, function (place) {
-                                    setRecommendPlaceBox(place.array.length);
-                                    console.log(place);
-                                    for (var i = 0; i < place.array.length; i++) {
-                                        var dest = "(" + place.array[i].lat + "," + place.array[i].lng + ")";
+                                    for (count = 0; count < place.array.length; count++) {
+                                        setRecommendPlaceBox(place.array.length);
+                                        var dest = "(" + place.array[count].lat + "," + place.array[count].lng + ")";
                                         var src = "(" + lat + "," + lng + ")";
                                         var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKey;
-                                        console.log(requestDistance);
-                                        requestDirection(requestDistance);
-                                        lats.push(place.array[i].lat);
-                                        lngs.push(place.array[i].lng);
-                                        names.push(place.array[i].name);
-                                        descriptions.push(place.array[i].description);
-                                        relate_costs.push(place.array[i].related_cost);
-                                        links.push(place.array[i].link);
-                                        marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i, place.array[i].link);
+                                        var servlet = 'ParseJSON?link=';
+                                        var url = servlet + requestDistance;
+                                        var distance;
+                                        var time;
+                                        jQuery.getJSON(url, function (data) {
+                                            console.log(data);
+                                            console.log(place);
+                                            distance = data.routes[0].legs[0].distance.value;
+                                            time = data.routes[0].legs[0].duration.text;
+                                            console.log(calTaxi(distance));
+                                            taxi.push(calTaxi(distance));
+                                            times.push(time);
+                                            document.getElementById("place" + count).innerHTML = "<B>" + count + " : " + place.array[count].name + "</B> <br> taxi cost :" + calTaxi(distance) + "time : " + time;
+                                        });
+                                        lats.push(place.array[count].lat);
+                                        lngs.push(place.array[count].lng);
+                                        names.push(place.array[count].name);
+                                        descriptions.push(place.array[count].description);
+                                        relate_costs.push(place.array[count].related_cost);
+                                        links.push(place.array[count].link);
+                                        document.getElementById("place" + count).style.backgroundImage = "url(" + place.array[count].link + ")";
+                                        marker(place.array[count].lat, place.array[count].lng, place.array[count].name, count, place.array[count].link);
                                     }
-                                    console.log(times);
-                                    console.log(taxi);
-                                    setRecomendText();
                                 });
                             } else {
                                 alert('Geocode was not successful for the following reason: ' + status);
@@ -312,6 +322,8 @@
                     };
 
                     function setRecomendText() {
+                        console.log(times);
+                        console.log(taxi);
                         for (var i = 0; i < names.length; i++) {
                             document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + "</B> <br> taxt cost :" + taxi[i] + "time : " + times[i];
                             document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
@@ -327,6 +339,7 @@
                             //console.log(temp);
                         }
                         document.getElementById("recBox").innerHTML = temp;
+                        console.log(temp);
                     }
 
 
@@ -350,12 +363,11 @@
                         var url = servlet + link;
                         var distance;
                         var time;
-                        console.log(url);
                         jQuery.getJSON(url, function (data) {
                             console.log(data);
                             distance = data.routes[0].legs[0].distance.value;
                             time = data.routes[0].legs[0].duration.text;
-                            console.log(distance);
+                            console.log(calTaxi(distance));
                             taxi.push(calTaxi(distance));
                             times.push(time);
                         });
