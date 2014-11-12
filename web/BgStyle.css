@@ -13,12 +13,12 @@
 	position: relative;
 }
 #head1 {
-	width: 769px;
-	height: 538px;
+	width: 818px;
+	height: 597px;
 	position: absolute;
-	left: 366px;
-	top: 154px;
-	background-color: #C9C;
+	left: 361px;
+	top: 97px;
+	background-image: url(img/boxes2.png);
 }
 body {
 	position: relative;
@@ -34,12 +34,12 @@ body {
 	position: relative;
 }
 #lt1 {
-	height: 309px;
-	width: 284px;
+	height: 398px;
+	width: 344px;
 	position: absolute;
-	left: 55px;
-	top: 386px;
-	background-color: #F96;
+	left: 23px;
+	top: 333px;
+	background-image: url(img/boxes3.png);
 }
 #ct {
 	height: auto;
@@ -47,30 +47,30 @@ body {
 	margin-left: 320px;
 }
 #spic1 {
-	height: 487px;
-	width: 784px;
+	height: 524px;
+	width: 802px;
 	position: absolute;
-	left: 354px;
-	top: 842px;
-	background-color: #669;
+	left: 368px;
+	top: 874px;
+	background-image: url(img/boxes6.png);
 }
 #spic {
-	height: 102px;
-	width: 1079px;
+	height: 168px;
+	width: 1115px;
 	position: absolute;
-	top: 716px;
-	left: 52px;
-	background-color: #3C6;
+	top: 713px;
+	left: 46px;
+	background-image: url(img/boxes4.png);
 }
 #pic02 {
-	height: 216px;
-	width: 281px;
+	height: 238px;
+	width: 328px;
 	position: absolute;
 	z-index: auto;
-	left: 56px;
-	top: 156px;
+	left: 30px;
+	top: 96px;
 	background-repeat: no-repeat;
-	background-color: #0CF;
+	background-image: url(img/boxes1.png);
 }
 #pic03 {
 	height: 270px;
@@ -113,9 +113,9 @@ body {
 #picLocate {
 	position: absolute;
 	width: 731px;
-	height: 424px;
-	left: 26px;
-	top: 21px;
+	height: 436px;
+	left: 37px;
+	top: 41px;
 	background-color: #999;
 	z-index: 2;
 	background-image: url(img/ecotourism-128088-1.jpg);
@@ -127,8 +127,8 @@ body {
 	z-index: 3;
 	width: 712px;
 	height: 60px;
-	left: 26px;
-	top: 366px;
+	left: 32px;
+	top: 407px;
 	background-color: #FFF;
 	opacity: 0.8;
 	padding: 10px;
@@ -146,16 +146,16 @@ body {
 	position: absolute;
 	width: 190px;
 	height: 57px;
-	left: 56px;
-	top: 8px;
+	left: 82px;
+	top: 30px;
 	background-image: url(img/Botton/sugLogo.png);
 }
 #suggBkList {
 	width: 263px;
 	height: 222px;
 	position: absolute;
-	left: 11px;
-	top: 75px;
+	left: 45px;
+	top: 91px;
 	overflow: scroll;
 	overflow-style: marquee-line;
 }
@@ -163,8 +163,8 @@ body {
 	position: absolute;
 	width: 230px;
 	height: 103px;
-	left: 1px;
-	top: 5px;
+	left: 13px;
+	top: 13px;
 	padding-left: 5px;
 	padding-right: 5px;
 }
@@ -177,11 +177,11 @@ body {
 }
 #map-canvas {
 	height: 455px;
-	width: 1029px;
+	width: 749px;
 	padding: 0px;
 	position: absolute;
-	left: 46px;
-	top: 42px;
+	left: 42px;
+	top: 59px;
 }
 #panel {
 	position: absolute;
@@ -215,18 +215,18 @@ body {
 
 #BottWeb{
 	position: absolute;
-	height: 138px;
-	width: 1089px;
-	top: 1363px;
-	left: 53px;
-	background-color: #C93;
+	height: 168px;
+	width: 1115px;
+	top: 1380px;
+	left: 44px;
+	background-image: url(img/boxes4.png);
 	}
 
 #showCost{
 	position: absolute;
-	height: 481px;
-	width: 274px;
-	left: 53px;
-	top: 845px;
-	background-color: #696;
+	height: 509px;
+	width: 348px;
+	left: 24px;
+	top: 870px;
+	background-image: url(img/boxes5.png);
 }
