@@ -7,7 +7,7 @@
             <link rel="stylesheet" type="text/css" href="formStyle.css">
                 <script src="script.js"></script>
                 <style>
-                <!-- sad-->
+                    <!-- sad-->
                     #map-canvas {
                         height: 493px;
                         width: 735px;
@@ -32,15 +32,15 @@
                         overflow: auto;
                     }
                     #control {
-	padding: 5px;
-	font-size: 14px;
-	font-family: Arial;
-	z-index: 100;
-	position: absolute;
-	left: 52px;
-	top: 31px;
-	width: 245px;
-	height: 198px;
+                        padding: 5px;
+                        font-size: 14px;
+                        font-family: Arial;
+                        z-index: 100;
+                        position: absolute;
+                        left: 52px;
+                        top: 31px;
+                        width: 245px;
+                        height: 198px;
                     }
                     #directions-panel {
                         float: none;
@@ -198,6 +198,8 @@
                     var infowindow = null;
                     //set marker
                     function marker(lat, lng, title, number, pic) {
+                        
+                        markers.push(number);
                         var myLatlng = new google.maps.LatLng(lat, lng);
                         var marker = new google.maps.Marker({
                             position: myLatlng,
@@ -217,8 +219,6 @@
                             infowindow.open(map, marker);
                             map.setCenter(myLatlng);
                         });
-
-                        markers.push(marker);
                     }
                     //end marker
 
@@ -257,15 +257,12 @@
                         relate_costs.length = 0;
                         links.length = 0;
                         select = 0;
-                        console.log(names);
+                        markers.length=0;
                     }
 
 
                     var number;
                     function findPlaces() {
-                        if (lats.length != 0) {
-                            reset();
-                        }
                         var count;
                         var address = document.getElementById('start').value;
                         var radius = document.getElementById('radius').value;
@@ -296,7 +293,8 @@
                     }
 
                     function calTaxi(distance) {
-                        return 35 + distance * 5;
+                        console.log(distance);
+                        return 35 + ((distance/1000) * 5);
                     }
 
                     window.onload = function () {
@@ -305,12 +303,16 @@
                     };
 
                     function setRecomend() {
-                        console.log(names);
+                        console.log(markers.length);
+//                        if (marker.length != 0) {
+//                            reset();
+//                        }
                         for (var i = 0; i < names.length; i++) {
-                            document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + "</B> <br> taxt cost :" + taxi[i] + "time : " + times[i];
+                            document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i]+"</B>";
                             document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
-                            marker(lats[i],lngs[i],names[i],i,links[i]);
+                            marker(lats[i], lngs[i], names[i], i, links[i]);
                         }
+                        console.log(markers.length);
                     }
 
                     function setRecommendPlaceBox(size) {
@@ -371,21 +373,21 @@
                                 <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" /><BR />
                                 <input class="textbox"  id="end"  style="width: 190px" type="text" placeholder="ปลายทาง" /><BR />
                                 <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" /><BR />
-                                    <select id="radius" class="textbox" style="width: 200px">
-                                        <option value=25>25 km</option>
-                                        <option value=50>50 km</option>
-                                        <option value=100>100 km</option>
-                                        <option value=200>200 km</option>
-                                        <option value=10000000>unlimit</option>
-                                    </select><BR />
-                                    <input class="textbox"  style="width: 200px"type="submit" value="ค้นหา" onclick="findPlaces()"/>
+                                <select id="radius" class="textbox" style="width: 200px">
+                                    <option value=25>25 km</option>
+                                    <option value=50>50 km</option>
+                                    <option value=100>100 km</option>
+                                    <option value=200>200 km</option>
+                                    <option value=10000000>unlimit</option>
+                                </select><BR />
+                                <input class="textbox"  style="width: 200px"type="submit" value="ค้นหา" onclick="findPlaces()"/>
                             </div>
                         </div>
                         <div id="head1" >
-                          <div id="map-canvas"></div>
-                      </div>
+                            <div id="map-canvas"></div>
+                        </div>
                         <div id="lt1" >
-                          <div id="suggHead"></div>
+                            <div id="suggHead"></div>
                             <div id="suggBkList">
                                 <div id="suggDetail">
 
@@ -393,9 +395,9 @@
 
                                 </div>
                             </div>
-                      </div>
-                      <div id="spic1" >
-                          <div id="picLocate"></div>
+                        </div>
+                        <div id="spic1" >
+                            <div id="picLocate"></div>
                             <div id="picDisc"> </div>
                             <div id="textInPicDis">loading . . .</div>
                             <div id="textReg">สถานที่เเนะนำ</div>
