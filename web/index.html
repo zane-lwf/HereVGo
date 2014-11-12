@@ -287,10 +287,11 @@
                                         descriptions.push(place.array[i].description);
                                         relate_costs.push(place.array[i].related_cost);
                                         links.push(place.array[i].link);
-                                        document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + place.array[i].name + "</B>";
-                                        document.getElementById("place" + i).style.backgroundImage = "url(" + place.array[i].link + ")";
                                         marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i, place.array[i].link);
                                     }
+                                    console.log(times);
+                                    console.log(taxi);
+                                    setRecomendText();
                                 });
                             } else {
                                 alert('Geocode was not successful for the following reason: ' + status);
@@ -309,6 +310,13 @@
                         //findPlaces();
                         //setInfo(0);
                     };
+
+                    function setRecomendText() {
+                        for (var i = 0; i < names.length; i++) {
+                            document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + "</B> <br> taxt cost :" + taxi[i] + "time : " + times[i];
+                            document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
+                        }
+                    }
 
                     function setRecommendPlaceBox(size) {
                         var temp = "";
@@ -346,11 +354,12 @@
                         jQuery.getJSON(url, function (data) {
                             console.log(data);
                             distance = data.routes[0].legs[0].distance.value;
-                            time = data.routes[0].legs[0].distance.text;
+                            time = data.routes[0].legs[0].duration.text;
                             console.log(distance);
+                            taxi.push(calTaxi(distance));
+                            times.push(time);
                         });
                     }
-
 
                     google.maps.event.addDomListener(window, 'load', initialize);
                 </script>
