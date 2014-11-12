@@ -146,7 +146,6 @@ public class ConnectDB {
 
             // Create and execute an SQL statement that returns some data.
           String SQL = "SELECT *  FROM dbo.hvg_places WHERE (6371 * acos (cos ( radians("+lat+") )* cos( radians( latitude ) )* cos( radians( longitude ) - radians("+lng+") )+ sin ( radians("+lat+") )* sin( radians( latitude ) ) )) <= "+r+" ORDER BY (6371 * acos (cos ( radians("+lat+") )* cos( radians( latitude ) )* cos( radians( longitude ) - radians("+lng+") )+ sin ( radians("+lat+") )* sin( radians( latitude ) ) ));";
- //           String SQL = "SELECT * ,( 3959 * acos( cos( radians(37) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(-122) ) + sin( radians(37) ) * sin( radians( lat ) ) ) ) AS distance FROM markers HAVING distance < 25 ORDER BY distance LIMIT 0 , 20;";
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL);
             // Iterate through the data in the result set and display it.
