@@ -113,9 +113,9 @@ body {
 #picLocate {
 	position: absolute;
 	width: 731px;
-	height: 424px;
-	left: 26px;
-	top: 21px;
+	height: 436px;
+	left: 37px;
+	top: 41px;
 	background-color: #999;
 	z-index: 2;
 	background-image: url(img/ecotourism-128088-1.jpg);
@@ -127,8 +127,8 @@ body {
 	z-index: 3;
 	width: 712px;
 	height: 60px;
-	left: 26px;
-	top: 366px;
+	left: 32px;
+	top: 407px;
 	background-color: #FFF;
 	opacity: 0.8;
 	padding: 10px;
