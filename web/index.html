@@ -82,7 +82,7 @@
                         var autocomplete = new google.maps.places.Autocomplete(input2);
                         autocomplete.bindTo('bounds', map);
 
-                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        google.maps.event.addListener(autocomplete, 'place_changed', function() {
                             infowindow.close();
                             marker.setVisible(false);
                             var place = autocomplete.getPlace();
@@ -122,7 +122,7 @@
                             avoidHighways: true,
                             avoidTolls: true
                         };
-                        directionsService.route(request, function (response, status) {
+                        directionsService.route(request, function(response, status) {
                             if (status == google.maps.DirectionsStatus.OK) {
                                 directionsDisplay.setDirections(response);
                             } else {
@@ -137,7 +137,7 @@
                     function getCurrentLocation() {
                         // Try HTML5 geolocation
                         if (navigator.geolocation) {
-                            navigator.geolocation.getCurrentPosition(function (position) {
+                            navigator.geolocation.getCurrentPosition(function(position) {
                                 var pos = new google.maps.LatLng(position.coords.latitude,
                                         position.coords.longitude);
                                 var infowindow = new google.maps.InfoWindow({
@@ -149,7 +149,7 @@
                                 map.setZoom(11);
                                 map.setCenter(pos);
                                 document.getElementById('start').value = pos;
-                            }, function () {
+                            }, function() {
                                 handleNoGeolocation(true);
                             });
                         } else {
@@ -179,7 +179,7 @@
                     //set recomend place
                     function recPlaces() {
                         var text = 'place';
-                        jQuery.getJSON('messenger?cmd=all', function (place) {
+                        jQuery.getJSON('messenger?cmd=all', function(place) {
                             setRecommendPlaceBox(place.array.length);
                             console.log(place);
                             for (var i = 0; i < place.array.length; i++) {
@@ -191,7 +191,7 @@
                     }
                     //end recomend place
 
-
+                    var infowindow = null;
                     //set marker
                     function marker(lat, lng, title, number) {
                         myLatlng = new google.maps.LatLng(lat, lng);
@@ -201,13 +201,21 @@
                             title: title,
                             icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + number + "|FF0000|000000"
                         });
+
+                        google.maps.event.addListener(marker, 'click', function() {
+                            if(infowindow !=null) infowindow.close();
+                            infowindow = new google.maps.InfoWindow({
+                                content: '<strong>'+title+'</strong>'
+                            });
+                            infowindow.open(map,marker);
+                        });
                     }
                     //end marker
 
 
                     //set desciption & picture
                     function setInfo(select) {
-                        jQuery.getJSON('messenger?cmd=all', function (place) {
+                        jQuery.getJSON('messenger?cmd=all', function(place) {
                             document.getElementById("textInPicDis").innerHTML = place.array[select].description;
                             document.getElementById('nameForRoute').value = place.array[select].name;
                             document.getElementById("picLocate").style.backgroundImage = "url(" + place.array[select].link + ")";
@@ -233,13 +241,13 @@
                     function findPlaces() {
                         var address = document.getElementById('start').value;
                         var radius = document.getElementById('radius').value;
-                        geocoder.geocode({'address': address}, function (results, status) {
+                        geocoder.geocode({'address': address}, function(results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
                                 console.log(results[0].geometry.location.k + " & " + results[0].geometry.location.B);
                                 var lat = results[0].geometry.location.k;
                                 var lng = results[0].geometry.location.B;
                                 var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
-                                jQuery.getJSON(request, function (place) {
+                                jQuery.getJSON(request, function(place) {
                                     setRecommendPlaceBox(place.array.length);
                                     console.log(place);
                                     for (var i = 0; i < place.array.length; i++) {
@@ -253,12 +261,12 @@
                             }
                         });
                     }
-                    
-                    function calTaxi(distance){
-                        
+
+                    function calTaxi(distance) {
+
                     }
 
-                    window.onload = function () {
+                    window.onload = function() {
                         //set recommend place
                         loading();
                         getCurrentLocation();
