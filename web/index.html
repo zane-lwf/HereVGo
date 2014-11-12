@@ -60,6 +60,9 @@
                     var relate_costs = [];
                     var links = [];
                     var select;
+                    var markers = [];
+
+
                     //start initalize
                     function initialize() {
                         //about map
@@ -88,7 +91,7 @@
                         var autocomplete = new google.maps.places.Autocomplete(input2);
                         autocomplete.bindTo('bounds', map);
 
-                        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
                             infowindow.close();
                             marker.setVisible(false);
                             var place = autocomplete.getPlace();
@@ -129,7 +132,7 @@
                             avoidHighways: true,
                             avoidTolls: true
                         };
-                        directionsService.route(request, function(response, status) {
+                        directionsService.route(request, function (response, status) {
                             if (status == google.maps.DirectionsStatus.OK) {
                                 directionsDisplay.setDirections(response);
                             } else {
@@ -144,7 +147,7 @@
                     function getCurrentLocation() {
                         // Try HTML5 geolocation
                         if (navigator.geolocation) {
-                            navigator.geolocation.getCurrentPosition(function(position) {
+                            navigator.geolocation.getCurrentPosition(function (position) {
                                 var pos = new google.maps.LatLng(position.coords.latitude,
                                         position.coords.longitude);
                                 var infowindow = new google.maps.InfoWindow({
@@ -157,7 +160,7 @@
                                 map.setCenter(pos);
                                 document.getElementById('start').value = pos;
 
-                            }, function() {
+                            }, function () {
                                 handleNoGeolocation(true);
                             });
                         } else {
@@ -199,7 +202,7 @@
                             icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + number + "|FF0000|000000"
                         });
 
-                        google.maps.event.addListener(marker, 'click', function() {
+                        google.maps.event.addListener(marker, 'click', function () {
                             document.getElementById('end').value = title;
                             select = number;
                             if (infowindow != null)
@@ -210,6 +213,8 @@
                             infowindow.open(map, marker);
                             map.setCenter(myLatlng);
                         });
+                        
+                        markers.push(marker);
                     }
                     //end marker
 
@@ -237,8 +242,9 @@
                         document.getElementById("textInPicDis").innerHTML = "loading . . .";
                         document.getElementById("picLocate").style.backgroundImage = "url(img/spinner.gif)";
                     }
-                    
-                    function reset(){
+
+                    function reset() {
+                        console.log(names);
                         setAllMap(null);
                         lats.length = 0;
                         lngs.length = 0;
@@ -246,22 +252,23 @@
                         descriptions.length = 0;
                         relate_costs.length = 0;
                         links.length = 0;
-                        select=0;
+                        select = 0;
+                        console.log(names);
                     }
 
-                    function findPlaces() { 
-                        if (lats.length!=0){
+                    function findPlaces() {
+                        if (lats.length != 0) {
                             reset();
                         }
                         var address = document.getElementById('start').value;
                         var radius = document.getElementById('radius').value;
-                        geocoder.geocode({'address': address}, function(results, status) {
+                        geocoder.geocode({'address': address}, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
                                 console.log(results[0].geometry.location.k + " & " + results[0].geometry.location.B);
                                 var lat = results[0].geometry.location.k;
                                 var lng = results[0].geometry.location.B;
                                 var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
-                                jQuery.getJSON(request, function(place) {
+                                jQuery.getJSON(request, function (place) {
                                     setRecommendPlaceBox(place.array.length);
                                     console.log(place);
                                     for (var i = 0; i < place.array.length; i++) {
@@ -286,8 +293,8 @@
 
                     }
 
-                    window.onload = function() {
-                        loading();
+                    window.onload = function () {
+                        //loading();
                         getCurrentLocation();
                         //recPlaces();
                         //findPlaces();
@@ -303,6 +310,22 @@
                             //console.log(temp);
                         }
                         document.getElementById("recBox").innerHTML = temp;
+                    }
+
+
+                    function deleteMarkers() {
+                        clearMarkers();
+                        markers.length = 0;
+                    }
+
+                    function setAllMap(map) {
+                        for (var i = 0; i < markers.length; i++) {
+                            markers[i].setMap(map);
+                        }
+                    }
+
+                    function clearMarkers() {
+                        setAllMap(null);
                     }
 
 
