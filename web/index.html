@@ -202,6 +202,7 @@
                             icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + number + "|FF0000|000000"
                         });
 
+
                         google.maps.event.addListener(marker, 'click', function() {
                             if(infowindow !=null) infowindow.close();
                             infowindow = new google.maps.InfoWindow({
