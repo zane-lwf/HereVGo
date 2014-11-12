@@ -52,10 +52,13 @@
                     var directionsDisplay;
                     var directionsService = new google.maps.DirectionsService();
                     var map;
-                    var onSelect;
                     var geocoder;
                     var lats = [];
                     var lngs = [];
+                    var names = [];
+                    var descriptions = [];
+                    var relate_costs = [];
+                    var links = [];
                     var select;
                     //start initalize
                     function initialize() {
@@ -118,7 +121,7 @@
                     function calcRoute() {
                         var i = select;
                         var start = document.getElementById('start').value;
-                        var end = '('+lats[i]+','+lngs[i]+')';
+                        var end = '(' + lats[i] + ',' + lngs[i] + ')';
                         var request = {
                             origin: start,
                             destination: end,
@@ -153,7 +156,7 @@
                                 map.setZoom(11);
                                 map.setCenter(pos);
                                 document.getElementById('start').value = pos;
-                                findPlaces();
+
                             }, function() {
                                 handleNoGeolocation(true);
                             });
@@ -177,31 +180,18 @@
                         };
                         var infowindow = new google.maps.InfoWindow(options);
                         map.setCenter(options.position);
-
                     }
                     //end get current location
 
-                    //set recomend place
-//                    function recPlaces() {
-//                        var text = 'place';
-//                        jQuery.getJSON('messenger?cmd=all', function(place) {
-//                            setRecommendPlaceBox(place.array.length);
-//                            console.log(place);
-//                            for (var i = 0; i < place.array.length; i++) {
-//                                document.getElementById(text + (i)).innerHTML = "<B>" + place.array[i].name + "</B>";
-//                                document.getElementById("place" + i).style.backgroundImage = "url(" + place.array[i].link + ")";
-//                                marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i,place.array[i].link );
-//                            }
-//                        });
-//                    }
-                    //end recomend place
+                    function onSelect(i) {
+                        select = i;
+                    }
+
 
                     var infowindow = null;
                     //set marker
                     function marker(lat, lng, title, number, pic) {
-                       var myLatlng = new google.maps.LatLng(lat, lng);
-                        lats.push(lat);
-                        lngs.push(lng);
+                        var myLatlng = new google.maps.LatLng(lat, lng);
                         var marker = new google.maps.Marker({
                             position: myLatlng,
                             map: map,
@@ -209,29 +199,27 @@
                             icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + number + "|FF0000|000000"
                         });
 
-
                         google.maps.event.addListener(marker, 'click', function() {
-                            document.getElementById('end').value=title;
-                            select=number;
-                            if(infowindow !=null) infowindow.close();
+                            document.getElementById('end').value = title;
+                            select = number;
+                            if (infowindow != null)
+                                infowindow.close();
                             infowindow = new google.maps.InfoWindow({
-                                content: '<strong>'+title+'</strong>'+'<br><center> <img src='+pic+' width=200></center>'
+                                content: '<strong>' + title + '</strong>' + '<br><center> <img src=' + pic + ' width=200></center>'
                             });
-                            infowindow.open(map,marker);
+                            infowindow.open(map, marker);
                             map.setCenter(myLatlng);
-                            
                         });
                     }
                     //end marker
 
 
                     //set desciption & picture
-                    function setInfo(select) {
-                        jQuery.getJSON('messenger?cmd=all', function(place) {
-                            document.getElementById("textInPicDis").innerHTML = place.array[select].description;
-                            document.getElementById('nameForRoute').value = place.array[select].name;
-                            document.getElementById("picLocate").style.backgroundImage = "url(" + place.array[select].link + ")";
-                        });
+                    function setInfo() {
+                        var text = descriptions[select] + "<br> ค่าเข้า : " + relate_costs[select];
+                        document.getElementById("textInPicDis").innerHTML = text;
+                        document.getElementById("end").value = names[select];
+                        document.getElementById("picLocate").style.backgroundImage = "url(" + links[select] + ")";
                     }
                     //end desciption & picture
 
@@ -242,15 +230,29 @@
 
                     //set end
                     function setEnd() {
-                        document.getElementById('end').value = document.getElementById('nameForRoute').value;
+                        document.getElementById('end').value = names[select];
                     }
 
                     function loading() {
                         document.getElementById("textInPicDis").innerHTML = "loading . . .";
                         document.getElementById("picLocate").style.backgroundImage = "url(img/spinner.gif)";
                     }
+                    
+                    function reset(){
+                        setAllMap(null);
+                        lats.length = 0;
+                        lngs.length = 0;
+                        names.length = 0;
+                        descriptions.length = 0;
+                        relate_costs.length = 0;
+                        links.length = 0;
+                        select=0;
+                    }
 
-                    function findPlaces() {
+                    function findPlaces() { 
+                        if (lats.length!=0){
+                            reset();
+                        }
                         var address = document.getElementById('start').value;
                         var radius = document.getElementById('radius').value;
                         geocoder.geocode({'address': address}, function(results, status) {
@@ -263,9 +265,15 @@
                                     setRecommendPlaceBox(place.array.length);
                                     console.log(place);
                                     for (var i = 0; i < place.array.length; i++) {
-                                        document.getElementById("place" + i).innerHTML = "<B>" + place.array[i].name + "</B>";
+                                        lats.push(place.array[i].lat);
+                                        lngs.push(place.array[i].lng);
+                                        names.push(place.array[i].name);
+                                        descriptions.push(place.array[i].description);
+                                        relate_costs.push(place.array[i].related_cost);
+                                        links.push(place.array[i].link);
+                                        document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + place.array[i].name + "</B>";
                                         document.getElementById("place" + i).style.backgroundImage = "url(" + place.array[i].link + ")";
-                                        marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i,place.array[i].link);
+                                        marker(place.array[i].lat, place.array[i].lng, place.array[i].name, i, place.array[i].link);
                                     }
                                 });
                             } else {
@@ -279,21 +287,20 @@
                     }
 
                     window.onload = function() {
-                        //set recommend place
                         loading();
-                        //getCurrentLocation();
+                        getCurrentLocation();
                         //recPlaces();
                         //findPlaces();
-                       //setInfo(0);
-
+                        //setInfo(0);
                     };
 
                     function setRecommendPlaceBox(size) {
                         var temp = "";
                         for (var i = 0; i < size; i++) {
-                            temp += "<div class=\"suggBox\" onclick=\"loading();setInfo(" + i + ")\">";
+                            temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");loading();setInfo();calcRoute()\">";
                             temp += "<div id=\"place" + i + "\" class=\"positionSuggName\" ></div>";
                             temp += "</div>";
+                            //console.log(temp);
                         }
                         document.getElementById("recBox").innerHTML = temp;
                     }
@@ -319,7 +326,7 @@
                                     <option value=200>200 km</option>
                                     <option value=10000000>unlimit</option>
                                 </select><BR />
-                                <input class="textbox"  style="width: 200px"type="submit" value="ค้นหา" onclick="calcRoute();"/>
+                                <input class="textbox"  style="width: 200px"type="submit" value="ค้นหา" onclick="findPlaces()"/>
                             </div>
                         </div>
                         <div id="head1" >
@@ -342,7 +349,6 @@
                             <div id="textReg">สถานที่เเนะนำ</div>
                             <div class="textbox" id="getDirection" onclick="setEnd();
                                     calcRoute()">ขอเส้นทาง</div>
-                            <input type="hidden" value="" id="nameForRoute" />
                         </div>
                         <div id="spic"></div>
                         <div id="showCost"></div>
