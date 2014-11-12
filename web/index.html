@@ -64,8 +64,6 @@
                     var apiKey = "AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM";
                     var times = [];
                     var taxi = [];
-                    var count;
-
 
                     //start initalize
                     function initialize() {
@@ -120,6 +118,7 @@
                             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                             infowindow.open(map, marker);
                         });
+                        setRecommendPlaceBox(30);
                     }
                     //end of initailize
 
@@ -260,47 +259,33 @@
                         console.log(names);
                     }
 
+
+                    var number;
                     function findPlaces() {
                         if (lats.length != 0) {
                             reset();
                         }
+                        var count;
                         var address = document.getElementById('start').value;
                         var radius = document.getElementById('radius').value;
-                        var money = document.getElementById('money').value;
                         geocoder.geocode({'address': address}, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
-                                console.log(results[0].geometry.location.k + " & " + results[0].geometry.location.B);
                                 var lat = results[0].geometry.location.k;
                                 var lng = results[0].geometry.location.B;
                                 var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
                                 jQuery.getJSON(request, function (place) {
+                                    number = place.array.length;
                                     for (count = 0; count < place.array.length; count++) {
-                                        setRecommendPlaceBox(place.array.length);
                                         var dest = "(" + place.array[count].lat + "," + place.array[count].lng + ")";
                                         var src = "(" + lat + "," + lng + ")";
                                         var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKey;
-                                        var servlet = 'ParseJSON?link=';
-                                        var url = servlet + requestDistance;
-                                        var distance;
-                                        var time;
-                                        jQuery.getJSON(url, function (data) {
-                                            console.log(data);
-                                            console.log(place);
-                                            distance = data.routes[0].legs[0].distance.value;
-                                            time = data.routes[0].legs[0].duration.text;
-                                            console.log(calTaxi(distance));
-                                            taxi.push(calTaxi(distance));
-                                            times.push(time);
-                                            document.getElementById("place" + count).innerHTML = "<B>" + count + " : " + place.array[count].name + "</B> <br> taxi cost :" + calTaxi(distance) + "time : " + time;
-                                        });
+                                        requestDirection(requestDistance);
                                         lats.push(place.array[count].lat);
                                         lngs.push(place.array[count].lng);
                                         names.push(place.array[count].name);
                                         descriptions.push(place.array[count].description);
                                         relate_costs.push(place.array[count].related_cost);
                                         links.push(place.array[count].link);
-                                        document.getElementById("place" + count).style.backgroundImage = "url(" + place.array[count].link + ")";
-                                        marker(place.array[count].lat, place.array[count].lng, place.array[count].name, count, place.array[count].link);
                                     }
                                 });
                             } else {
@@ -314,19 +299,16 @@
                     }
 
                     window.onload = function () {
-                        //loading();
                         getCurrentLocation();
-                        //recPlaces();
-                        //findPlaces();
-                        //setInfo(0);
+
                     };
 
-                    function setRecomendText() {
-                        console.log(times);
-                        console.log(taxi);
+                    function setRecomend() {
+                        console.log(names);
                         for (var i = 0; i < names.length; i++) {
                             document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + "</B> <br> taxt cost :" + taxi[i] + "time : " + times[i];
                             document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
+                            marker(lats[i],lngs[i],names[i],i,links[i]);
                         }
                     }
 
@@ -336,10 +318,8 @@
                             temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");loading();setInfo();calcRoute()\">";
                             temp += "<div id=\"place" + i + "\" class=\"positionSuggName\" ></div>";
                             temp += "</div>";
-                            //console.log(temp);
                         }
                         document.getElementById("recBox").innerHTML = temp;
-                        console.log(temp);
                     }
 
 
@@ -370,6 +350,10 @@
                             console.log(calTaxi(distance));
                             taxi.push(calTaxi(distance));
                             times.push(time);
+                            if (times.length == number) {
+                                setRecomend();
+                            }
+                            console.log(time);
                         });
                     }
 
@@ -386,14 +370,14 @@
                                 <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" /><BR />
                                 <input class="textbox"  id="end"  style="width: 190px" type="text" placeholder="ปลายทาง" /><BR />
                                 <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" /><BR />
-                                <select id="radius" class="textbox" style="width: 200px">
-                                    <option value=25>25 km</option>
-                                    <option value=50>50 km</option>
-                                    <option value=100>100 km</option>
-                                    <option value=200>200 km</option>
-                                    <option value=10000000>unlimit</option>
-                                </select><BR />
-                                <input class="textbox"  style="width: 200px"type="submit" value="ค้นหา" onclick="findPlaces()"/>
+                                    <select id="radius" class="textbox" style="width: 200px">
+                                        <option value=25>25 km</option>
+                                        <option value=50>50 km</option>
+                                        <option value=100>100 km</option>
+                                        <option value=200>200 km</option>
+                                        <option value=10000000>unlimit</option>
+                                    </select><BR />
+                                    <input class="textbox"  style="width: 200px"type="submit" value="ค้นหา" onclick="findPlaces()"/>
                             </div>
                         </div>
                         <div id="head1" >
