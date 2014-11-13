@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Untitled Document</title>
+        <title>HereVGo</title>
         <link rel="stylesheet" type="text/css" href="BgStyle.css">
             <link rel="stylesheet" type="text/css" href="formStyle.css">
                 <script src="script.js"></script>
@@ -48,6 +48,7 @@
                     }
                 </style>
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
+
                 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
                 <script>
                     var directionsDisplay;
@@ -62,7 +63,7 @@
                     var links = [];
                     var select;
                     var markers = [];
-                    var apiKey = "AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM";
+                    var apiKeys = ["AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM", "AIzaSyAx9vHjNSgd_AuinvDEOn2sMLxppHEG4tM","AIzaSyAU0VPFAnKpOwSmzt5IN6tJ6ImdopSenOw"];
                     var times = [];
                     var taxi = [];
 
@@ -163,7 +164,6 @@
                                 map.setZoom(11);
                                 map.setCenter(pos);
                                 document.getElementById('start').value = pos;
-
                             }, function () {
                                 handleNoGeolocation(true);
                             });
@@ -198,7 +198,6 @@
                     var infowindow = null;
                     //set marker
                     function marker(lat, lng, title, number, pic) {
-                        
                         var myLatlng = new google.maps.LatLng(lat, lng);
                         var marker = new google.maps.Marker({
                             position: myLatlng,
@@ -218,7 +217,7 @@
                             infowindow.open(map, marker);
                             map.setCenter(myLatlng);
                         });
-                        
+
                         markers.push(marker);
                     }
                     //end marker
@@ -258,11 +257,36 @@
                         relate_costs.length = 0;
                         links.length = 0;
                         select = 0;
-                        markers.length=0;
-                        times.length=0
-                        taxi.length=0
+                        markers.length = 0;
+                        times.length = 0
+                        taxi.length = 0
                         console.log(names);
                         findPlaces();
+                    }
+
+                    function locationByUser() {
+                        var address = document.getElementById('start').value;
+                        console.log(address);
+                        geocoder.geocode({'address': address}, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                if (infowindow != null) {
+                                    infowindow.close();
+                                }
+                                var pos = new google.maps.LatLng(results[0].geometry.location.k, results[0].geometry.location.B);
+                                console.log("(" + results[0].geometry.location.k + "," + results[0].geometry.location.B + ")");
+                                infowindow = new google.maps.InfoWindow({
+                                    map: map,
+                                    position: pos,
+                                    content: 'Start',
+                                    maxWidth: 200
+                                });
+                                map.setZoom(13);
+                                map.setCenter(pos);
+                            } else {
+                                alert('Geocode was not successful for the following reason: ' + status);
+                            }
+                        });
+
                     }
 
 
@@ -275,13 +299,14 @@
                             if (status == google.maps.GeocoderStatus.OK) {
                                 var lat = results[0].geometry.location.k;
                                 var lng = results[0].geometry.location.B;
+                                console.log(lat + " " + lng);
                                 var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
                                 jQuery.getJSON(request, function (place) {
                                     number = place.array.length;
                                     for (count = 0; count < place.array.length; count++) {
                                         var dest = "(" + place.array[count].lat + "," + place.array[count].lng + ")";
                                         var src = "(" + lat + "," + lng + ")";
-                                        var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKey;
+                                        var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKeys[count % apiKeys.length];
                                         requestDirection(requestDistance);
                                         lats.push(place.array[count].lat);
                                         lngs.push(place.array[count].lng);
@@ -299,7 +324,7 @@
 
                     function calTaxi(distance) {
                         console.log(distance);
-                        return 35 + ((distance/1000) * 5);
+                        return 35 + ((distance / 1000) * 5);
                     }
 
                     window.onload = function () {
@@ -310,7 +335,7 @@
                     function setRecomend() {
                         console.log(markers.length);
                         for (var i = 0; i < names.length; i++) {
-                            document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i]+"</B>";
+                            document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "</B>";
                             document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
                             marker(lats[i], lngs[i], names[i], i, links[i]);
                         }
@@ -370,9 +395,9 @@
                         <div id="LogoProj" ></div>
                         <div id="pic02" >
                             <div id="control">
-                                <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();"/>
+                                <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();" />
                                 <BR />
-                                <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" /><BR />
+                                <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" onfocusout="locationByUser();" /><BR />
                                 <input class="textbox"  id="end"  style="width: 190px" type="text" placeholder="ปลายทาง" /><BR />
                                 <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" /><BR />
                                 <select id="radius" class="textbox" style="width: 200px">
