@@ -196,6 +196,7 @@
                     function onSelect(i) {
                         select = i;
                         calcRoute(lats[select], lngs[select]);
+                        setInfo();
                     }
 
 
@@ -281,8 +282,8 @@
                                 if (infowindow != null) {
                                     infowindow.close();
                                 }
-                                userlat=results[0].geometry.location.k;
-                                userlng=results[0].geometry.location.B;
+                                userlat = results[0].geometry.location.k;
+                                userlng = results[0].geometry.location.B;
                                 var pos = new google.maps.LatLng(results[0].geometry.location.k, results[0].geometry.location.B);
                                 console.log("(" + results[0].geometry.location.k + "," + results[0].geometry.location.B + ")");
                                 infowindow = new google.maps.InfoWindow({
@@ -349,13 +350,20 @@
 
                     function setRecomend() {
                         console.log(markers.length);
+                        var money = parseFloat(document.getElementById("money").value);
+                        console.log(money);
+                        if (isNaN(money)) {
+                            money = 9999999999999;
+                        }
+                        console.log(money);
                         for (var i = 0; i < names.length; i++) {
-                            document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "</B>";
-                            document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
-                            marker(lats[i], lngs[i], names[i], i, links[i]);
+                            if (money >= taxi[i] + relate_costs[i]) {
+                                document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "</B>";
+                                document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
+                                marker(lats[i], lngs[i], names[i], i, links[i]);
+                            }
                         }
                         loaded();
-                        setInfo();
                     }
 
                     function setRecommendPlaceBox(size) {
