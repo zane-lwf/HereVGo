@@ -63,7 +63,7 @@
                     var links = [];
                     var select;
                     var markers = [];
-                    var apiKeys = ["AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM", "AIzaSyAx9vHjNSgd_AuinvDEOn2sMLxppHEG4tM","AIzaSyAU0VPFAnKpOwSmzt5IN6tJ6ImdopSenOw"];
+                    var apiKeys = ["AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM", "AIzaSyAx9vHjNSgd_AuinvDEOn2sMLxppHEG4tM","AIzaSyAU0VPFAnKpOwSmzt5IN6tJ6ImdopSenOw","AIzaSyBC0mmW5Hk0oH0D-P7rRTuFqG07FhmkSDQ"];
                     var times = [];
                     var taxi = [];
 
@@ -280,7 +280,7 @@
                                     content: 'Start',
                                     maxWidth: 200
                                 });
-                                map.setZoom(13);
+                                console.log(pos);
                                 map.setCenter(pos);
                             } else {
                                 alert('Geocode was not successful for the following reason: ' + status);
