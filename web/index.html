@@ -199,7 +199,6 @@
                     //set marker
                     function marker(lat, lng, title, number, pic) {
                         
-                        markers.push(number);
                         var myLatlng = new google.maps.LatLng(lat, lng);
                         var marker = new google.maps.Marker({
                             position: myLatlng,
@@ -219,6 +218,8 @@
                             infowindow.open(map, marker);
                             map.setCenter(myLatlng);
                         });
+                        
+                        markers.push(marker);
                     }
                     //end marker
 
@@ -249,7 +250,7 @@
 
                     function reset() {
                         console.log(names);
-                        setAllMap(null);
+                        deleteMarkers();
                         lats.length = 0;
                         lngs.length = 0;
                         names.length = 0;
@@ -258,6 +259,10 @@
                         links.length = 0;
                         select = 0;
                         markers.length=0;
+                        times.length=0
+                        taxi.length=0
+                        console.log(names);
+                        findPlaces();
                     }
 
 
@@ -304,9 +309,6 @@
 
                     function setRecomend() {
                         console.log(markers.length);
-//                        if (marker.length != 0) {
-//                            reset();
-//                        }
                         for (var i = 0; i < names.length; i++) {
                             document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i]+"</B>";
                             document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
@@ -380,7 +382,7 @@
                                     <option value=200>200 km</option>
                                     <option value=10000000>unlimit</option>
                                 </select><BR />
-                                <input class="textbox"  style="width: 200px"type="submit" value="ค้นหา" onclick="findPlaces()"/>
+                                <input class="textbox"  style="width: 200px"type="submit" value="ค้นหา" onclick="reset()"/>
                             </div>
                         </div>
                         <div id="head1" >
