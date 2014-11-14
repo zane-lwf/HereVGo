@@ -123,7 +123,6 @@
                             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                             infowindow.open(map, marker);
                         });
-                        setRecommendPlaceBox(30);
                     }
                     //end of initailize
 
@@ -257,6 +256,7 @@
                     function reset() {
                         console.log(document.getElementById("money").value);
                         console.log(names);
+                        document.getElementById("recBox").innerHTML = "load";
                         deleteMarkers();
                         lats.length = 0;
                         lngs.length = 0;
@@ -349,6 +349,7 @@
                     };
 
                     function setRecomend() {
+                        var temp = "";
                         console.log(markers.length);
                         var money = parseFloat(document.getElementById("money").value);
                         console.log(money);
@@ -358,23 +359,17 @@
                         console.log(money);
                         for (var i = 0; i < names.length; i++) {
                             if (money >= taxi[i] + relate_costs[i]) {
-                                document.getElementById("place" + i).innerHTML = "<B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "</B>";
-                                document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
+                                temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
+                                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url("+links[i]+");\"><B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "</B></div>";
+                                //document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
+                                temp += "</div>";
                                 marker(lats[i], lngs[i], names[i], i, links[i]);
                             }
                         }
+                        document.getElementById("recBox").innerHTML = temp;
                         loaded();
                     }
 
-                    function setRecommendPlaceBox(size) {
-                        var temp = "";
-                        for (var i = 0; i < size; i++) {
-                            temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                            temp += "<td> <div id=\"place" + i + "\" class=\"positionSuggName\" ></div> </td>";
-                            temp += "</div>";
-                        }
-                        document.getElementById("recBox").innerHTML = temp;
-                    }
 
                     function loaded() {
                         document.getElementById('submit').value = "ค้นหา";
@@ -455,10 +450,10 @@
                                 <input class="textbox"  id="end"  style="width: 190px" type="text" placeholder="ปลายทาง" onfocusout="desByUser()"/><BR />
                                 <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" /><BR />
                                 <select id="radius" class="textbox" style="width: 200px">
+                                    <option value=10>10 km</option>
                                     <option value=25>25 km</option>
                                     <option value=50>50 km</option>
                                     <option value=100>100 km</option>
-                                    <option value=200>200 km</option>
                                     <option value=10000000>unlimit</option>
                                 </select><BR />
                                 <input class="textbox"  id="submit" style="width: 200px" type="submit" value="ค้นหา" onclick="reset()"/>
