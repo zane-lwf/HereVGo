@@ -156,9 +156,40 @@ body {
 	position: absolute;
 	left: 46px;
 	top: 109px;
-	overflow: scroll;
-	overflow-style: marquee-line;
+	
+	
 }
+
+.scrollbar
+{
+	
+	
+	background: #F5F5F5;
+	overflow-y: scroll;
+	
+
+}
+
+#suggBkList::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#suggBkList::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#suggBkList::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #D62929;
+}
+
 #suggDetail {
 	position: absolute;
 	width: 209px;
@@ -222,7 +253,7 @@ body {
 	background-image: url(img/boxes4.png);
 	}
 
-#showCostBG{
+#fromUserBG{
 	position: absolute;
 	height: 509px;
 	width: 348px;

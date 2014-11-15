@@ -98,7 +98,7 @@ div.positionSuggName{
 }
 
 
-#showCostDetail{
+#fromUserDetail{
 	position: absolute;
 	width: 263px;
 	height: 362px;
@@ -108,7 +108,7 @@ div.positionSuggName{
 	
 }
 
-#showCostHead{
+#fromUserHead{
 	position: absolute;
 	width: 238px;
 	height: 65px;
