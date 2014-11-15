@@ -96,3 +96,24 @@ div.positionSuggName{
 
         
 }
+
+
+#showCostDetail{
+	position: absolute;
+	width: 263px;
+	height: 362px;
+	left: 44px;
+	top: 116px;
+	background-color: #6C9;
+	
+}
+
+#showCostHead{
+	position: absolute;
+	width: 238px;
+	height: 65px;
+	left: 50px;
+	top: 45px;
+	background-color: #09C;
+	
+}
