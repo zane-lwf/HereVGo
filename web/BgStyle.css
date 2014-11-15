@@ -16,8 +16,8 @@
 	width: 818px;
 	height: 597px;
 	position: absolute;
-	left: 361px;
-	top: 97px;
+	left: 336px;
+	top: 92px;
 	background-image: url(img/boxes2.png);
 }
 body {
@@ -37,8 +37,8 @@ body {
 	height: 398px;
 	width: 344px;
 	position: absolute;
-	left: 23px;
-	top: 333px;
+	left: 14px;
+	top: 303px;
 	background-image: url(img/boxes3.png);
 }
 #ct {
@@ -50,16 +50,16 @@ body {
 	height: 524px;
 	width: 802px;
 	position: absolute;
-	left: 368px;
-	top: 874px;
+	left: 336px;
+	top: 811px;
 	background-image: url(img/boxes6.png);
 }
 #spic {
 	height: 168px;
 	width: 1115px;
 	position: absolute;
-	top: 713px;
-	left: 46px;
+	top: 665px;
+	left: 27px;
 	background-image: url(img/boxes4.png);
 }
 #pic02 {
@@ -67,8 +67,8 @@ body {
 	width: 328px;
 	position: absolute;
 	z-index: auto;
-	left: 30px;
-	top: 96px;
+	left: 24px;
+	top: 87px;
 	background-repeat: no-repeat;
 	background-image: url(img/boxes1.png);
 }
@@ -95,8 +95,8 @@ body {
 	position: absolute;
 	width: 187px;
 	height: 75px;
-	left: 916px;
-	top: 571px;
+	left: 922px;
+	top: 566px;
 	background-image: url(img/cropped%20logo.png);
 	background-size: cover;
 	background-position: center;
@@ -112,9 +112,9 @@ body {
 }
 #picLocate {
 	position: absolute;
-	width: 731px;
+	width: 734px;
 	height: 436px;
-	left: 37px;
+	left: 35px;
 	top: 41px;
 	background-color: #999;
 	z-index: 2;
@@ -125,10 +125,10 @@ body {
 #picDisc {
 	position: absolute;
 	z-index: 3;
-	width: 712px;
+	width: 714px;
 	height: 60px;
-	left: 32px;
-	top: 407px;
+	left: 35px;
+	top: 399px;
 	background-color: #FFF;
 	opacity: 0.8;
 	padding: 10px;
@@ -147,24 +147,24 @@ body {
 	width: 190px;
 	height: 57px;
 	left: 82px;
-	top: 30px;
+	top: 41px;
 	background-image: url(img/Botton/sugLogo.png);
 }
 #suggBkList {
-	width: 263px;
-	height: 222px;
+	width: 255px;
+	height: 246px;
 	position: absolute;
-	left: 45px;
-	top: 91px;
+	left: 46px;
+	top: 109px;
 	overflow: scroll;
 	overflow-style: marquee-line;
 }
 #suggDetail {
 	position: absolute;
-	width: 230px;
+	width: 209px;
 	height: 103px;
-	left: 13px;
-	top: 13px;
+	left: 17px;
+	top: 17px;
 	padding-left: 5px;
 	padding-right: 5px;
 }
@@ -176,12 +176,12 @@ body {
 	margin-right: 20px;
 }
 #map-canvas {
-	height: 455px;
-	width: 749px;
+	height: 520px;
+	width: 737px;
 	padding: 0px;
 	position: absolute;
-	left: 42px;
-	top: 59px;
+	left: 41px;
+	top: 39px;
 }
 #panel {
 	position: absolute;
@@ -217,8 +217,8 @@ body {
 	position: absolute;
 	height: 168px;
 	width: 1115px;
-	top: 1380px;
-	left: 44px;
+	top: 1303px;
+	left: 19px;
 	background-image: url(img/boxes4.png);
 	}
 
@@ -226,7 +226,7 @@ body {
 	position: absolute;
 	height: 509px;
 	width: 348px;
-	left: 24px;
-	top: 870px;
+	left: 11px;
+	top: 811px;
 	background-image: url(img/boxes5.png);
 }

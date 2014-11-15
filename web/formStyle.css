@@ -26,7 +26,7 @@
 #textInPicDis{
 	position: absolute;
 	left: 40px;
-	top: 408px;
+	top: 406px;
 	z-index: 6;
 	width: 719px;
 	height: 70px;
@@ -36,8 +36,8 @@
 	position: absolute;
 	width: 220px;
 	height: 39px;
-	left: 38px;
-	top: 40px;
+	left: 56px;
+	top: 52px;
 	z-index: 6;
 	font-size: 36px;
 	color: #FFF;
