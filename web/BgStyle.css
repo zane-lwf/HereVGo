@@ -34,12 +34,12 @@ body {
 	position: relative;
 }
 #lt1 {
-	height: 398px;
-	width: 344px;
+	height: 457px;
+	width: 345px;
 	position: absolute;
-	left: 14px;
-	top: 303px;
-	background-image: url(img/boxes3.png);
+	left: 7px;
+	top: 358px;
+	background-image: url(img/New%20Box2.png);
 }
 #ct {
 	height: auto;
@@ -55,22 +55,22 @@ body {
 	background-image: url(img/boxes6.png);
 }
 #spic {
-	height: 168px;
-	width: 1115px;
+	height: 157px;
+	width: 795px;
 	position: absolute;
-	top: 665px;
-	left: 27px;
-	background-image: url(img/boxes4.png);
+	top: 674px;
+	left: 341px;
+	background-image: url(img/New%20Box%203.png);
 }
 #pic02 {
-	height: 238px;
-	width: 328px;
+	height: 301px;
+	width: 345px;
 	position: absolute;
 	z-index: auto;
-	left: 24px;
-	top: 87px;
+	left: 15px;
+	top: 76px;
 	background-repeat: no-repeat;
-	background-image: url(img/boxes1.png);
+	background-image: url(img/New%20Box1.png);
 }
 #pic03 {
 	height: 270px;
@@ -147,15 +147,15 @@ body {
 	width: 190px;
 	height: 57px;
 	left: 82px;
-	top: 41px;
+	top: 32px;
 	background-image: url(img/Botton/sugLogo.png);
 }
 #suggBkList {
 	width: 255px;
 	height: 246px;
 	position: absolute;
-	left: 46px;
-	top: 109px;
+	left: 54px;
+	top: 119px;
 	
 	
 }
