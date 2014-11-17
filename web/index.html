@@ -340,8 +340,48 @@
                     }
 
                     function calTaxi(distance) {
-                        console.log(distance);
-                        return 35 + ((distance / 1000) * 5);
+                        var km = distance / 1000;
+                        var g = 0;
+                        g += 35;
+                        km -= 2;
+                        if (km - 10 < 0) {
+                            g += km * 5;
+                        } else {
+                            g += 10 * 5;
+                            km -= 10;
+                            if (km - 8 < 0) {
+                                g += km * 5.5;
+                            } else {
+                                g += 8 * 5.5;
+                                km -= 8
+                                if (km - 20 < 0) {
+                                    g += km * 6;
+                                } else {
+                                    g += 20 * 6;
+                                    km -= 20;
+                                    if (km - 20 < 0) {
+                                        g += km * 6.5;
+                                    } else {
+                                        g += 20 * 6.5;
+                                        km -= 20;
+                                        if (km - 20 < 0) {
+                                            g += km * 7.5;
+                                        } else {
+                                            g += 20 * 7.5;
+                                            km -= 20;
+                                            if (km - 20 > 0) {
+                                                g += km * 8;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        console.log(g);
+                        if ((g % 2) % 1 != 0) {
+                            g = g - ((g % 2)) + 1;
+                        }
+                        return g;
                     }
 
                     window.onload = function () {
@@ -360,8 +400,7 @@
                         for (var i = 0; i < names.length; i++) {
                             if (money >= taxi[i] + relate_costs[i]) {
                                 temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url("+links[i]+");\"><B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "</B></div>";
-                                //document.getElementById("place" + i).style.backgroundImage = "url(" + links[i] + ")";
+                                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : "+distances[i]+"</B></div>";
                                 temp += "</div>";
                                 marker(lats[i], lngs[i], names[i], i, links[i]);
                             }
@@ -438,6 +477,7 @@
 
                     google.maps.event.addDomListener(window, 'load', initialize);
                 </script>
+
                 </head>
                 <body  >
                     <div id="all">
@@ -460,7 +500,7 @@
                             </div>
                         </div>
                         <div id="head1" >
-                          <div id="map-canvas"></div>
+                            <div id="map-canvas"></div>
                         </div>
                         <div id="lt1" >
                             <div id="suggHead"></div>
@@ -473,15 +513,15 @@
                             </div>
                         </div>
                         <div id="spic1" >
-                          <div id="picLocate"></div>
+                            <div id="picLocate"></div>
                             <div id="picDisc"> </div>
                             <div id="textInPicDis">loading . . .</div>
                             <div id="textReg">สถานที่เเนะนำ</div>
                         </div>
                         <div id="spic"></div>
                         <div id="fromUserBG">
-                          <div id="fromUserHead">ค่าเดินทางจากผู้ใช้ท่านอื่นๆ</div>
-                          <div id="fromUserDetail"></div> <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช-->
+                            <div id="fromUserHead">ค่าเดินทางจากผู้ใช้ท่านอื่นๆ</div>
+                            <div id="fromUserDetail"></div> <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช-->
                         </div>
                         <div id="BottWeb"></div>
                     </div>
