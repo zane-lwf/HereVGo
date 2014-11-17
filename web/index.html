@@ -5,6 +5,7 @@
         <title>HereVGo</title>
         <link rel="stylesheet" type="text/css" href="BgStyle.css">
             <link rel="stylesheet" type="text/css" href="formStyle.css">
+                <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
                 <script src="script.js"></script>
                 <style>
                     <!-- sad-->
@@ -254,8 +255,6 @@
                     }
 
                     function reset() {
-                        console.log(document.getElementById("money").value);
-                        console.log(names);
                         document.getElementById("recBox").innerHTML = "load";
                         deleteMarkers();
                         lats.length = 0;
@@ -269,7 +268,6 @@
                         times.length = 0;
                         taxi.length = 0;
                         distances.length = 0;
-                        console.log(names);
                         loading();
                         findPlaces();
                     }
@@ -292,7 +290,6 @@
                                     content: 'Start',
                                     maxWidth: 200
                                 });
-                                console.log(pos);
                                 map.setCenter(pos);
                             } else {
                                 alert('Geocode was not successful for the following reason: ' + status);
@@ -310,7 +307,6 @@
                             if (status == google.maps.GeocoderStatus.OK) {
                                 var lat = results[0].geometry.location.k;
                                 var lng = results[0].geometry.location.B;
-                                console.log(lat + " " + lng);
                                 var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
                                 console.log(request);
                                 jQuery.getJSON(request, function (place) {
@@ -390,17 +386,24 @@
 
                     function setRecomend() {
                         var temp = "";
-                        console.log(markers.length);
                         var money = parseFloat(document.getElementById("money").value);
-                        console.log(money);
                         if (isNaN(money)) {
                             money = 9999999999999;
                         }
-                        console.log(money);
+                        
                         for (var i = 0; i < names.length; i++) {
+                            var tempName=names[i];
+                        console.log(tempName);
+                        var str=tempName.split(" ");
+                        console.log(str);
+                        if(str.length<=2){
+                            tempName=names[i];
+                        }else{
+                             tempName=str[0]+" "+str[1]+" "+str[2];
+                        }
                             if (money >= taxi[i] + relate_costs[i]) {
                                 temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + names[i] + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : "+distances[i]+"</B></div>";
+                                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                                 temp += "</div>";
                                 marker(lats[i], lngs[i], names[i], i, links[i]);
                             }
@@ -471,7 +474,6 @@
                             if (times.length == number) {
                                 setRecomend();
                             }
-                            console.log(time);
                         });
                     }
 
