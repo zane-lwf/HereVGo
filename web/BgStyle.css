@@ -93,14 +93,14 @@ body {
 }
 #LogoProj {
 	position: absolute;
-	width: 760px;
-	height: 112px;
-	left: 364px;
-	top: 22px;
+	width: 682px;
+	height: 126px;
+	left: 408px;
+	top: 18px;
 	background-position: center;
 	z-index: 5;
 	background-repeat: no-repeat;
-	background-color: #CC3;
+	background-image: url(img/lastest%20logo.png);
 }
 #formQSearch {
 	position: absolute;
@@ -262,10 +262,10 @@ body {
 
 #bgHeadSearch{
 	position: absolute;
-	width: 254px;
-	height: 159px;
-	left: 66px;
-	top: 20px;
-	background-color: #0C9;
+	width: 297px;
+	height: 179px;
+	left: 37px;
+	top: 17px;
 	z-index: -1;
+	background-image: url(img/New%20Box%20top.png);
 }
