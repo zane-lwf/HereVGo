@@ -17,7 +17,7 @@
 	height: 597px;
 	position: absolute;
 	left: 336px;
-	top: 92px;
+	top: 132px;
 	background-image: url(img/boxes2.png);
 }
 body {
@@ -38,7 +38,7 @@ body {
 	width: 345px;
 	position: absolute;
 	left: 7px;
-	top: 358px;
+	top: 384px;
 	background-image: url(img/New%20Box2.png);
 }
 #ct {
@@ -51,15 +51,15 @@ body {
 	width: 802px;
 	position: absolute;
 	left: 336px;
-	top: 811px;
+	top: 837px;
 	background-image: url(img/boxes6.png);
 }
 #spic {
 	height: 157px;
 	width: 795px;
 	position: absolute;
-	top: 674px;
-	left: 341px;
+	top: 700px;
+	left: 349px;
 	background-image: url(img/New%20Box%203.png);
 }
 #pic02 {
@@ -68,7 +68,7 @@ body {
 	position: absolute;
 	z-index: auto;
 	left: 15px;
-	top: 76px;
+	top: 122px;
 	background-repeat: no-repeat;
 	background-image: url(img/New%20Box1.png);
 }
@@ -93,15 +93,14 @@ body {
 }
 #LogoProj {
 	position: absolute;
-	width: 187px;
-	height: 75px;
-	left: 922px;
-	top: 566px;
-	background-image: url(img/cropped%20logo.png);
-	background-size: cover;
+	width: 682px;
+	height: 126px;
+	left: 408px;
+	top: 18px;
 	background-position: center;
 	z-index: 5;
 	background-repeat: no-repeat;
+	background-image: url(img/lastest%20logo.png);
 }
 #formQSearch {
 	position: absolute;
@@ -142,20 +141,19 @@ body {
 	background-image: url(img/Botton/addLocate.png);
 	background-repeat: no-repeat;
 }
-#suggHead {
+#fromUserHead {
 	position: absolute;
 	width: 190px;
 	height: 57px;
 	left: 82px;
 	top: 32px;
-	background-image: url(img/Botton/sugLogo.png);
 }
 #suggBkList {
 	width: 255px;
-	height: 246px;
+	height: 343px;
 	position: absolute;
 	left: 54px;
-	top: 119px;
+	top: 86px;
 	
 	
 }
@@ -170,20 +168,20 @@ body {
 
 }
 
-#suggBkList::-webkit-scrollbar-track
+.scrollbar::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: 10px;
 	background-color: #F5F5F5;
 }
 
-#suggBkList::-webkit-scrollbar
+.scrollbar::-webkit-scrollbar
 {
 	width: 12px;
 	background-color: #F5F5F5;
 }
 
-#suggBkList::-webkit-scrollbar-thumb
+.scrollbar::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
@@ -248,7 +246,7 @@ body {
 	position: absolute;
 	height: 168px;
 	width: 1115px;
-	top: 1303px;
+	top: 1329px;
 	left: 19px;
 	background-image: url(img/boxes4.png);
 	}
@@ -258,6 +256,16 @@ body {
 	height: 509px;
 	width: 348px;
 	left: 11px;
-	top: 811px;
+	top: 842px;
 	background-image: url(img/boxes5.png);
+}
+
+#bgHeadSearch{
+	position: absolute;
+	width: 297px;
+	height: 179px;
+	left: 37px;
+	top: 17px;
+	z-index: -1;
+	background-image: url(img/New%20Box%20top.png);
 }

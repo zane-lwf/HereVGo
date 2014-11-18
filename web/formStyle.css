@@ -32,27 +32,15 @@
 	height: 70px;
 }
 
-#textReg{
+#fromUserHead{
 	position: absolute;
-	width: 220px;
-	height: 39px;
-	left: 56px;
-	top: 52px;
+	text-align: center;
+	width: 241px;
+	height: 67px;
+	left: 52px;
+	top: 53px;
 	z-index: 6;
-	font-size: 36px;
-	color: #FFF;
-	text-shadow: 0 1px 0 #ccc, 
-               0 2px 0 #c9c9c9,
-               0 3px 0 #bbb,
-               0 4px 0 #b9b9b9,
-               0 5px 0 #aaa,
-               0 6px 1px rgba(0,0,0,.1),
-               0 0 5px rgba(0,0,0,.1),
-               0 1px 3px rgba(0,0,0,.3),
-               0 3px 5px rgba(0,0,0,.2),
-               0 5px 10px rgba(0,0,0,.25),
-               0 10px 10px rgba(0,0,0,.2),
-               0 20px 20px rgba(0,0,0,.15);
+	
 	}
 
 #getDirection{
@@ -100,20 +88,38 @@ div.positionSuggName{
 
 #fromUserDetail{
 	position: absolute;
-	width: 263px;
-	height: 362px;
-	left: 44px;
-	top: 116px;
-	background-color: #6C9;
+	width: 251px;
+	height: 348px;
+	left: 49px;
+	top: 124px;
 	
 }
 
-#fromUserHead{
+
+
+.headText{
+	text-shadow: 0px 0px 5px #333333, 2px 2px 8px #333333;
+	font-size: 24px;
+	color: #000;
+}
+
+#locateHead{
 	position: absolute;
-	width: 238px;
-	height: 65px;
-	left: 50px;
-	top: 45px;
-	background-color: #09C;
-	
+	left: 51px;
+	top: 56px;
+	z-index:5;
+	}
+
+#suggHead{
+	position: absolute;
+	left: 114px;
+	top: 43px;
+}
+
+#headSearchText{
+	position: absolute;
+	width: 209px;
+	height: 56px;
+	left: 45px;
+	top: 39px;
 }
