@@ -107,6 +107,7 @@ public class ConnectDB {
                 rt.setT_route(rs.getString("route"));
                 rt.setOrigin(rs.getString("origin"));
                 rt.setTotal_cost(rs.getFloat("total_cost"));
+                rt.setUser(rs.getNString("user"));
                 routes.add(rt);
             }
 
@@ -186,4 +187,59 @@ public class ConnectDB {
         }
         return places;
     }
+    
+    
+    public List<route> getNearRoute(float lat,float lng) {
+        float r=(float) 0.5;
+        try {
+            routes = new ArrayList<route>();
+            // Establish the connection.
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection(connectionUrl);
+
+            // Create and execute an SQL statement that returns some data.
+            String SQL = "SELECT * FROM dbo.hvg_route  WHERE (6371 * acos (cos ( radians("+lat+") )* cos( radians( ori_lat ) )* cos( radians( ori_lon ) - radians("+lng+") )+ sin ( radians("+lat+") )* sin( radians( ori_lat ) ) )) <= "+r+" ORDER BY total_cost;";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SQL);
+
+            // Iterate through the data in the result set and display it.
+            while (rs.next()) {
+                rt = new route();
+                rt.setDestination(rs.getString("place_id"));
+                rt.setOri_lat(rs.getFloat("ori_lat"));
+                rt.setOri_long(rs.getFloat("ori_lon"));
+                rt.setT_route(rs.getString("route"));
+                rt.setOrigin(rs.getString("origin"));
+                rt.setTotal_cost(rs.getFloat("total_cost"));
+                rt.setUser(rs.getNString("user"));
+                routes.add(rt);
+            }
+
+        } // Handle any errors that may have occurred.
+        catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (Exception e) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return routes;
+    }
+    
+    
 }

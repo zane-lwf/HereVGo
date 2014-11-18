@@ -111,7 +111,6 @@ public class messenger extends HttpServlet {
     }
 
     public String getPlacesInRadius(float lat, float lng, float r) {
-        List<place> places;
         ConnectDB place = new ConnectDB();
         places = place.placesInRadius(lat, lng, r);
         String locationArray = "";
@@ -131,6 +130,37 @@ public class messenger extends HttpServlet {
                     temp += plc.getLink() + "\" }";
                 } else {
                     temp += plc.getLink() + "\" },";
+                }
+                locationArray += temp;
+            }
+            locationArray += " ] }";
+        } catch (Exception e) {
+            temp += e.toString();
+            locationArray = temp;
+        }
+        return locationArray;
+    }
+    
+    public String getRoute(float lat, float lng) {
+        ConnectDB place = new ConnectDB();
+        routes = place.getNearRoute(lat, lng);
+        String locationArray = "";
+        String temp = "";
+        try {
+            locationArray = "{ \"array\": [ ";
+            for (int i = 0; i < routes.size(); i++) {
+                route rte = (route) routes.get(i);
+                temp = "{ \"place_id\": \"";
+                temp += rte.getDestination() + "\",\"lat\": ";
+                temp += rte.getOri_lat() + ", \"lng\": ";
+                temp += rte.getOri_long() + ",\"total_cost\":";
+                temp += rte.getTotal_cost()+ ", \"name\": \"";
+                temp += rte.getOrigin() + "\", \"description\": \"";
+                temp += textCorrecter(rte.getT_route()) + "\", \"user\": \"";
+                if (i == places.size() - 1) {
+                    temp += rte.getUser() + "\" }";
+                } else {
+                    temp += rte.getUser() + "\" },";
                 }
                 locationArray += temp;
             }

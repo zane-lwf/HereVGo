@@ -11,7 +11,7 @@ package cjava;
  * @author plewp_000
  */
 public class route {
-    String place_id,origin,t_route;   
+    String place_id,origin,t_route,user;   
     double total_cost;
     float ori_lat,ori_long;
 
@@ -62,6 +62,14 @@ public class route {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+    
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String origin) {
+        this.user = user;
     }
     
 }
