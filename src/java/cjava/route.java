@@ -68,7 +68,7 @@ public class route {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(String origin) {
         this.user = user;
     }
     
