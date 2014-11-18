@@ -38,8 +38,8 @@
 	font-family: Arial;
 	z-index: 100;
 	position: absolute;
-	left: 72px;
-	top: 44px;
+	left: 71px;
+	top: 65px;
 	width: 245px;
 	height: 198px;
                     }
@@ -68,7 +68,6 @@
                     var times = [];
                     var taxi = [];
                     var distances = [];
-                    var place_ids = [];
                     var userlat;
                     var userlng;
 
@@ -318,7 +317,6 @@
                                             var src = "(" + lat + "," + lng + ")";
                                             var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKeys[count % apiKeys.length];
                                             requestDirection(requestDistance);
-                                            place_ids.push(place.array[count].place_id);
                                             lats.push(place.array[count].lat);
                                             lngs.push(place.array[count].lng);
                                             names.push(place.array[count].name);
@@ -487,6 +485,9 @@
                 <body  >
                     <div id="all">
                         <div id="LogoProj" ></div>
+                        <div id="bgHeadSearch">
+                        	<div id="headSearchText" class="headText">ค้นหาสถานที่เเนะนำ</div>
+                        </div>
                         <div id="pic02" >
                             <div id="control">
                                 <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();" />
@@ -508,7 +509,7 @@
                           <div id="map-canvas"></div>
                         </div>
                         <div id="lt1" >
-                            <div id="suggHead"></div>
+                            <div id="suggHead" class="headText">สถานที่เเนะนำ</div>
                             <div id="suggBkList" class="scrollbar">
                                 <div id="suggDetail">
                                     <div id="recBox"></div>
@@ -519,12 +520,13 @@
                           <div id="picLocate"></div>
                             <div id="picDisc"> </div>
                             <div id="textInPicDis">Welcome</div>
-                            <div id="textReg">สถานที่เเนะนำ</div>
+                            <div id="locateHead" class="headText">รายละเอียดสถานที่</div>
                         </div>
                         <div id="spic"></div>
                         <div id="fromUserBG">
-                          <div id="fromUserHead">ค่าเดินทางจากผู้ใช้ท่านอื่นๆ</div>
-                            <div id="fromUserDetail"></div> <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช-->
+                          <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
+                          จากผู้ใช้ท่านอื่นๆ</div>
+                            <div id="fromUserDetail"  class="scrollbar"></div> <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช-->
                         </div>
                         <div id="BottWeb"></div>
                     </div>
