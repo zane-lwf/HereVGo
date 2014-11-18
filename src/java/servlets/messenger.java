@@ -157,7 +157,7 @@ public class messenger extends HttpServlet {
                 temp += rte.getTotal_cost()+ ", \"name\": \"";
                 temp += rte.getOrigin() + "\", \"description\": \"";
                 temp += textCorrecter(rte.getT_route()) + "\", \"user\": \"";
-                if (i == routes.size() - 1) {
+                if (i == places.size() - 1) {
                     temp += rte.getUser() + "\" }";
                 } else {
                     temp += rte.getUser() + "\" },";

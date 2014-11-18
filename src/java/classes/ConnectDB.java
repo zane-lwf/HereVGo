@@ -198,7 +198,7 @@ public class ConnectDB {
             con = DriverManager.getConnection(connectionUrl);
 
             // Create and execute an SQL statement that returns some data.
-            String SQL = "SELECT * FROM dbo.hvg_route  WHERE (6371 * acos (cos ( radians("+lat+") )* cos( radians( ori_lat ) )* cos( radians( ori_lon ) - radians("+lng+") )+ sin ( radians("+lat+") )* sin( radians( ori_lat ) ) )) <= "+r+" AND (place_id = '"+id+"') ORDER BY total_cost;";
+            String SQL = "SELECT * FROM dbo.hvg_route  WHERE (6371 * acos (cos ( radians("+lat+") )* cos( radians( ori_lat ) )* cos( radians( ori_lon ) - radians("+lng+") )+ sin ( radians("+lat+") )* sin( radians( ori_lat ) ) )) <= "+r+" AND place_id = id ORDER BY total_cost;";
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL);
 
