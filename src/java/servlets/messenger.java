@@ -141,9 +141,9 @@ public class messenger extends HttpServlet {
         return locationArray;
     }
     
-    public String getRoute(float lat, float lng) {
+    public String getRoute(float lat, float lng, String id) {
         ConnectDB place = new ConnectDB();
-        routes = place.getNearRoute(lat, lng);
+        routes = place.getNearRoute(lat, lng , id);
         String locationArray = "";
         String temp = "";
         try {
@@ -186,6 +186,10 @@ public class messenger extends HttpServlet {
                 case "radius":
                     out.println(getPlacesInRadius(Float.parseFloat(request.getParameter("lat")), Float.parseFloat(request.getParameter("lng")), Float.parseFloat(request.getParameter("r"))));
                     break;
+                case "route":
+                    out.println(getRoute(Float.parseFloat(request.getParameter("lat")), Float.parseFloat(request.getParameter("lng")), request.getParameter("id")));
+                    break;
+                    
             }
         } catch (Exception e) {
             out.println("<h1>hi</h1>");

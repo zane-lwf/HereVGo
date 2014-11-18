@@ -68,6 +68,7 @@
                     var times = [];
                     var taxi = [];
                     var distances = [];
+                    var place_ids = [];
                     var userlat;
                     var userlng;
 
@@ -317,6 +318,7 @@
                                             var src = "(" + lat + "," + lng + ")";
                                             var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKeys[count % apiKeys.length];
                                             requestDirection(requestDistance);
+                                            place_ids.push(place.array[count].place_id);
                                             lats.push(place.array[count].lat);
                                             lngs.push(place.array[count].lng);
                                             names.push(place.array[count].name);
