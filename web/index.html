@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="BgStyle.css">
             <link rel="stylesheet" type="text/css" href="formStyle.css">
                 <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
-<<<<<<< HEAD
+
                     <script src="script.js"></script>
                     <style>
                         <!-- sad-->
@@ -173,7 +173,6 @@
                                 }, function () {
                                     handleNoGeolocation(true);
                                 });
-=======
                 <script src="script.js"></script>
                 <style>
                     <!-- sad-->
@@ -277,7 +276,6 @@
                             // If the place has a geometry, then present it on a map.
                             if (place.geometry.viewport) {
                                 map.fitBounds(place.geometry.viewport);
->>>>>>> origin/master
                             } else {
                                 // Browser doesn't support Geolocation
                                 handleNoGeolocation(false);
@@ -327,7 +325,6 @@
                                 infowindow = new google.maps.InfoWindow({
                                     content: '<strong>' + title + '</strong>' + '<br><center> <img src=' + pic + ' width=200></center>'
                                 });
-<<<<<<< HEAD
                                 infowindow.open(map, marker);
                                 map.setCenter(myLatlng);
                             });
@@ -388,7 +385,6 @@
                                 if (status == google.maps.GeocoderStatus.OK) {
                                     if (infowindow != null) {
                                         infowindow.close();
-=======
                                 map.setCenter(pos);
                             } else {
                                 alert('Geocode was not successful for the following reason: ' + status);
@@ -426,7 +422,6 @@
                                     } else {
                                         alert("ไม่ที่ให้คุณเที่ยว");
                                         loaded();
->>>>>>> origin/master
                                     }
                                     userlat = results[0].geometry.location.k;
                                     userlng = results[0].geometry.location.B;
