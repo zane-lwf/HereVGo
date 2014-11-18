@@ -38,8 +38,8 @@
 	font-family: Arial;
 	z-index: 100;
 	position: absolute;
-	left: 71px;
-	top: 65px;
+	left: 70px;
+	top: 50px;
 	width: 245px;
 	height: 198px;
                     }
@@ -230,7 +230,7 @@
 
                     //set desciption & picture
                     function setInfo() {
-                        var text = descriptions[select] + "<br> ค่าเข้า : " + relate_costs[select];
+                        var text = descriptions[select] + "<br> ค่าเข้าประมาณ : " + relate_costs[select] + "บาท/คน";
                         document.getElementById("textInPicDis").innerHTML = text;
                         document.getElementById("end").value = names[select];
                         document.getElementById("picLocate").style.backgroundImage = "url(" + links[select] + ")";
@@ -526,8 +526,8 @@
                         <div id="fromUserBG">
                           <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
                           จากผู้ใช้ท่านอื่นๆ</div>
-                            <div id="fromUserDetail"  class="scrollbar"></div> <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช-->
-                        </div>
+                            <div id="fromUserDetail"  class="scrollbar"></div> 
+                      </div>
                         <div id="BottWeb"></div>
                     </div>
                 </body>
