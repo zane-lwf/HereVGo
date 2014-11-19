@@ -96,7 +96,7 @@ body {
 	width: 682px;
 	height: 126px;
 	left: 408px;
-	top: 18px;
+	top: 37px;
 	background-position: center;
 	z-index: 5;
 	background-repeat: no-repeat;
@@ -264,8 +264,65 @@ body {
 	position: absolute;
 	width: 297px;
 	height: 179px;
-	left: 37px;
-	top: 17px;
+	left: 43px;
+	top: 53px;
 	z-index: -1;
 	background-image: url(img/New%20Box%20top.png);
+}
+
+#pin01{
+	position: absolute;
+	left: 33px;
+	top: 145px;
+}
+
+#pin02{
+	position: absolute;
+	left: 351px;
+	top: 147px;
+}
+#pin03{
+	position: absolute;
+	left: 351px;
+	top: 711px;
+}
+
+#pin04{
+	position: absolute;
+	left: 14px;
+	top: 1343px;
+}
+
+#pin05{
+	position: absolute;
+	left: 294px;
+	top: 330px;
+}
+
+#pin06{
+	position: absolute;
+	left: 1083px;
+	top: 636px;
+}
+#pin07{
+	position: absolute;
+	left: 1085px;
+	top: 717px;
+}
+#pin08{
+	position: absolute;
+	left: 1077px;
+	top: 1350px;
+}
+.pinL{
+	width: 60px;
+	height: 60px;
+	z-index: 10;
+	background-color: #C30;
+}
+.pinR{
+	width: 60px;
+	height: 60px;
+	z-index: 10;
+	background-color: #30F;
 }

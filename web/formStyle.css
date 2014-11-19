@@ -98,9 +98,9 @@ div.positionSuggName{
 
 
 .headText{
-	text-shadow: 0px 0px 5px #333333, 2px 2px 8px #333333;
+	text-shadow: 0px 0px 5px #000000,2px 2px 8px #333333;
 	font-size: 24px;
-	color: #000;
+	color: #FFF;
 }
 
 #locateHead{
@@ -120,6 +120,6 @@ div.positionSuggName{
 	position: absolute;
 	width: 209px;
 	height: 56px;
-	left: 45px;
-	top: 39px;
+	left: 50px;
+	top: 49px;
 }
