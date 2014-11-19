@@ -261,6 +261,7 @@ function findPlaces() {
                 number = place.array.length;
                 if (place.array.length != 0) {
                     for (count = 0; count < place.array.length; count++) {
+                        routes.push("");
                         var dest = "(" + place.array[count].lat + "," + place.array[count].lng + ")";
                         var src = "(" + lat + "," + lng + ")";
                         var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKeys[count % apiKeys.length];
@@ -403,7 +404,6 @@ function desByUser() {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
-
 }
 
 function requestDirection(link) {
@@ -411,8 +411,9 @@ function requestDirection(link) {
     var url = servlet + link;
     var distance;
     var time;
+    console.log(url);
     jQuery.getJSON(url, function (data) {
-        console.log(data);
+        console.log(url);
         distance = data.routes[0].legs[0].distance.value;
         time = data.routes[0].legs[0].duration.text;
         taxi.push(calTaxi(distance));
@@ -420,33 +421,27 @@ function requestDirection(link) {
         distances.push(data.routes[0].legs[0].distance.text);
         if (times.length == number) {
             setRecomend();
+            for(var i = 0;i < times.length;i++){
+                
+            }
         }
     });
 }
 
 
-
 function routeFromUser(lat, lng, id, index) {
     var request = 'messenger?cmd=route&lat=' + lat + '&lng=' + lng + '&id=' + id;
-    console.log(request);
-    routes.push("");
-    var temp = [];
     jQuery.getJSON(request, function (route) {
+        console.log(request + " "+ index);
         console.log(route);
-        console.log(id);
         if (route.array.length != 0) {
             for (var i = 0; i < route.array.length; i++) {
-                temp.push("yes");
-
+                routes[index]=(["YES",route.array[i].place_id,route.array[i].description]);
             }
-            routes[index] = temp;
         } else {
-            routes[index] = ["no"];
+            routes[index]=(["NO",id]);
         }
-        console.log(temp);
-
-        console.log(routes);
-    });
+    }); 
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
