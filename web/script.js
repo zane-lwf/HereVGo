@@ -257,7 +257,7 @@ function findPlaces() {
             var lat = results[0].geometry.location.k;
             var lng = results[0].geometry.location.B;
             var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
-            jQuery.getJSON(request, function (place) {
+            jQuery.getJSON(request, null, function (place) {
                 number = place.array.length;
                 if (place.array.length != 0) {
                     for (count = 0; count < place.array.length; count++) {
@@ -359,6 +359,8 @@ function setRecomend() {
     document.getElementById("recBox").innerHTML = temp;
     loaded();
     setInfo();
+    console.log(names);
+    console.log(routes);
 }
 
 
@@ -395,7 +397,7 @@ function desByUser() {
             var servlet = 'ParseJSON?link=';
             var url = servlet + requestDistance;
             console.log(url);
-            jQuery.getJSON(url, function (data) {
+            jQuery.getJSON(url, null, function (data) {
                 console.log(data);
                 console.log(data.routes[0].legs[0].duration.text + " " + data.routes[0].legs[0].distance.text + " " + calTaxi(data.routes[0].legs[0].distance.value));
                 alert(data.routes[0].legs[0].duration.text + " " + data.routes[0].legs[0].distance.text + " " + calTaxi(data.routes[0].legs[0].distance.value));
@@ -411,9 +413,7 @@ function requestDirection(link) {
     var url = servlet + link;
     var distance;
     var time;
-    console.log(url);
-    jQuery.getJSON(url, function (data) {
-        console.log(url);
+    jQuery.getJSON(url, null, function (data) {
         distance = data.routes[0].legs[0].distance.value;
         time = data.routes[0].legs[0].duration.text;
         taxi.push(calTaxi(distance));
@@ -421,27 +421,27 @@ function requestDirection(link) {
         distances.push(data.routes[0].legs[0].distance.text);
         if (times.length == number) {
             setRecomend();
-            for(var i = 0;i < times.length;i++){
-                
-            }
         }
     });
 }
 
-
 function routeFromUser(lat, lng, id, index) {
     var request = 'messenger?cmd=route&lat=' + lat + '&lng=' + lng + '&id=' + id;
-    jQuery.getJSON(request, function (route) {
-        console.log(request + " "+ index);
-        console.log(route);
-        if (route.array.length != 0) {
-            for (var i = 0; i < route.array.length; i++) {
-                routes[index]=(["YES",route.array[i].place_id,route.array[i].description]);
+    jQuery.getJSON(request, null, function (data) {
+        console.log(data);
+        var temp = [];
+        if (data.array.length != 0) {
+            for (var i = 0; i < data.array.length; i++) {
+                if (data.array[i].place_id == id) {
+                    temp.push(["YES", data.array[i].place_id, data.array[i].description]);
+                    console.log(temp);
+                }
             }
+            routes[index] = temp;
         } else {
-            routes[index]=(["NO",id]);
+            routes[index] = (["NO", id]);
         }
-    }); 
+    });
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
