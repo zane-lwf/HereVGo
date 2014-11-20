@@ -464,7 +464,7 @@ function showRouteFromUser() {
     var temp = "";
     if (routes[select] != "" && routes[select] != []) {
         for (var i = 0; i < routes[select].length; i++) {
-            temp += "<div>" + routes[select][i][0] + "<br>total cost :" + routes[select][i][2] + "<br>By :" + routes[select][i][1] + "</div><br>";
+            temp += "<div id = \"resultFromUser\">" + routes[select][i][0] + "<br>total cost :" + routes[select][i][2] + "<br>By :" + routes[select][i][1] + "</div><br>";
         }
     } else {
         temp += "<div>No Data</div>";
