@@ -190,7 +190,7 @@ public class ConnectDB {
     
     
     public List<route> getNearRoute(float lat,float lng, String id) {
-        float r=(float) 1;
+        float r=(float) 2;
         try {
             routes = new ArrayList<route>();
             // Establish the connection.

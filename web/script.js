@@ -145,6 +145,7 @@ function onSelect(i) {
     select = i;
     calcRoute(lats[select], lngs[select]);
     setInfo();
+    showRouteFromUser();
 }
 
 
@@ -360,7 +361,6 @@ function setRecomend() {
     loaded();
     setInfo();
     console.log(names);
-    console.log(routes);
 }
 
 
@@ -434,14 +434,29 @@ function routeFromUser(lat, lng, id, index) {
             for (var i = 0; i < data.array.length; i++) {
                 if (data.array[i].place_id == id) {
                     temp.push(["YES", data.array[i].place_id, data.array[i].description]);
-                    console.log(temp);
+                }else{
+                    temp.push(["NO", id]);
                 }
             }
             routes[index] = temp;
-        } else {
-            routes[index] = (["NO", id]);
+        }
+        if (index == (times.length) - 1) {
+            console.log(routes);
         }
     });
+}
+
+
+function showRouteFromUser(){
+    var temp="";
+    console.log(routes[select][0][0]);
+    if(routes[select][0][0]=="YES"){
+        for(var i = 0;i<routes[select].length;i++){
+            temp+="<div>"+routes[select][i][0]+" "+routes[select][i][0]+"<div>"
+        }
+        document.getElementById("routebox").innerHTML = temp;
+        console.log(temp);
+    } 
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
