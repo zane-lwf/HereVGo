@@ -1,120 +1,119 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>HereVGo</title>
-        <link rel="stylesheet" type="text/css" href="BgStyle.css">
-            <link rel="stylesheet" type="text/css" href="formStyle.css">
-                <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
-
-                    <style>
-                        <!-- sad-->
-                        #map-canvas {
-                            height: 493px;
-                            width: 735px;
-                            padding: 0px;
-                            position: absolute;
-                            left: 17px;
-                            top: 21px;
-                        }
-                        #panel {                        position: absolute;
-                                                        top: 5px;
-                                                        left: 50%;
-                                                        z-index: 5;
-                                                        background-color: #fff;
-                                                        padding: 5px;
-                                                        border: 1px solid #999;
-                        }
-                        #directions-panel {
-                            height: 100%;
-                            float: right;
-                            width: 390px;
-                            overflow: auto;
-                        }
-                        #control {
-                            padding: 5px;
-                            font-size: 14px;
-                            font-family: Arial;
-                            z-index: 100;
-                            position: absolute;
-                            left: 71px;
-                            top: 62px;
-                            width: 245px;
-                            height: 198px;
-                        }
-                        #directions-panel {
-                            float: none;
-                            width: auto;
-                        }
-                    </style>
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
-
-                    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-
-                    <script src="script.js"></script>
-
-                    </head>
-                    <body  >
-                        <div id="all">
-                            <div id="pin01" class="pinL"></div>
-                            <div id="pin02" class="pinL"></div>
-                            <div id="pin03" class="pinL"></div>
-                          <div id="pin04" class="pinL"></div>
-
-                            <div id="pin05" class="pinR"></div>
-                            <div id="pin06" class="pinR"></div>
-                            <div id="pin07" class="pinR"></div>
-                            <div id="pin08" class="pinR"></div>
-
-                            <div id="LogoProj" ></div>
-                            <div id="bgHeadSearch">
-                                <div id="headSearchText" class="headText">ค้นหาสถานที่เเนะนำ</div>
-                            </div>
-                            <div id="pic02" >
-                                <div id="control">
-                                    <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();" />
-                                    <BR />
-                                    <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" onfocusout="locationByUser();" /><BR />
-                                    <input class="textbox"  id="end"  style="width: 190px" type="text" placeholder="ปลายทาง" onfocusout="desByUser()"/><BR />
-                                    <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" /><BR />
-                                    <select id="radius" class="textbox" style="width: 200px">
-                                        <option value=10>10 km</option>
-                                        <option value=25>25 km</option>
-                                        <option value=50>50 km</option>
-                                        <option value=100>100 km</option>
-                                        <option value=10000000>unlimit</option>
-                                    </select><BR />
-                                    <input class="textbox"  id="submit" style="width: 200px" type="submit" value="ค้นหา" onclick="reset()"/>
-                                </div>
-                            </div>
-                            <div id="head1" >
-                                <div id="map-canvas"></div>
-                            </div>
-                            <div id="lt1" >
-                                <div id="suggHead" class="headText">สถานที่เเนะนำ</div>
-                                <div id="suggBkList" class="scrollbar">
-                                    <div id="suggDetail">
-                                        <div id="recBox"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="spic1" >
-                                <div id="picLocate"></div>
-                                <div id="picDisc"> </div>
-                                <div id="textInPicDis">Welcome</div>
-                                <div id="locateHead" class="headText">รายละเอียดสถานที่</div>
-                            </div>
-                            <div id="spic"></div>
-                            <div id="fromUserBG">
-                                <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
-                                    จากผู้ใช้ท่านอื่นๆ</div>
-                                <div id="fromUserDetail"  class="scrollbar">
-                                    <div id="routebox"></div>
-                                </div> <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช-->
-                            </div>
-                            <div id="BottWeb"></div>
-                        </div>
-                        
-                        <input type="submit" value="debug" onclick="debug()">
-                    </body>
-                    </html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HereVGo</title>
+<link rel="stylesheet" type="text/css" href="BgStyle.css">
+<link rel="stylesheet" type="text/css" href="formStyle.css">
+<link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
+<style>
+<!--
+sad-->  #map-canvas {
+	height: 493px;
+	width: 735px;
+	padding: 0px;
+	position: absolute;
+	left: 17px;
+	top: 21px;
+}
+#panel {
+	position: absolute;
+	top: 5px;
+	left: 50%;
+	z-index: 5;
+	background-color: #fff;
+	padding: 5px;
+	border: 1px solid #999;
+}
+#directions-panel {
+	height: 100%;
+	float: right;
+	width: 390px;
+	overflow: auto;
+}
+#control {
+	padding: 5px;
+	font-size: 14px;
+	font-family: Arial;
+	z-index: 100;
+	position: absolute;
+	left: 71px;
+	top: 62px;
+	width: 245px;
+	height: 198px;
+}
+#directions-panel {
+	float: none;
+	width: auto;
+}
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="script.js"></script>
+</head>
+<body  >
+<div id="all">
+  <div id="pin01" class="pinL"></div>
+  <div id="pin02" class="pinL"></div>
+  <div id="pin03" class="pinL"></div>
+  <div id="pin04" class="pinL"></div>
+  <div id="pin05" class="pinR"></div>
+  <div id="pin06" class="pinR"></div>
+  <div id="pin07" class="pinR"></div>
+  <div id="pin08" class="pinR"></div>
+  <div id="LogoProj" ></div>
+  <div id="bgHeadSearch">
+    <div id="headSearchText" class="headText">ค้นหาสถานที่เเนะนำ</div>
+  </div>
+  <div id="pic02" >
+    <div id="control">
+      <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();" />
+      <BR />
+      <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" onfocusout="locationByUser();" />
+      <BR />
+      <input class="textbox"  id="end"  style="width: 190px" type="text" placeholder="ปลายทาง" onfocusout="desByUser()"/>
+      <BR />
+      <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" />
+      <BR />
+      <select id="radius" class="textbox" style="width: 200px">
+        <option value=10>10 km</option>
+        <option value=25>25 km</option>
+        <option value=50>50 km</option>
+        <option value=100>100 km</option>
+        <option value=10000000>unlimit</option>
+      </select>
+      <BR />
+      <input class="textbox"  id="submit" style="width: 200px" type="submit" value="ค้นหา" onclick="reset()"/>
+    </div>
+  </div>
+  <div id="head1" >
+    <div id="map-canvas"></div>
+  </div>
+  <div id="lt1" >
+    <div id="suggHead" class="headText">สถานที่เเนะนำ</div>
+    <div id="suggBkList" class="scrollbar">
+      <div id="suggDetail">
+        <div id="recBox"></div>
+      </div>
+    </div>
+  </div>
+  <div id="spic1" >
+    <div id="picLocate"></div>
+    <div id="picDisc"> </div>
+    <div id="textInPicDis">Welcome</div>
+    <div id="locateHead" class="headText">รายละเอียดสถานที่</div>
+  </div>
+  <div id="spic"></div>
+  <div id="fromUserBG">
+    <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
+      จากผู้ใช้ท่านอื่นๆ</div>
+    <div id="fromUserDetail"  class="scrollbar">
+      <div id="routebox"></div>
+    </div>
+    <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช--> 
+  </div>
+  <div id="BottWeb"></div>
+</div>
+<input type="submit" value="debug" onclick="debug()">
+</body>
+</html>

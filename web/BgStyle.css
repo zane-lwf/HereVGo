@@ -5,12 +5,10 @@
 #all {
 	height: 1500px;
 	width: 1140px;
-	margin-left: auto;
 	margin-right: auto;
-	padding: 10px;
 	z-index: 2;
-	padding-top: 130px;
 	position: relative;
+	margin-left: auto;
 }
 #head1 {
 	width: 818px;
@@ -27,8 +25,6 @@ body {
 	background-repeat: no-repeat;
 	background-color: #FFFFFF;
 	background-position: center;
-	width: 65px;
-	height: 82px;
 }
 #det {
 	height: 900px;
@@ -318,16 +314,16 @@ body {
 
 #pin06{
 	position: absolute;
-	left: 1090px;
-	top: 612px;
+	left: 1091px;
+	top: 613px;
 	width: 69px;
 	height: 83px;
 	background-image: url(img/mood%202.png);
 }
 #pin07{
 	position: absolute;
-	left: 1093px;
-	top: 680px;
+	left: 1089px;
+	top: 684px;
 	background-image: url(img/mood%202.png);
 	width: 69px;
 	height: 83px;
