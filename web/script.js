@@ -16,6 +16,7 @@ var taxi = [];
 var distances = [];
 var place_ids = [];
 var routes = [];
+var avalible=0;
 var userlat;
 var userlng;
 
@@ -372,7 +373,6 @@ function setRecomend() {
     }
     document.getElementById("recBox").innerHTML = temp;
     loaded();
-    setInfo();
 }
 
 
