@@ -353,10 +353,16 @@ function setRecomend() {
         } else {
             tempName = str[0] + " " + str[1] + " " + str[2];
         }
-        console.log(routes)
 
         if (routes[i] != "" && routes[i] != []) {
             if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2]+relate_costs[i])) {
+                temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
+                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                temp += "</div>";
+                marker(lats[i], lngs[i], names[i], i, links[i]);
+            }
+        }else{
+            if (money >= taxi[i] + relate_costs[i]) {
                 temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
                 temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                 temp += "</div>";
@@ -367,7 +373,6 @@ function setRecomend() {
     document.getElementById("recBox").innerHTML = temp;
     loaded();
     setInfo();
-    console.log(names);
 }
 
 
@@ -403,7 +408,6 @@ function desByUser() {
             var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKeys[0];
             var servlet = 'ParseJSON?link=';
             var url = servlet + requestDistance;
-            console.log(url);
             jQuery.getJSON(url, null, function (data) {
                 console.log(data);
                 console.log(data.routes[0].legs[0].duration.text + " " + data.routes[0].legs[0].distance.text + " " + calTaxi(data.routes[0].legs[0].distance.value));
@@ -460,7 +464,6 @@ function showRouteFromUser() {
         temp += "<div>No Data</div>";
     }
     document.getElementById("routebox").innerHTML = temp;
-    console.log(temp);
 }
 
 function debug() {
