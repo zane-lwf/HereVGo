@@ -27,6 +27,8 @@ body {
 	background-repeat: no-repeat;
 	background-color: #FFFFFF;
 	background-position: center;
+	width: 65px;
+	height: 82px;
 }
 #det {
 	height: 900px;
@@ -272,47 +274,71 @@ body {
 
 #pin01{
 	position: absolute;
-	left: 33px;
-	top: 145px;
+	left: 29px;
+	top: 133px;
+	background-image: url(img/mood%201.png);
+	width: 65px;
+	height: 82px;
 }
 
 #pin02{
 	position: absolute;
 	left: 351px;
 	top: 147px;
+	width: 65px;
+	height: 82px;
+	background-image: url(img/mood%201.png);
 }
 #pin03{
 	position: absolute;
 	left: 351px;
 	top: 711px;
+	width: 65px;
+	height: 82px;
+	background-image: url(img/mood%201.png);
 }
 
 #pin04{
 	position: absolute;
 	left: 14px;
 	top: 1343px;
+	width: 65px;
+	height: 82px;
+	background-image: url(img/mood%201.png);
 }
 
 #pin05{
 	position: absolute;
-	left: 294px;
-	top: 330px;
+	left: 290px;
+	top: 300px;
+	width: 65px;
+	height: 82px;
+	background-image: url(img/mood%202.png);
 }
 
 #pin06{
 	position: absolute;
-	left: 1083px;
-	top: 636px;
+	left: 1075px;
+	top: 610px;
+	width: 69px;
+	height: 83px;
+	background-image: url(img/mood%202.png);
 }
 #pin07{
 	position: absolute;
 	left: 1085px;
 	top: 717px;
+	background-image: url(img/mood%202.png);
+	width: 69px;
+	height: 83px;
 }
 #pin08{
 	position: absolute;
-	left: 1077px;
-	top: 1350px;
+	left: 1075px;
+	top: 1348px;
+	background-image: url(img/mood%202.png);
+	width: 65px;
+	height: 82px;
 }
 .pinL{
 	width: 60px;
