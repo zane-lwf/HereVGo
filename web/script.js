@@ -263,10 +263,13 @@ function findPlaces() {
                 if (place.array.length != 0) {
                     for (count = 0; count < place.array.length; count++) {
                         routes.push("");
+                        taxi.push("");
+                        times.push("");
+                        distances.push("");
                         var dest = "(" + place.array[count].lat + "," + place.array[count].lng + ")";
                         var src = "(" + lat + "," + lng + ")";
                         var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKeys[count % apiKeys.length];
-                        requestDirection(requestDistance);
+                        requestDirection(requestDistance, count);
                         routeFromUser(lat, lng, place.array[count].place_id, count);
                         place_ids.push(place.array[count].place_id);
                         lats.push(place.array[count].lat);
@@ -350,11 +353,15 @@ function setRecomend() {
         } else {
             tempName = str[0] + " " + str[1] + " " + str[2];
         }
-        if (money >= taxi[i] + relate_costs[i]) {
-            temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-            temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
-            temp += "</div>";
-            marker(lats[i], lngs[i], names[i], i, links[i]);
+        console.log(routes)
+
+        if (routes[i] != "" && routes[i] != []) {
+            if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2]+relate_costs[i])) {
+                temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
+                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                temp += "</div>";
+                marker(lats[i], lngs[i], names[i], i, links[i]);
+            }
         }
     }
     document.getElementById("recBox").innerHTML = temp;
@@ -408,7 +415,7 @@ function desByUser() {
     });
 }
 
-function requestDirection(link) {
+function requestDirection(link, index) {
     var servlet = 'ParseJSON?link=';
     var url = servlet + link;
     var distance;
@@ -416,12 +423,9 @@ function requestDirection(link) {
     jQuery.getJSON(url, null, function (data) {
         distance = data.routes[0].legs[0].distance.value;
         time = data.routes[0].legs[0].duration.text;
-        taxi.push(calTaxi(distance));
-        times.push(time);
-        distances.push(data.routes[0].legs[0].distance.text);
-        if (times.length == number) {
-            setRecomend();
-        }
+        taxi[index] = (calTaxi(distance));
+        times[index] = (time);
+        distances[index] = (data.routes[0].legs[0].distance.text);
     });
 }
 
@@ -429,34 +433,44 @@ function routeFromUser(lat, lng, id, index) {
     var request = 'messenger?cmd=route&lat=' + lat + '&lng=' + lng + '&id=' + id;
     jQuery.getJSON(request, null, function (data) {
         console.log(data);
+        var n = index;
         var temp = [];
         if (data.array.length != 0) {
             for (var i = 0; i < data.array.length; i++) {
                 if (data.array[i].place_id == id) {
-                    temp.push(["YES", data.array[i].place_id, data.array[i].description]);
-                }else{
-                    temp.push(["NO", id]);
+                    temp.push([data.array[i].description, data.array[i].user, data.array[i].total_cost]);
                 }
             }
-            routes[index] = temp;
+            routes[n] = temp;
         }
         if (index == (times.length) - 1) {
-            console.log(routes);
+            setRecomend();
         }
     });
 }
 
 
-function showRouteFromUser(){
-    var temp="";
-    console.log(routes[select][0][0]);
-    if(routes[select][0][0]=="YES"){
-        for(var i = 0;i<routes[select].length;i++){
-            temp+="<div>"+routes[select][i][0]+" "+routes[select][i][0]+"<div>"
+function showRouteFromUser() {
+    var temp = "";
+    if (routes[select] != "" && routes[select] != []) {
+        for (var i = 0; i < routes[select].length; i++) {
+            temp += "<div>" + routes[select][i][0] + "<br>total cost :" + routes[select][i][2] + "<br>By :" + routes[select][i][1] + "</div><br>";
         }
-        document.getElementById("routebox").innerHTML = temp;
-        console.log(temp);
-    } 
+    } else {
+        temp += "<div>No Data</div>";
+    }
+    document.getElementById("routebox").innerHTML = temp;
+    console.log(temp);
+}
+
+function debug() {
+    var test1 = "";
+    var test2 = [[]];
+    var test3 = [[1, 2, 3]];
+    console.log(routes);
+    console.log(test1.length);
+    console.log(test2.length);
+    console.log(test3.length);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
