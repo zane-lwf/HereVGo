@@ -207,6 +207,7 @@ function loading() {
 function reset() {
     document.getElementById("recBox").innerHTML = "load";
     deleteMarkers();
+    document.getElementById("routebox").innerHTML = "...";
     routes.length = 0;
     lats.length = 0;
     lngs.length = 0;
@@ -385,6 +386,8 @@ function setRecomend() {
 function loaded() {
     document.getElementById('submit').value = "ค้นหา";
     document.getElementById('submit').disabled = false;
+    document.getElementById("textInPicDis").innerHTML = "load data complete";
+    document.getElementById("picLocate").style.backgroundImage = "url(img/user guide.png)";
 }
 
 function deleteMarkers() {
@@ -442,7 +445,6 @@ function requestDirection(link, index) {
 function routeFromUser(lat, lng, id, index) {
     var request = 'messenger?cmd=route&lat=' + lat + '&lng=' + lng + '&id=' + id;
     jQuery.getJSON(request, null, function (data) {
-        console.log(data);
         var n = index;
         var temp = [];
         if (data.array.length != 0) {
