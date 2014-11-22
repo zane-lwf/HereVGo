@@ -184,6 +184,7 @@ function setInfo() {
     document.getElementById("textInPicDis").innerHTML = text;
     document.getElementById("end").value = names[select];
     document.getElementById("picLocate").style.backgroundImage = "url(" + links[select] + ")";
+     document.getElementById("placeName").innerHTML = "<b>"+names[select]+"<b>"
 }
 //end desciption & picture
 
@@ -387,7 +388,7 @@ function loaded() {
     document.getElementById('submit').value = "ค้นหา";
     document.getElementById('submit').disabled = false;
     document.getElementById("textInPicDis").innerHTML = "load data complete";
-    document.getElementById("picLocate").style.backgroundImage = "url(img/user guide.png)";
+    document.getElementById("picLocate").style.backgroundImage = "url(img/guide.png)";
 }
 
 function deleteMarkers() {
@@ -475,13 +476,7 @@ function showRouteFromUser() {
 }
 
 function debug() {
-    var test1 = "";
-    var test2 = [[]];
-    var test3 = [[1, 2, 3]];
-    console.log(routes);
-    console.log(test1.length);
-    console.log(test2.length);
-    console.log(test3.length);
+    document.getElementById("picLocate").style.backgroundImage = "url(img/guide.png)";
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

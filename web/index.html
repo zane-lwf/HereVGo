@@ -71,7 +71,7 @@ sad-->  #map-canvas {
       <BR />
       <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" onfocusout="locationByUser();" />
       <BR />
-      <input class="textbox"  id="end"  style="width: 190px" type="text" placeholder="ปลายทาง" onfocusout="desByUser()"/>
+      <input class="textbox"  id="end"  style="width: 190px" type="hidden" placeholder="ปลายทาง" onfocusout="desByUser()"/>
       <BR />
       <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" />
       <BR />
@@ -108,12 +108,13 @@ sad-->  #map-canvas {
     <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
       จากผู้ใช้ท่านอื่นๆ</div>
     <div id="fromUserDetail"  class="scrollbar">
+        <div id="placeName"></div><br>
       <div id="routebox"></div>
     </div>
     <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช--> 
   </div>
   <div id="BottWeb"></div>
 </div>
-<input type="submit" value="debug" onclick="debug()">
+    <input type="hidden" value="debug" onclick="debug()">
 </body>
 </html>
