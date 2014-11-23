@@ -16,7 +16,7 @@ var taxi = [];
 var distances = [];
 var place_ids = [];
 var routes = [];
-var avalible=0;
+var avalible = 0;
 var userlat;
 var userlng;
 
@@ -91,6 +91,8 @@ function calcRoute(lat, lng) {
     directionsService.route(request, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
+            directionsDisplay.setMap(map);
+            directionsDisplay.setOptions({suppressMarkers: true});
         } else {
             alert("service fail");
         }
@@ -184,7 +186,7 @@ function setInfo() {
     document.getElementById("textInPicDis").innerHTML = text;
     document.getElementById("end").value = names[select];
     document.getElementById("picLocate").style.backgroundImage = "url(" + links[select] + ")";
-     document.getElementById("placeName").innerHTML = "<b>"+names[select]+"<b>"
+    document.getElementById("placeName").innerHTML = "<b>" + names[select] + "<b>"
 }
 //end desciption & picture
 
@@ -206,8 +208,10 @@ function loading() {
 }
 
 function reset() {
-    document.getElementById("recBox").innerHTML = "load";
+    document.getElementById("recBox").innerHTML = "loading . . .";
+    document.getElementById("placeName").innerHTML = "";
     deleteMarkers();
+    directionsDisplay.setMap(null);
     document.getElementById("routebox").innerHTML = "...";
     routes.length = 0;
     lats.length = 0;
@@ -221,7 +225,7 @@ function reset() {
     times.length = 0;
     taxi.length = 0;
     distances.length = 0;
-    avalible=0;
+    avalible = 0;
     loading();
     findPlaces();
 }
@@ -359,14 +363,14 @@ function setRecomend() {
         }
 
         if (routes[i] != "" && routes[i] != []) {
-            if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2]+relate_costs[i])) {
+            if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2] + relate_costs[i])) {
                 temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
                 temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                 temp += "</div>";
                 marker(lats[i], lngs[i], names[i], i, links[i]);
                 avalible++;
             }
-        }else{
+        } else {
             if (money >= taxi[i] + relate_costs[i]) {
                 temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
                 temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
@@ -377,7 +381,7 @@ function setRecomend() {
         }
     }
     document.getElementById("recBox").innerHTML = temp;
-    if(avalible==0){
+    if (avalible == 0) {
         alert("เงินแค่นี้อย่าเที่ยวเลย");
     }
     loaded();
