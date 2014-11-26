@@ -11,7 +11,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            #overlay {
+            #overlayRoute {
                 visibility: hidden;
                 position: absolute;
                 left: 0px;
@@ -20,9 +20,10 @@ and open the template in the editor.
                 height:100%;
                 text-align:center;
                 z-index: 1000;
+                background-image:url(img/ovbg.png);
             }
 
-            #overlay div {
+            #overlayRoute div {
                 width:300px;
                 margin: 100px auto;
                 background-color: #fff;
@@ -41,7 +42,7 @@ and open the template in the editor.
     </head>
 
     <body>
-        <div id="overlay">
+        <div id="overlayRoute">
             <div>
                 <p>Content you want the user to see goes here.</p>
                 Click here to [<a href='#' onclick='overlay()'>close</a>]
