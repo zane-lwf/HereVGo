@@ -31,10 +31,53 @@ public class ConnectDB {
     Statement stmt = null;
     ResultSet rs = null;
 
-    public void test() {
+    public int countPlace() {
+            int row=0;
+            try{
+               Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection(connectionUrl);
 
+            // Create and execute an SQL statement that returns some data.
+            String SQL = "SELECT * FROM dbo.hvg_places";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SQL);
+            int n =0;
+            while(rs.next()){
+                n++;
+            }
+            row = n;
+            }
+            catch(Exception ex){
+                
+            }
+        return row;
+        
+    }   
+    public String insertNewPlace(String placeid, String name,float lati,float longi,String desc,String img,int related_cost){
+        String status ="incomplete";
+        String img_link = "https://portalvhdsq4mb7l03r2vy7.blob.core.windows.net/herevgo/"+img;
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection(connectionUrl);
+            
+            String SQL = "INSERT INTO dbo.hvg_places"+" (PLACE_ID,NAME,LATITUDE,LONGITUDE,DESCRIPTION,LINK,RELATED_COST)"+" VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setString(1, placeid);
+            preparedStatement.setString(2, name);
+            preparedStatement.setFloat(3, lati);
+            preparedStatement.setFloat(4, longi);
+            preparedStatement.setString(5, desc);
+            preparedStatement.setString(6, img_link);
+            preparedStatement.setInt(7, related_cost);
+            preparedStatement.executeUpdate();
+            status = "complete";
+             
+        }
+        catch(Exception ex){
+            status =img+" -- "+ ex.getMessage();
+        }
+        return status;
     }
-
     public List<place> getPlaceList() {
         try {
             places = new ArrayList<place>();
