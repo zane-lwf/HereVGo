@@ -43,9 +43,17 @@ public class UploadNewPlace extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, URISyntaxException {
         response.setContentType("text/html;charset=UTF-8");
+        String placeid;
+        String name;
+        float lati;
+        float longi;
+        String desc;
+        String img_link;
+        int related_cost;
+        
         PrintWriter out = response.getWriter();
         String connectionString = "DefaultEndpointsProtocol=https;AccountName=portalvhdsq4mb7l03r2vy7;AccountKey=chMhwKbrFN9E0bYG/CofoBMZUAyuM07QSC9w6lrkrkVxCfGYP4t4pd8BYPQZgh3P0bn+XTtNSgYjdgQBtKmtgA==";
-            // You will need these imports
+        // You will need these imports
         try {
 // Initialize Account
             CloudStorageAccount account = CloudStorageAccount.parse(connectionString);
@@ -59,21 +67,21 @@ public class UploadNewPlace extends HttpServlet {
 // Create or overwrite the "myimage.jpg" blob with contents from a local
 // file
             CloudBlockBlob blob = container.getBlockBlobReference("testimage");
-            File source = new File("C:\\Users\\plewp_000\\Desktop\\happymeal-logo.png");
+            File source = new File("E:\\github\\HereVGo\\web\\map.js");
             blob.upload(new FileInputStream(source), source.length());
-            
-            String path = "C:\\Users\\plewp_000\\Desktop\\happymeal-logo.png";
+
+            String path = "E:\\github\\HereVGo\\web\\map.js";
             String[] paths = path.split("\\\\");
             ConnectDB connDB = new ConnectDB();
-  
-            String status =connDB.insertNewPlace("id"+(connDB.countPlace()+1), "Test Name", 13, 100, "Test Description",paths[paths.length-1] , 50);
-            out.print("<h1>"+status+connDB.countPlace()+"-</h1>");
-            
+
+            String status = connDB.insertNewPlace("id" + (connDB.countPlace() + 1), "Test Name", 13, 100, "Test Description", paths[paths.length - 1], 50);
+            out.print("<h1>" + status + connDB.countPlace() + "-</h1>");
+
         } catch (Exception ex) {
-             out.print(ex);
+            out.print(ex);
         }
     }
-        
+
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
