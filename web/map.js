@@ -37,15 +37,15 @@ function initialize() {
     var control = document.getElementById('control');
     control.style.display = 'block';
     //map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
-    var input = /** @type {HTMLInputElement} */(
+    var start = /** @type {HTMLInputElement} */(
             document.getElementById('start'));
-    var input2 = /** @type {HTMLInputElement} */(
-            document.getElementById('end'));
+    var address = /** @type {HTMLInputElement} */(
+            document.getElementById('address'));
 
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    var autocomplete = new google.maps.places.Autocomplete(start);
     autocomplete.bindTo('bounds', map);
 
-    var autocomplete = new google.maps.places.Autocomplete(input2);
+    autocomplete = new google.maps.places.Autocomplete(address);
     autocomplete.bindTo('bounds', map);
 
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
@@ -237,7 +237,7 @@ function locationByUser() {
             userlat = results[0].geometry.location.lat();
             userlng = results[0].geometry.location.lng();
             var pos = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-           // console.log(results[0].geometry.location);
+            // console.log(results[0].geometry.location);
             console.log("(" + results[0].geometry.location.lat() + "," + results[0].geometry.location.lng() + ")");
             infowindow = new google.maps.InfoWindow({
                 map: map,
@@ -479,6 +479,18 @@ function showRouteFromUser() {
 
 function debug() {
     document.getElementById("picLocate").style.backgroundImage = "url(img/guide.png)";
+}
+
+function codeAddress() {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            document.getElementById("lat").value = results[0].geometry.location.lat();
+            document.getElementById("lng").value = results[0].geometry.location.lng();
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

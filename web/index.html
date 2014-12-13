@@ -82,7 +82,7 @@
                         }
 
                         #overlayPlace div {
-                            width:300px;
+                            width:400px;
                             margin: 100px auto;
                             background-color: #fff;
                             border:1px solid #000;
@@ -93,9 +93,10 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
                     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
                     <script src="map.js"></script>
-                    <script src="uiControl.js"></script>
+                    <script src="UIControl.js"></script>
+                    <script src="insertDB.js"></script>
                     <script>
-                        
+
 
                     </script>
                     </head>
@@ -141,10 +142,11 @@
                                 <div id="suggHead" class="headText">สถานที่เเนะนำ</div>
 
                                 <div id="suggBkList" class="scrollbar">
-                                    <input type="submit" value="addPlace" onclick='overlay("Place");scrollWin()'>
-                                    <div id="suggDetail">                                       
+                                    <input type="submit" value="addPlace" onclick='overlay("Place");
+                                            scrollWin()'>
+                                        <div id="suggDetail">                                       
                                             <div id="recBox"></div>
-                                    </div>
+                                        </div>
                                 </div>
                             </div>
                             <div id="spic1" >
@@ -158,7 +160,8 @@
                                 <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
                                     จากผู้ใช้ท่านอื่นๆ</div>
                                 <div id="fromUserDetail"  class="scrollbar">
-                                    <input type="submit" value="addRoute" onclick='overlay("Route");scrollWin()'>
+                                    <input type="submit" value="addRoute" onclick='overlay("Route");
+                                            scrollWin()'>
                                         <div id="placeName"></div><br>
                                             <div id="routebox"></div>
                                             </div>
@@ -173,17 +176,34 @@
                                                     <div>
                                                         <p>เพิ่มการเดินทางของฉัน</p>
                                                         <input type="submit" value="debug" onclick="debug()">
-                                                            Click here to [<a href='#' onclick='overlay("Route")'>cancel</a>]
-                                                    </div>
-                                                </div>
+                                                            <input type="submit" onclick=""> [<a href='#' onclick='overlay("Route")'>cancel</a>]
+                                                                </div>
+                                                                </div>
 
-                                                <div id="overlayPlace">
-                                                    <div>
-                                                        <p>เพิ่มสถานที่ของฉัน</p>
-                                                        <input type="submit" value="debug" onclick="debug()">
-                                                            Click here to [<a href='#' onclick='overlay("Place")'>cancel</a>]
-                                                    </div>
-                                                </div>
+                                                                <div id="overlayPlace">
+                                                                    <div>
+                                                                        <p>เพิ่มสถานที่ของฉัน</p>
+                                                                        ชื่อสถานที่ <br>
+                                                                            <input type="text" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress()"  style="width:100%;"><br>
+                                                                                    <br>
+                                                                                        lat : <input type="text" id="lat"> lng : <input type="text" id="lng">
+                                                                                                <br>
+                                                                                                    <br>
+                                                                                                        รายละเอียด<br>
 
-                                                </body>
-                                                </html>
+                                                                                                            <textarea rows="4" cols="50" id="detail">
+
+                                                                                                            </textarea>
+                                                                                                            <br> <br>
+                                                                                                                    ค่าเข้าชม : <input type="text" id="cost" value="0"><br>
+                                                                                                                            <br>
+                                                                                                                                <br>
+                                                                                                                                    รูปภาพ : <input type="file"/>
+                                                                                                                                    <br>
+                                                                                                                                        <br>
+                                                                                                                                            <input type="submit" onclick="codeAddress()"> [<a href='#' onclick='overlay("Place")'>cancel</a>]
+                                                                                                                                                </div>
+                                                                                                                                                </div>
+
+                                                                                                                                                </body>
+                                                                                                                                                </html>
