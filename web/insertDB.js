@@ -5,8 +5,8 @@
  */
 
 function picUpload(){
-    var path = document.getElementById('picUpload').value;
-    console.log(path+" kuy");
+    var path = document.getElementById('fileUpload').value;
+    alert(path+" path gu yoo nai wa i heer");
 }
 
 
