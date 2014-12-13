@@ -41,11 +41,16 @@ function initialize() {
             document.getElementById('start'));
     var address = /** @type {HTMLInputElement} */(
             document.getElementById('address'));
+    var source = /** @type {HTMLInputElement} */(
+            document.getElementById('source'));
 
     var autocomplete = new google.maps.places.Autocomplete(start);
     autocomplete.bindTo('bounds', map);
 
     autocomplete = new google.maps.places.Autocomplete(address);
+    autocomplete.bindTo('bounds', map);
+    
+    autocomplete = new google.maps.places.Autocomplete(source);
     autocomplete.bindTo('bounds', map);
 
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
