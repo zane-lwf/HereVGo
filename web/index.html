@@ -97,7 +97,6 @@
                     <script src="insertDB.js"></script>
                     <script>
 
-
                     </script>
                     </head>
                     <body  >
@@ -182,15 +181,15 @@
                                                                                 </div>
                                                                                 </div>
 
+
+
                                                                                 <div id="overlayPlace">
                                                                                     <div>
                                                                                         <p>เพิ่มสถานที่ของฉัน</p>
                                                                                         ชื่อสถานที่ <br>
-                                                                                            <input type="text" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress()"  style="width:100%;"><br><br>
+                                                                                            <input type="text" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress()"  style="width:100%;"><br> <>                                                                                                                                                               <br>
+                                                                                                        lat : <input type="text" id="lat" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lng" style="width:30%;" disabled="disabled"><br><br>
 
-                                                                                                        lat : <input type="text" id="lat" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lng" style="width:30%;" disabled="disabled">
-                                                                                                                <br>
-                                                                                                                    <br>
                                                                                                                         รายละเอียด<br>
 
                                                                                                                             <textarea rows="4" cols="50" id="detail">
@@ -198,33 +197,13 @@
                                                                                                                             </textarea>
                                                                                                                             <br> <br>
                                                                                                                                     ค่าเข้าชม : <input type="text" id="cost" value="0"><br>
-                                                                                                                                            <br> <br>
-                                                                                                                                                    รูปภาพ : <input type="file"/>
-                                                                                                                                                    <br> <br>
-                                                                                                                                                            <input type="submit" onclick="codeAddress()"> [<a href='#' onclick='overlay("Place")'>cancel</a>]
-                                                                                                                                                                </div>
-                                                                                                                                                                </div>
+                                                                                                                                            <br>
+                                                                                                                                                ควย : <input type="file" id="fileUpload"> <br><input type="button" onclick="alert(document.getElementById('fileUpload').value)">
 
-                                                                                                                                                                <div id="overlayPlace">
-                                                                                                                                                                    <div>
-                                                                                                                                                                        <p>เพิ่มสถานที่ของฉัน</p>
-                                                                                                                                                                        ชื่อสถานที่ <br>
-                                                                                                                                                                            <input type="text" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress()"  style="width:100%;"><br> <>                                                                                                                                                               <br>
-                                                                                                                                                                                        lat : <input type="text" id="lat" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lng" style="width:30%;" disabled="disabled"><br><br>
+                                                                                                                                                            <br> <br>
+                                                                                                                                                                    <input type="submit" > [<a href='#' onclick='overlay("Place")'>cancel</a>]
+                                                                                                                                                                        </div>
+                                                                                                                                                                        </div>
 
-                                                                                                                                                                                                        รายละเอียด<br>
-
-                                                                                                                                                                                                        <textarea rows="4" cols="50" id="detail">
-
-                                                                                                                                                                                                        </textarea>
-                                                                                                                                                                                                        <br> <br>
-                                                                                                                                                                                                        ค่าเข้าชม : <input type="text" id="cost" value="0"><br>
-                                                                                                                                                                                                        <br>
-                                                                                                                                                                                                        รูปภาพ : <input type="file" name="picture"/>
-                                                                                                                                                                                                        <br> <br>
-                                                                                                                                                                                                        <input type="submit" onclick="codeAddress()"> [<a href='#' onclick='overlay("Place")'>cancel</a>]
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                        </body>
-                                                                                                                                                                                                        </html>
+                                                                                                                                                                        </body>
+                                                                                                                                                                        </html>
