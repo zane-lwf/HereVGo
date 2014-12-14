@@ -498,4 +498,25 @@ function codeAddress() {
     });
 }
 
+//parameter for insert database
+var ilat;
+var ilng;
+var iname;
+var idetail;
+var ipic;
+var icost;
+var iplace_id;
+
+function placeID(lat,lng){
+    var servlet = 'ParseJSON?link=';
+    var link="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+-lat+","+lng+"&radius=10&key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM";
+    var url = servlet + link;
+    jQuery.getJSON(url, function (data) {
+        if(data.status=='OK'){
+            iplace_id=data.result[0].place_id;
+            console.log(iplace_id);
+        }
+    }); 
+}
+
 google.maps.event.addDomListener(window, 'load', initialize);

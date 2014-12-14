@@ -90,10 +90,10 @@
                             text-align:center;
                         }
                     </style>
+                    <script src="UIControl.js"></script>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
                     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-                    <script src="map.js"></script>
-                    <script src="UIControl.js"></script>
+                    <script src="map.js"></script>                   
                     <script src="insertDB.js"></script>
                     <script>
 
@@ -175,7 +175,7 @@
                                                     ชื่อสถานที่ <br>
                                                         <input type="text" id="source" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress()"  style="width:100%;"><br><br>
 
-                                                                    lat : <input type="text" id="latr" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lngr" style="width:30%;" disabled="disabled">
+                                                                    lat : <input type="text" id="latr" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lngr" style="width:30%;" disabled="disabled" onchange="placeID()">
 
                                                                             <input type="submit" onclick=""> [<a href='#' onclick='overlay("Route")'>cancel</a>]
                                                                                 </div>
