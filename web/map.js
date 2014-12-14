@@ -492,6 +492,7 @@ var ilng;
 var iname;
 var idetail;
 var ipic;
+var picPath;
 var icost;
 var iplace_id;
 

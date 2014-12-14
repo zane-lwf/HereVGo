@@ -50,11 +50,20 @@ public class UploadNewPlace extends HttpServlet {
         String desc;
         String img_link;
         int related_cost;
-        
+        String path = "nothing";
+        String picname;
         PrintWriter out = response.getWriter();
         String connectionString = "DefaultEndpointsProtocol=https;AccountName=portalvhdsq4mb7l03r2vy7;AccountKey=chMhwKbrFN9E0bYG/CofoBMZUAyuM07QSC9w6lrkrkVxCfGYP4t4pd8BYPQZgh3P0bn+XTtNSgYjdgQBtKmtgA==";
         // You will need these imports
         try {
+            placeid = request.getParameter("place_id");
+            name = request.getParameter("name");
+            lati = Float.parseFloat(request.getParameter("lat"));
+            longi = Float.parseFloat(request.getParameter("lng"));
+            desc = request.getParameter("detail");
+            related_cost = Integer.parseInt(request.getParameter("cost"));
+            path = request.getParameter("path");
+            picname = request.getParameter("ipic");
 // Initialize Account
             CloudStorageAccount account = CloudStorageAccount.parse(connectionString);
 
@@ -67,18 +76,19 @@ public class UploadNewPlace extends HttpServlet {
 // Create or overwrite the "myimage.jpg" blob with contents from a local
 // file
             CloudBlockBlob blob = container.getBlockBlobReference("testimage");
-            File source = new File("E:\\github\\HereVGo\\web\\map.js");
-            blob.upload(new FileInputStream(source), source.length());
+            File source = new File(path);
+            //blob.upload(new FileInputStream(source), source.length());
 
-            String path = "E:\\github\\HereVGo\\web\\map.js";
-            String[] paths = path.split("\\\\");
+            //String path = "blob:http%3A//localhost%3A8080/b23eea61-e307-43b2-9a3c-fd354d16793e";
+            //String[] paths = path.split("\\\\");
+            //String[] paths = path.split("//");
             ConnectDB connDB = new ConnectDB();
+            String status = connDB.insertNewPlace(placeid, name, lati, longi, desc, picname, related_cost);
 
-            String status = connDB.insertNewPlace("id" + (connDB.countPlace() + 1), "Test Name", 13, 100, "Test Description", paths[paths.length - 1], 50);
-            out.print("<h1>" + status + connDB.countPlace() + "-</h1>");
+            out.print("{ \"status\" : " + " \"" + status + " " + " bok gu ma si i here por meung hp = 0 " + "\"}");
 
         } catch (Exception ex) {
-            out.print(ex);
+            out.print("{ \"status\" : " + " \"" + ex + " " + path + " i broken spear " + "\"}");
         }
     }
 

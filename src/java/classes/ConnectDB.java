@@ -59,7 +59,6 @@ public class ConnectDB {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(connectionUrl);
-            
             String SQL = "INSERT INTO dbo.hvg_places"+" (PLACE_ID,NAME,LATITUDE,LONGITUDE,DESCRIPTION,LINK,RELATED_COST)"+" VALUES(?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = con.prepareStatement(SQL);
             preparedStatement.setString(1, placeid);
@@ -71,13 +70,15 @@ public class ConnectDB {
             preparedStatement.setInt(7, related_cost);
             preparedStatement.executeUpdate();
             status = "complete";
+            return status;
              
         }
         catch(Exception ex){
-            status =img+" -- "+ ex.getMessage();
+            status = img+" -- "+ ex.getMessage();
+            return status;
         }
-        return status;
     }
+    
     public List<place> getPlaceList() {
         try {
             places = new ArrayList<place>();
