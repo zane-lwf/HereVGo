@@ -90,13 +90,20 @@
                             text-align:center;
                         }
                     </style>
-                    <script src="UIControl.js"></script>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
                     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
                     <script src="map.js"></script>                   
                     <script src="insertDB.js"></script>
                     <script>
+                        function overlay(n) {
+                            el = document.getElementById("overlay" + n);
+                            el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+                        }
 
+
+                        function scrollWin() {
+                            window.scrollTo(0, 0);
+                        }
                     </script>
                     </head>
                     <body  >
@@ -200,10 +207,10 @@
                                                                                                                                             <br>
                                                                                                                                                 ควย : <input type="file" id="fileUpload" onchange="picUpload()">
 
-                                                                                                                                                            <br> <br>
-                                                                                                                                                                    <input type="submit" > [<a href='#' onclick='overlay("Place")'>cancel</a>]
-                                                                                                                                                                        </div>
-                                                                                                                                                                        </div>
+                                                                                                                                                    <br> <br>
+                                                                                                                                                            <input type="submit" > [<a href='#' onclick='overlay("Place")'>cancel</a>]
+                                                                                                                                                                </div>
+                                                                                                                                                                </div>
 
-                                                                                                                                                                        </body>
-                                                                                                                                                                        </html>
+                                                                                                                                                                </body>
+                                                                                                                                                                </html>
