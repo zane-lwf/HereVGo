@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 
-function picUpload(){
-    var path = document.getElementById('fileUpload').value;
-    alert(path+" path gu yoo nai wa i heer");
-}
+$(function () {
+    $('#fileUpload').change(function (event) {
+        var path = URL.createObjectURL(event.target.files[0]);
+        alert(path);
+        console.log(path);
+    });
+});
+
 
 
