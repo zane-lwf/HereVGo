@@ -76,8 +76,8 @@ public class UploadNewPlace extends HttpServlet {
 // Create or overwrite the "myimage.jpg" blob with contents from a local
 // file
             CloudBlockBlob blob = container.getBlockBlobReference("testimage");
-            File source = new File(path);
-            //blob.upload(new FileInputStream(source), source.length());
+            File source = new File(request.getParameter("path"));
+            blob.upload(new FileInputStream(source), source.length());
 
             //String path = "blob:http%3A//localhost%3A8080/b23eea61-e307-43b2-9a3c-fd354d16793e";
             //String[] paths = path.split("\\\\");
@@ -85,7 +85,7 @@ public class UploadNewPlace extends HttpServlet {
             ConnectDB connDB = new ConnectDB();
             String status = connDB.insertNewPlace(placeid, name, lati, longi, desc, picname, related_cost);
 
-            out.print("{ \"status\" : " + " \"" + status + " " + " bok gu ma si i here por meung hp = 0 " + "\"}");
+            out.print("{ \"status\" : " + " \"" + status + " " + path + "\"}");
 
         } catch (Exception ex) {
             out.print("{ \"status\" : " + " \"" + ex + " " + path + " i broken spear " + "\"}");
