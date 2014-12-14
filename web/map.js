@@ -49,7 +49,7 @@ function initialize() {
 
     autocomplete = new google.maps.places.Autocomplete(address);
     autocomplete.bindTo('bounds', map);
-    
+
     autocomplete = new google.maps.places.Autocomplete(source);
     autocomplete.bindTo('bounds', map);
 
@@ -486,18 +486,6 @@ function debug() {
     document.getElementById("picLocate").style.backgroundImage = "url(img/guide.png)";
 }
 
-function codeAddress() {
-    var address = document.getElementById('address').value;
-    geocoder.geocode({'address': address}, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            document.getElementById("lat").value = results[0].geometry.location.lat();
-            document.getElementById("lng").value = results[0].geometry.location.lng();
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
-    });
-}
-
 //parameter for insert database
 var ilat;
 var ilng;
@@ -507,16 +495,32 @@ var ipic;
 var icost;
 var iplace_id;
 
-function placeID(lat,lng){
-    var servlet = 'ParseJSON?link=';
-    var link="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+-lat+","+lng+"&radius=10&key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM";
-    var url = servlet + link;
-    jQuery.getJSON(url, function (data) {
-        if(data.status=='OK'){
-            iplace_id=data.result[0].place_id;
-            console.log(iplace_id);
+function codeAddress() {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            ilat = results[0].geometry.location.lat();
+            ilng = results[0].geometry.location.lng();
+            document.getElementById("lat").value = results[0].geometry.location.lat();
+            document.getElementById("lng").value = results[0].geometry.location.lng();
+            placeID();
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
         }
-    }); 
+    });
+}
+
+
+function placeID() {
+    var servlet = 'ParseJSON?link=';
+    var link = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + ilat + "," + ilng + "&radius=10&key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM";
+    var url = servlet + link;
+    console.log(link);
+    jQuery.getJSON(url, function (data) {
+        if (data.status == "OK") {
+            iplace_id = data.results[0].place_id;
+        }
+    });
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
