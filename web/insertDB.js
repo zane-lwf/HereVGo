@@ -29,6 +29,9 @@ function insertPlace() {
     $.post("UploadNewPlace", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "ipic": ipic, "path": picPath}, function (data) {
         console.log("after send param");
         console.log(data);
+        console.log(ilat);
+        console.log(ilng);
+        
     }, "json");
 }
 

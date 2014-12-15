@@ -506,8 +506,6 @@ function codeAddress() {
         if (status == google.maps.GeocoderStatus.OK) {
             ilat = results[0].geometry.location.lat();
             ilng = results[0].geometry.location.lng();
-            document.getElementById("lat").value = results[0].geometry.location.lat();
-            document.getElementById("lng").value = results[0].geometry.location.lng();
             placeID();
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
@@ -524,6 +522,10 @@ function placeID() {
     jQuery.getJSON(url, function (data) {
         if (data.status == "OK") {
             iplace_id = data.results[0].place_id;
+            ilat = data.results[0].geometry.location.lat;
+            ilng = data.results[0].geometry.location.lng;
+            document.getElementById("lat").value = ilat;
+            document.getElementById("lng").value = ilng;
         }
     });
 }

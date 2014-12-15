@@ -62,8 +62,8 @@ public class UploadNewPlace extends HttpServlet {
             
             placeid = request.getParameter("place_id");
             name = request.getParameter("name");
-            lati = Float.parseFloat(request.getParameter("lat"));
-            longi = Float.parseFloat(request.getParameter("lng"));
+            lati = Float.valueOf(request.getParameter("lat"));
+            longi = Float.valueOf(request.getParameter("lng"));
             desc = request.getParameter("detail");
             related_cost = Integer.parseInt(request.getParameter("cost"));
             picname = request.getParameter("ipic");
@@ -98,7 +98,7 @@ public class UploadNewPlace extends HttpServlet {
             ConnectDB connDB = new ConnectDB();
             String status = connDB.insertNewPlace(placeid, name, lati, longi, desc, picname, related_cost);
 
-            out.print("{ \"status\" : " + " \"" + status + " " + "\"}");
+            out.print("{ \"status\" : " + " \"" + status + " " +lati+ "\"}");
 
         } catch (Exception ex) {
             out.print("{ \"status\" : " + " \"" + ex + " " + picname + "\"}");
