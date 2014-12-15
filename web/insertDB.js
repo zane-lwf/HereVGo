@@ -26,11 +26,13 @@ function insertPlace() {
     ilat = document.getElementById('lat').value;
     ilng = document.getElementById('lng').value;
     icost = document.getElementById('cost').value;
-    idetail = "document.getElementById('detail').value";
-    console.log("before send param")
-    $.post("UploadNewPlace", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "path": picPath, "ipic": "test.jpg"}, function (data) {
+    idetail = document.getElementById('detail').value;
+    ipic="Tulips.jpg";
+    console.log("before send param");
+    $.post("UploadNewPlace", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail" : idetail, "cost": icost, "ipic" : ipic , "path": picPath}, function (data) {
         console.log("after send param");
         console.log(data);
+        document.getElementById("reply").innerHTML = data.status;
     }, "json");
 }
 

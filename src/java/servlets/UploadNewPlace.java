@@ -10,6 +10,7 @@ import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import com.microsoft.azure.storage.core.Base64;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,19 +54,21 @@ public class UploadNewPlace extends HttpServlet {
         String img_link;
         int related_cost;
         String path = "nothing";
-        String picname;
+        String picname = null;
         PrintWriter out = response.getWriter();
         String connectionString = "DefaultEndpointsProtocol=https;AccountName=portalvhdsq4mb7l03r2vy7;AccountKey=chMhwKbrFN9E0bYG/CofoBMZUAyuM07QSC9w6lrkrkVxCfGYP4t4pd8BYPQZgh3P0bn+XTtNSgYjdgQBtKmtgA==";
         // You will need these imports
         try {
+            
             placeid = request.getParameter("place_id");
             name = request.getParameter("name");
             lati = Float.parseFloat(request.getParameter("lat"));
             longi = Float.parseFloat(request.getParameter("lng"));
             desc = request.getParameter("detail");
             related_cost = Integer.parseInt(request.getParameter("cost"));
-            path = request.getParameter("path");
             picname = request.getParameter("ipic");
+            path = request.getParameter("path").split(",")[1];
+            
 // Initialize Account
             CloudStorageAccount account = CloudStorageAccount.parse(connectionString);
 
@@ -75,9 +80,15 @@ public class UploadNewPlace extends HttpServlet {
 
 // Create or overwrite the "myimage.jpg" blob with contents from a local
 // file
-            CloudBlockBlob blob = container.getBlockBlobReference("testimage");
-            File source = new File(request.getParameter("path"));
-            blob.upload(new FileInputStream(source), source.length());
+            CloudBlockBlob blob = container.getBlockBlobReference("file");
+            
+            byte[] dataBytes = Base64.decode(path);
+            
+            //File source = new File(request.getParameter("path"));
+            //blob.upload(new FileInputStream(dataBytes), dataBytes.length());
+            //blob.uploadFromFile(request.getParameter("path"));
+            
+            blob.uploadFromByteArray(dataBytes, 0, dataBytes.length);
 
             //String path = "blob:http%3A//localhost%3A8080/b23eea61-e307-43b2-9a3c-fd354d16793e";
             //String[] paths = path.split("\\\\");
@@ -85,10 +96,10 @@ public class UploadNewPlace extends HttpServlet {
             ConnectDB connDB = new ConnectDB();
             String status = connDB.insertNewPlace(placeid, name, lati, longi, desc, picname, related_cost);
 
-            out.print("{ \"status\" : " + " \"" + status + " " + path + "\"}");
+            out.print("{ \"status\" : " + " \"" + status + " " + "\"}");
 
         } catch (Exception ex) {
-            out.print("{ \"status\" : " + " \"" + ex + " " + path + " i broken spear " + "\"}");
+            out.print("{ \"status\" : " + " \"" + ex + " " + picname + "\"}");
         }
     }
 
