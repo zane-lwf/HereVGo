@@ -260,6 +260,7 @@ function locationByUser() {
 
 var number;
 function findPlaces() {
+    console.log("i do it");
     var count;
     var address = document.getElementById('start').value;
     var radius = document.getElementById('radius').value;
@@ -268,10 +269,13 @@ function findPlaces() {
             var lat = results[0].geometry.location.lat();
             var lng = results[0].geometry.location.lng();
             var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
+            console.log(request);
             jQuery.getJSON(request, function (place) {
+                console.log(place);
                 number = place.array.length;
                 if (place.array.length != 0) {
                     for (count = 0; count < place.array.length; count++) {
+                        console.log(place.array[count].place_id);
                         routes.push("");
                         taxi.push("");
                         times.push("");

@@ -80,7 +80,9 @@ public class UploadNewPlace extends HttpServlet {
 
 // Create or overwrite the "myimage.jpg" blob with contents from a local
 // file
-            CloudBlockBlob blob = container.getBlockBlobReference("file");
+            CloudBlockBlob blob = container.getBlockBlobReference(picname);
+            
+            blob.getProperties().setContentType("image/jpg");
             
             byte[] dataBytes = Base64.decode(path);
             
