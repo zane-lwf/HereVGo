@@ -153,6 +153,7 @@ function handleNoGeolocation(errorFlag) {
 
 function onSelect(i) {
     select = i;
+    document.getElementById("btn").disabled = false;
     calcRoute(lats[select], lngs[select]);
     setInfo();
     showRouteFromUser();

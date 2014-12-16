@@ -168,7 +168,7 @@
                                     จากผู้ใช้ท่านอื่นๆ</div>
                                 <div id="fromUserDetail"  class="scrollbar">
                                     <input type="submit" value="addRoute" onclick='overlay("Route");
-                                            scrollWin()' style="width:100%;">
+                                            scrollWin()' style="width:100%;" disabled id="btn">
                                         <div id="placeName"></div><br>
                                             <div id="routebox"></div>
                                             </div>
@@ -184,7 +184,7 @@
                                                         <input type="text" id="source" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress('source')"  style="width:100%;"><br><br>
 <!--                                                                    lat : <input type="text" id="latr" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lngr" style="width:30%;" disabled="disabled" > <br><br>-->
                                                                                     รายละเอียด : <br><input type="text" id="detailr"><br><br>
-                                                                                       ค่าเดินทางทั้งหมด : <input type="text" id="costr"><br><br>
+                                                                                       ค่าเดินทางทั้งหมด : <input type="text" id="costr" value="0"><br><br>
                                                                                             user : <input type="text" id="user"><br><br>  
                                                                             <input type="submit" onclick="insertRoute()"> [<a href='#' onclick='overlay("Route")'>cancel</a>]
                                                                                 </div>

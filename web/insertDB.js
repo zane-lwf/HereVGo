@@ -26,9 +26,11 @@ function insertPlace() {
     document.getElementById('add').value = "wait";
     console.log("before send param");
     $.post("UploadNewPlace", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "ipic": ipic, "path": picPath}, function (data) {
+        alert(data.status);
         console.log(data);
         console.log(ilat);
         console.log(ilng);
+        overlay("Place");
     }, "json");
 }
 
@@ -39,9 +41,11 @@ function insertRoute() {
     iname = document.getElementById('source').value;
     iplace_id = place_ids[select];
     $.post("messenger", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "user": user, "cmd":"add"}, function (data) {
+        alert(data.status);
         console.log(data);
         console.log(ilat);
         console.log(ilng);
+        overlay("Route");
     }, "json");
 }
 
