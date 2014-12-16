@@ -171,7 +171,6 @@ function marker(lat, lng, title, number, pic) {
     });
 
     google.maps.event.addListener(marker, 'click', function () {
-        document.getElementById('end').value = title;
         select = number;
         if (infowindow != null)
             infowindow.close();
@@ -191,7 +190,6 @@ function marker(lat, lng, title, number, pic) {
 function setInfo() {
     var text = descriptions[select] + "<br> ค่าเข้าโดยประมาณ : " + relate_costs[select] + "บาท/คน";
     document.getElementById("textInPicDis").innerHTML = text;
-    document.getElementById("end").value = names[select];
     document.getElementById("picLocate").style.backgroundImage = "url(" + links[select] + ")";
     document.getElementById("placeName").innerHTML = "<b>" + names[select] + "<b>"
 }
