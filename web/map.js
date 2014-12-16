@@ -42,18 +42,16 @@ function initialize() {
     var source = /** @type {HTMLInputElement} */(
             document.getElementById('source'));
 
+
     var autocomplete = new google.maps.places.Autocomplete(start);
-    autocomplete.bindTo('bounds', map);
+    var autocompletePlace = new google.maps.places.Autocomplete(address);
+    var autocompleteOrigin = new google.maps.places.Autocomplete(source);
 
-    autocomplete = new google.maps.places.Autocomplete(address);
-    autocomplete.bindTo('bounds', map);
-
-    autocomplete = new google.maps.places.Autocomplete(source);
     autocomplete.bindTo('bounds', map);
 
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
-        infowindow.close();
-        marker.setVisible(false);
+        //infowindow.close();
+        //marker.setVisible(false);
         var place = autocomplete.getPlace();
         if (!place.geometry) {
             return;
@@ -73,9 +71,10 @@ function initialize() {
                 (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
         }
-        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-        infowindow.open(map, marker);
+        //infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+        //infowindow.open(map, marker);
     });
+
 }
 //end of initailize
 
@@ -263,7 +262,6 @@ function locationByUser() {
 
 var number;
 function findPlaces() {
-    console.log("i do it");
     var count;
     var address = document.getElementById('start').value;
     var radius = document.getElementById('radius').value;
@@ -279,6 +277,14 @@ function findPlaces() {
                 number = place.array.length;
                 if (place.array.length != 0) {
                     for (count = 0; count < place.array.length; count++) {
+                        place_ids.push("");
+                        names.push("");
+                        lats.push("");
+                        lngs.push("");
+                        names.push("");
+                        descriptions.push("");
+                        relate_costs.push("");
+                        links.push("");
                         routes.push("");
                         taxi.push("");
                         times.push("");
@@ -287,14 +293,14 @@ function findPlaces() {
                         var src = "(" + lat + "," + lng + ")";
                         var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKeys[count % apiKeys.length];
                         requestDirection(requestDistance, count);
+                        place_ids[count] = (place.array[count].place_id);
+                        lats[count] = (place.array[count].lat);
+                        lngs[count] = (place.array[count].lng);
+                        names[count] = (place.array[count].name);
+                        descriptions[count] = (place.array[count].description);
+                        relate_costs[count] = (place.array[count].related_cost);
+                        links[count] = (place.array[count].link);
                         routeFromUser(lat, lng, place.array[count].place_id, count);
-                        place_ids.push(place.array[count].place_id);
-                        lats.push(place.array[count].lat);
-                        lngs.push(place.array[count].lng);
-                        names.push(place.array[count].name);
-                        descriptions.push(place.array[count].description);
-                        relate_costs.push(place.array[count].related_cost);
-                        links.push(place.array[count].link);
                     }
                 } else {
                     alert("ไม่ที่ให้คุณเที่ยว");
@@ -371,27 +377,30 @@ function setRecomend() {
         } else {
             tempName = str[0] + " " + str[1] + " " + str[2];
         }
-
-        if (routes[i] != "" && routes[i] != []) {
-            if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2] + relate_costs[i])) {
-                temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
-                temp += "</div>";
-                marker(lats[i], lngs[i], names[i], i, links[i]);
-                avalible++;
+        try {
+            if (routes[i] !== "") {
+                if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2] + relate_costs[i])) {
+                    temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "</div>";
+                    marker(lats[i], lngs[i], names[i], i, links[i]);
+                    avalible++;
+                }
+            } else {
+                if (money >= taxi[i] + relate_costs[i]) {
+                    temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "</div>";
+                    marker(lats[i], lngs[i], names[i], i, links[i]);
+                    avalible++;
+                }
             }
-        } else {
-            if (money >= taxi[i] + relate_costs[i]) {
-                temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
-                temp += "</div>";
-                marker(lats[i], lngs[i], names[i], i, links[i]);
-                avalible++;
-            }
+        } catch (err) {
+            console.log( err.message );
         }
     }
     document.getElementById("recBox").innerHTML = temp;
-    if (avalible == 0) {
+    if (avalible === 0) {
         alert("เงินแค่นี้อย่าเที่ยวเลย");
     }
     loaded();

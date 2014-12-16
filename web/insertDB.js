@@ -35,12 +35,13 @@ function insertPlace() {
 }
 
 function insertRoute() {
+    iplace_id = place_ids[select];
     var user = document.getElementById('user').value;
     icost = document.getElementById('costr').value;
     idetail = document.getElementById('detailr').value;
     iname = document.getElementById('source').value;
-    iplace_id = place_ids[select];
-    $.post("messenger", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "user": user, "cmd":"add"}, function (data) {
+    console.log(iplace_id);
+    $.post("messenger", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "user": user, "cmd": "add"}, function (data) {
         alert(data.status);
         console.log(data);
         console.log(ilat);
