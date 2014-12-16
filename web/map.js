@@ -316,7 +316,8 @@ function calTaxi(distance) {
     var km = distance / 1000;
     var g = 0;
     g += 35;
-    km -= 2;
+    km -= 1;
+    if(km<0) km=0;
     if (km - 10 < 0) {
         g += km * 5;
     } else {
