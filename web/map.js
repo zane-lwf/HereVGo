@@ -270,12 +270,12 @@ function findPlaces() {
             var lng = results[0].geometry.location.lng();
             var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
             console.log(request);
-            jQuery.getJSON(request, function (place) {
+           jQuery.getJSON(request, function (place) {
+           //jQuery.getJSON("check.json", function (place) {
                 console.log(place);
                 number = place.array.length;
                 if (place.array.length != 0) {
                     for (count = 0; count < place.array.length; count++) {
-                        console.log(place.array[count].place_id);
                         routes.push("");
                         taxi.push("");
                         times.push("");

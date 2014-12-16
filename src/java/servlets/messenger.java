@@ -123,7 +123,7 @@ public class messenger extends HttpServlet {
                 temp += plc.getPlace_id() + "\",\"lat\": ";
                 temp += plc.getLatitude() + ", \"lng\": ";
                 temp += plc.getLongitude() + ",\"related_cost\":";
-                temp += plc.getRelated_cost()+ ", \"name\": \"";
+                temp += plc.getRelated_cost() + ", \"name\": \"";
                 temp += plc.getName() + "\", \"description\": \"";
                 temp += textCorrecter(plc.getDescription()) + "\", \"link\": \"";
                 if (i == places.size() - 1) {
@@ -140,10 +140,10 @@ public class messenger extends HttpServlet {
         }
         return locationArray;
     }
-    
+
     public String getRoute(float lat, float lng, String id) {
         ConnectDB place = new ConnectDB();
-        routes = place.getNearRoute(lat, lng , id);
+        routes = place.getNearRoute(lat, lng, id);
         String locationArray = "";
         String temp = "";
         try {
@@ -154,7 +154,7 @@ public class messenger extends HttpServlet {
                 temp += rte.getDestination() + "\",\"lat\": ";
                 temp += rte.getOri_lat() + ", \"lng\": ";
                 temp += rte.getOri_long() + ",\"total_cost\":";
-                temp += rte.getTotal_cost()+ ", \"name\": \"";
+                temp += rte.getTotal_cost() + ", \"name\": \"";
                 temp += rte.getOrigin() + "\", \"description\": \"";
                 temp += textCorrecter(rte.getT_route()) + "\", \"user\": \"";
                 if (i == routes.size() - 1) {
@@ -184,18 +184,22 @@ public class messenger extends HttpServlet {
                     out.println(getLocationArrayToSuggest());
                     break;
                 case "radius":
+                    //String tmp = getPlacesInRadius(Float.parseFloat(request.getParameter("lat")), Float.parseFloat(request.getParameter("lng")), Float.parseFloat(request.getParameter("r")));
                     out.println(getPlacesInRadius(Float.parseFloat(request.getParameter("lat")), Float.parseFloat(request.getParameter("lng")), Float.parseFloat(request.getParameter("r"))));
+                    //out.println(tmp);
+                    //ConnectDB place = new ConnectDB();
+                    //places = place.placesInRadius(Float.parseFloat(request.getParameter("lat")), Float.parseFloat(request.getParameter("lng")), Float.parseFloat(request.getParameter("r")));
+                    //place plc = (place) places.get(1);
+                    //out.println("{\"status\":\"connect "+plc.getLink()+"\"}");
                     break;
                 case "route":
                     out.println(getRoute(Float.parseFloat(request.getParameter("lat")), Float.parseFloat(request.getParameter("lng")), request.getParameter("id")));
                     break;
-                    
             }
         } catch (Exception e) {
-            out.println("<h1>hi</h1>");
+            out.println("{\"status\":\"error\"}");
         }
         /* TODO output your page here. You may use following sample code. */
-
     }
 
     /**

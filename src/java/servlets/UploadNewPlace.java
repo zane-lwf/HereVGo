@@ -82,7 +82,7 @@ public class UploadNewPlace extends HttpServlet {
 // file
             CloudBlockBlob blob = container.getBlockBlobReference(picname);
             
-            blob.getProperties().setContentType("image/jpg");
+            blob.getProperties().setContentType("image/jpeg");
             
             byte[] dataBytes = Base64.decode(path);
             
@@ -98,10 +98,10 @@ public class UploadNewPlace extends HttpServlet {
             ConnectDB connDB = new ConnectDB();
             String status = connDB.insertNewPlace(placeid, name, lati, longi, desc, picname, related_cost);
 
-            out.print("{ \"status\" : " + " \"" + status + " " +lati+ "\"}");
+            out.print("{ \"status\" : " + " \"" + status + "\"}");
 
         } catch (Exception ex) {
-            out.print("{ \"status\" : " + " \"" + ex + " " + picname + "\"}");
+            out.print("{ \"status\" : " + " \"" + ex + " " + "\"}");
         }
     }
 
