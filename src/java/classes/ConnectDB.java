@@ -172,7 +172,7 @@ public class ConnectDB {
                 rt.setT_route(rs.getString("route"));
                 rt.setOrigin(rs.getString("origin"));
                 rt.setTotal_cost(rs.getFloat("total_cost"));
-                rt.setUser(rs.getNString("user"));
+                rt.setUser(rs.getNString("username"));
                 routes.add(rt);
             }
 
@@ -274,7 +274,7 @@ public class ConnectDB {
                 rt.setT_route(rs.getString("route"));
                 rt.setOrigin(rs.getString("origin"));
                 rt.setTotal_cost(rs.getFloat("total_cost"));
-                rt.setUser(rs.getString("user"));
+                rt.setUser(rs.getString("username"));
                 routes.add(rt);
             }
 
@@ -302,6 +302,50 @@ public class ConnectDB {
             }
         }
         return routes;
+    }
+    
+    
+    public String insertNewRoute(String placeid, String name, float lati, float longi, String desc, String user, float cost) {
+        String status = "incomplete";
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection(connectionUrl);
+            
+            String SQL = "INSERT INTO dbo.hvg_route" + " (PLACE_ID,ORI_LAT,ORI_LON,ROUTE,ORIGIN,TOTAL_COST,USERNAME)" + " VALUES(?,?,?,?,?,?,?)";
+            preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setString(1, placeid);
+            preparedStatement.setString(4, desc);
+            preparedStatement.setFloat(2, lati);
+            preparedStatement.setFloat(3, longi);
+            preparedStatement.setString(5, name);
+            preparedStatement.setString(7, user);
+            preparedStatement.setFloat(6, cost);
+            preparedStatement.executeUpdate();      
+
+            status = "complete";
+        } catch (Exception ex) {
+            status = ex.getMessage();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (Exception e) {
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return status;
     }
 
 }

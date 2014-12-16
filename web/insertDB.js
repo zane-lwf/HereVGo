@@ -21,26 +21,28 @@ $(function () {
 
 function insertPlace() {
     iname = document.getElementById('address').value;
-    ilat = document.getElementById('lat').value;
-    ilng = document.getElementById('lng').value;
     icost = document.getElementById('cost').value;
     idetail = document.getElementById('detail').value;
+    document.getElementById('add').value = "wait";
     console.log("before send param");
     $.post("UploadNewPlace", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "ipic": ipic, "path": picPath}, function (data) {
-        console.log("after send param");
         console.log(data);
         console.log(ilat);
-        console.log(ilng);    
+        console.log(ilng);
     }, "json");
 }
 
 function insertRoute() {
-    ilat = document.getElementById('latr').value;
-    ilng = document.getElementById('lngr').value;
+    var user = document.getElementById('user').value;
     icost = document.getElementById('costr').value;
     idetail = document.getElementById('detailr').value;
-    iname = document.getElementById('user').value;
+    iname = document.getElementById('source').value;
     iplace_id = place_ids[select];
+    $.post("messenger", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "user": user, "cmd":"add"}, function (data) {
+        console.log(data);
+        console.log(ilat);
+        console.log(ilng);
+    }, "json");
 }
 
 

@@ -195,9 +195,20 @@ public class messenger extends HttpServlet {
                 case "route":
                     out.println(getRoute(Float.parseFloat(request.getParameter("lat")), Float.parseFloat(request.getParameter("lng")), request.getParameter("id")));
                     break;
+                case "add":
+                    float lati = Float.parseFloat(request.getParameter("lat"));
+                    float longi = Float.parseFloat(request.getParameter("lng"));
+                    float cost = Float.parseFloat(request.getParameter("cost"));
+                    String detail = request.getParameter("detail");
+                    String user = request.getParameter("user");
+                    String place_id = request.getParameter("place_id");
+                    String address = request.getParameter("name");
+                    ConnectDB r = new ConnectDB();
+                    out.println("{\"status\":\""+r.insertNewRoute(place_id, address, lati, longi, detail, user, cost)+"\"}");
+                    break;
             }
         } catch (Exception e) {
-            out.println("{\"status\":\"error\"}");
+            out.println("{\"status\":\"error ---"+e+"\"}");
         }
         /* TODO output your page here. You may use following sample code. */
     }

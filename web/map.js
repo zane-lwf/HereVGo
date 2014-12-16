@@ -124,7 +124,7 @@ function getCurrentLocation() {
             map.setCenter(pos);
             document.getElementById('start').value = pos;
             userlat = pos.lat();
-            userlng = log(pos.lng());
+            userlng = pos.lng();
         }, function () {
             handleNoGeolocation(true);
         });
@@ -526,8 +526,6 @@ function placeID() {
             iplace_id = data.results[0].place_id;
             ilat = data.results[0].geometry.location.lat;
             ilng = data.results[0].geometry.location.lng;
-            document.getElementById("lat").value = ilat;
-            document.getElementById("lng").value = ilng;
         }
     });
 }
