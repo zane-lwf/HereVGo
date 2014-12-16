@@ -74,9 +74,10 @@ public class ConnectDB {
                     
             //stmt = con.createStatement();
             //stmt.executeUpdate(SQL);
-            status = "complete";
+            status = "เพิ่มสถานที่เรียบร้อย";
         } catch (Exception ex) {
-            status = ex.getMessage();
+            status = "สถานที่ที่คุณต้องการเพิ่ม มีอยู่ในระบบแล้ว";
+                    //ex.getMessage();
         } finally {
             if (rs != null) {
                 try {
@@ -322,9 +323,9 @@ public class ConnectDB {
             preparedStatement.setFloat(6, cost);
             preparedStatement.executeUpdate();      
 
-            status = "complete";
+            status = "เพิ่มข้อมูลเรียบร้อย";
         } catch (Exception ex) {
-            status = ex.getMessage();
+            status = "กรอกข้อมูลไม่สมบูรณ์/ไม่ถูกต้อง";//ex.getMessage();
         } finally {
             if (rs != null) {
                 try {
