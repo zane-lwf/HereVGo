@@ -196,10 +196,10 @@ function setInfo() {
 //end desciption & picture
 
 
-//set end
-function setEnd() {
-    document.getElementById('end').value = names[select];
-}
+
+
+
+
 
 function loading() {
     document.getElementById("textInPicDis").innerHTML = "loading . . .";
@@ -326,7 +326,7 @@ function calTaxi(distance) {
             g += km * 5.5;
         } else {
             g += 8 * 5.5;
-            km -= 8
+            km -= 8;
             if (km - 20 < 0) {
                 g += km * 6;
             } else {
