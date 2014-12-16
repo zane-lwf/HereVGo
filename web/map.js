@@ -17,8 +17,6 @@ var distances = [];
 var place_ids = [];
 var routes = [];
 var avalible = 0;
-var userlat;
-var userlng;
 
 //start initalize
 function initialize() {
@@ -108,6 +106,8 @@ function calcRoute(lat, lng) {
 
 
 //get current location
+var userlat;
+var userlng;
 function getCurrentLocation() {
     // Try HTML5 geolocation
     if (navigator.geolocation) {
@@ -123,6 +123,8 @@ function getCurrentLocation() {
             map.setZoom(11);
             map.setCenter(pos);
             document.getElementById('start').value = pos;
+            userlat = pos.lat();
+            userlng = log(pos.lng());
         }, function () {
             handleNoGeolocation(true);
         });
@@ -270,8 +272,8 @@ function findPlaces() {
             var lng = results[0].geometry.location.lng();
             var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
             console.log(request);
-           jQuery.getJSON(request, function (place) {
-           //jQuery.getJSON("check.json", function (place) {
+            jQuery.getJSON(request, function (place) {
+                //jQuery.getJSON("check.json", function (place) {
                 console.log(place);
                 number = place.array.length;
                 if (place.array.length != 0) {
@@ -500,8 +502,8 @@ var picPath;
 var icost;
 var iplace_id;
 
-function codeAddress() {
-    var address = document.getElementById('address').value;
+function codeAddress(input) {
+    var address = document.getElementById(input).value;
     geocoder.geocode({'address': address}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             ilat = results[0].geometry.location.lat();

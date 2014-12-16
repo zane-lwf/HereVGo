@@ -180,11 +180,11 @@
                                             <div id="overlayRoute">
                                                 <div>
                                                     <p>เพิ่มการเดินทางของฉัน</p>
-                                                    ชื่อสถานที่ <br>
-                                                        <input type="text" id="source" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress()"  style="width:100%;"><br><br>
-
-                                                                    lat : <input type="text" id="latr" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lngr" style="width:30%;" disabled="disabled" >
-
+                                                    สถานที่เริ่มต้น <br>
+                                                        <input type="text" id="source" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress(source)"  style="width:100%;"><br><br>
+                                                                                    รายละเอียด : <br><input type="text" id="detailr"><br><br>
+                                                                                       ค่าเดินทางทั้งหมด : <input type="text" id="costr"><br><br>
+                                                                                            user : <input type="text" id="user"><br><br>  
                                                                             <input type="submit" onclick=""> [<a href='#' onclick='overlay("Route")'>cancel</a>]
                                                                                 </div>
                                                                                 </div>
@@ -194,8 +194,7 @@
                                                                                     <div>
                                                                                         <p>เพิ่มสถานที่ของฉัน</p>
                                                                                         ชื่อสถานที่ <br>
-                                                                                            <input type="text" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress()"  style="width:100%;"><br> <br>
-                                                                                                        lat : <input type="text" id="lat" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lng" style="width:30%;" disabled="disabled"><br><br>
+                                                                                            <input type="text" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress(address)"  style="width:100%;"><br> <br>
 
                                                                                                                         รายละเอียด<br>
 
@@ -208,7 +207,7 @@
                                                                                                                                                 ภาพ : <input type="file" id="fileUpload" >
 
                                                                                                                                                     <br> <br>
-                                                                                                                                                            <input type="submit" onclick="insertPlace()" > [<a href='#' onclick='overlay("Place")'>cancel</a>]
+                                                                                                                                                            <input type="submit" onclick="insertPlace()" id="add"> [<a href='#' onclick='overlay("Place")'>cancel</a>]
                                                                                                                                                                 </div>
                                                                                                                                                                 </div>
 
