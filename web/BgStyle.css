@@ -122,8 +122,8 @@ body {
 #picDisc {
 	position: absolute;
 	z-index: 3;
-	width: 714px;
-	height: 60px;
+	width: 735px;
+	height: 82px;
 	left: 35px;
 	top: 399px;
 	background-color: #FFF;
@@ -270,81 +270,73 @@ body {
 
 #pin01{
 	position: absolute;
-	left: 18px;
-	top: 109px;
-	background-image: url(img/mood%201.png);
-	width: 65px;
-	height: 82px;
+	left: 27px;
+	top: 135px;
+	
 }
 
 #pin02{
 	position: absolute;
-	left: 336px;
-	top: 111px;
-	width: 65px;
-	height: 82px;
-	background-image: url(img/mood%201.png);
+	left: 355px;
+	top: 145px;
+
 }
 #pin03{
 	position: absolute;
-	left: 333px;
-	top: 676px;
-	width: 65px;
-	height: 82px;
-	background-image: url(img/mood%201.png);
+	left: 345px;
+	top: 705px;
+	
 }
 
 #pin04{
 	position: absolute;
-	left: 2px;
-	top: 1315px;
-	width: 65px;
-	height: 82px;
-	background-image: url(img/mood%201.png);
+	left: 13px;
+	top: 1342px;
+	
 }
 
 #pin05{
 	position: absolute;
-	left: 297px;
-	top: 302px;
-	width: 65px;
-	height: 82px;
-	background-image: url(img/mood%202.png);
+	left: 304px;
+	top: 326px;
+
 }
 
 #pin06{
 	position: absolute;
-	left: 1091px;
-	top: 613px;
-	width: 69px;
-	height: 83px;
-	background-image: url(img/mood%202.png);
+	left: 1093px;
+	top: 639px;
+
 }
 #pin07{
 	position: absolute;
-	left: 1089px;
-	top: 684px;
-	background-image: url(img/mood%202.png);
-	width: 69px;
-	height: 83px;
+	left: 1094px;
+	top: 706px;
+	
 }
 #pin08{
 	position: absolute;
-	left: 1083px;
-	top: 1317px;
-	background-image: url(img/mood%202.png);
-	width: 65px;
-	height: 82px;
+	left: 1084px;
+	top: 1353px;
+
+
 }
 .pinL{
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	z-index: 10;
+	background-size:cover;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-image:url(img/mood%201.png);
 	
 }
 .pinR{
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	z-index: 10;
-	
+	background-size:cover;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-image:url(img/mood%202.png);
 }

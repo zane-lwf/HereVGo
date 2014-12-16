@@ -1,99 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>HereVGo</title>
-        <link rel="stylesheet" type="text/css" href="BgStyle.css">
-            <link rel="stylesheet" type="text/css" href="formStyle.css">
-                <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
-                    <style>
-                        <!--
-                        sad-->  #map-canvas {
-                            height: 493px;
-                            width: 735px;
-                            padding: 0px;
-                            position: absolute;
-                            left: 17px;
-                            top: 21px;
-                        }
-                        #panel {
-                            position: absolute;
-                            top: 5px;
-                            left: 50%;
-                            z-index: 5;
-                            background-color: #fff;
-                            padding: 5px;
-                            border: 1px solid #999;
-                        }
-                        #directions-panel {
-                            height: 100%;
-                            float: right;
-                            width: 390px;
-                            overflow: auto;
-                        }
-                        #control {
-                            padding: 5px;
-                            font-size: 14px;
-                            font-family: Arial;
-                            z-index: 100;
-                            position: absolute;
-                            left: 71px;
-                            top: 62px;
-                            width: 245px;
-                            height: 198px;
-                        }
-                        #directions-panel {
-                            float: none;
-                            width: auto;
-                        }
-
-                        #overlayRoute {
-                            visibility: hidden;
-                            position: absolute;
-                            left: 0px;
-                            top: 0px;
-                            width:100%;
-                            height:100%;
-                            text-align:center;
-                            z-index: 1000;
-                            background-image:url(img/ovbg.png);
-                        }
-
-                        #overlayRoute div {
-                            width:300px;
-                            margin: 100px auto;
-                            background-color: #fff;
-                            border:1px solid #000;
-                            padding:15px;
-                            text-align:center;
-                        }
-
-
-                        #overlayPlace {
-                            visibility: hidden;
-                            position: absolute;
-                            left: 0px;
-                            top: 0px;
-                            width:100%;
-                            height:100%;
-                            text-align:center;
-                            z-index: 1000;
-                            background-image:url(img/ovbg.png);
-                        }
-
-                        #overlayPlace div {
-                            width:400px;
-                            margin: 100px auto;
-                            background-color: #fff;
-                            border:1px solid #000;
-                            padding:15px;
-                            text-align:center;
-                        }
-                    </style>
+                    <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <title>HereVGo</title>
+                    <link rel="stylesheet" type="text/css" href="BgStyle.css">
+                    <link rel="stylesheet" type="text/css" href="formStyle.css">
+                    <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
+                    <style></style>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
                     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
                     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-                    <script src="map.js"></script>                   
+                    <script src="map.js"></script>
                     <script src="insertDB.js"></script>
                     <script>
                         function overlay(n) {
@@ -106,112 +23,135 @@
                             window.scrollTo(0, 0);
                         }
                     </script>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="css/bootstrap.min.css" rel="stylesheet">
+                    <script src="http://code.jquery.com/jquery.js"></script>
+                    <script src="js/bootstrap.min.js"></script>
                     </head>
                     <body  >
-                        <div id="all">
-                            <div id="pin01" class="pinL"></div>
-                            <div id="pin02" class="pinL"></div>
-                            <div id="pin03" class="pinL"></div>
-                            <div id="pin04" class="pinL"></div>
-                            <div id="pin05" class="pinR"></div>
-                            <div id="pin06" class="pinR"></div>
-                            <div id="pin07" class="pinR"></div>
-                            <div id="pin08" class="pinR"></div>
-                            <div id="LogoProj" ></div>
-                            <div id="bgHeadSearch">
-                                <div id="headSearchText" class="headText">ค้นหาสถานที่เเนะนำ</div>
-                            </div>
-                            <div id="pic02" >
-                                <div id="control">
-                                    <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();" />
-                                    <BR />
-                                    <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" onfocusout="locationByUser();" />
-                                    <BR />
-                                    <input class="textbox"  id="end"  style="width: 190px" type="hidden" placeholder="ปลายทาง" onfocusout="desByUser()"/>
-                                    <BR />
-                                    <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" />
-                                    <BR />
-                                    <select id="radius" class="textbox" style="width: 200px">
-                                        <option value=10>10 km</option>
-                                        <option value=25>25 km</option>
-                                        <option value=50>50 km</option>
-                                        <option value=100>100 km</option>
-                                        <option value=10000000>unlimit</option>
-                                    </select>
-                                    <BR />
-                                    <input class="textbox"  id="submit" style="width: 200px" type="submit" value="ค้นหา" onclick="reset()"/>
-                                </div>
-                            </div>
-                            <div id="head1" >
-                                <div id="map-canvas"></div>
-                            </div>
-                            <div id="lt1" >
-                                <div id="suggHead" class="headText">สถานที่เเนะนำ</div>
-
-                                <div id="suggBkList" class="scrollbar">
-                                    <input type="submit" value="addPlace" onclick='overlay("Place");
-                                            scrollWin()' style="width:100%;">
-                                        <div id="suggDetail">                                       
-                                            <div id="recBox"></div>
-                                        </div>
-                                </div>
-                            </div>
-                            <div id="spic1" >
-                                <div id="picLocate"></div>
-                                <div id="picDisc"> </div>
-                                <div id="textInPicDis">Welcome</div>
-                                <div id="locateHead" class="headText">รายละเอียดสถานที่</div>
-                            </div>
-                            <div id="spic"></div>
-                            <div id="fromUserBG">
-                                <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
-                                    จากผู้ใช้ท่านอื่นๆ</div>
-                                <div id="fromUserDetail"  class="scrollbar">
-                                    <input type="submit" value="addRoute" onclick='overlay("Route");
-                                            scrollWin()' style="width:100%;" disabled id="btn">
-                                        <div id="placeName"></div><br>
-                                            <div id="routebox"></div>
-                                            </div>
-                                            <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช--> 
-                                            </div>
-                                            <div id="BottWeb"></div>
-                                            </div>
-
-                                            <div id="overlayRoute">
-                                                <div>
-                                                    <p>เพิ่มการเดินทางของฉัน</p>
-                                                    สถานที่เริ่มต้น <br>
-                                                        <input type="text" id="source" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress('source')"  style="width:100%;"><br><br>
-<!--                                                                    lat : <input type="text" id="latr" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lngr" style="width:30%;" disabled="disabled" > <br><br>-->
-                                                                                    รายละเอียด : <br><input type="text" id="detailr"><br><br>
-                                                                                       ค่าเดินทางทั้งหมด : <input type="text" id="costr" value="0"><br><br>
-                                                                                            user : <input type="text" id="user"><br><br>  
-                                                                            <input type="submit" onclick="insertRoute()"> [<a href='#' onclick='overlay("Route")'>cancel</a>]
-                                                                                </div>
-                                                                                </div>
-
-
-                                                                                <div id="overlayPlace">
-                                                                                    <div>
-                                                                                        <p>เพิ่มสถานที่ของฉัน</p>
-                                                                                        ชื่อสถานที่ <br>
-                                                                                            <input type="text" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress('address')"  style="width:100%;"><br> <br>
-<!--                                                                                                        lat : <input type="text" id="lat" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lng" style="width:30%;" disabled="disabled"><br><br>-->
-
-                                                                                                                        รายละเอียด<br>
-
-                                                                                                                            <input type="text" id="detail">
-
-                                                                                                                            </textarea
-                                                                                                                            <br> <br>
-                                                                                                                                    ค่าเข้าชม : <input type="text" id="cost" value="0"><br>
-                                                                                                                                            <br>
-                                                                                                                                                ภาพ : <input type="file" id="fileUpload" >
-
-                                                                                                                                                    <br> <br>
-                                                                                                                                                            <input type="submit" onclick="insertPlace()" id="add"> [<a href='#' onclick='overlay("Place")'>cancel</a>]
-                                                                                                                                                                </div>
-                                                                                                                                                                </div>
-
-                                                                                                                                                                </body>
-                                                                                                                                                                </html>
+<div id="all">
+                      <div id="pin01" class="pinL"></div>
+                      <div id="pin02" class="pinL"></div>
+                      <div id="pin03" class="pinL"></div>
+                      <div id="pin04" class="pinL"></div>
+                      <div id="pin05" class="pinR"></div>
+                      <div id="pin06" class="pinR"></div>
+                      <div id="pin07" class="pinR"></div>
+                      <div id="pin08" class="pinR"></div>
+                      <div id="LogoProj" ></div>
+                      <div id="bgHeadSearch">
+    <div id="headSearchText" class="headText">ค้นหาสถานที่เเนะนำ</div>
+  </div>
+                      <div id="pic02" >
+    <div id="control">
+                          <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();" />
+                          <BR />
+                          <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" onfocusout="locationByUser();" />
+                          <BR />
+                          <!--<input class="textbox"  id="end"  style="width: 190px" type="hidden" placeholder="ปลายทาง" onfocusout="desByUser()"/>
+                                    <BR />-->
+                          <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" />
+                          <BR />
+                          <select id="radius" class="textbox" style="width: 200px">
+        <option value=10>10 km</option>
+        <option value=25>25 km</option>
+        <option value=50>50 km</option>
+        <option value=100>100 km</option>
+        <option value=10000000>unlimit</option>
+      </select>
+                          <BR />
+                          <input class="textbox"  id="submit" style="width: 200px" type="submit" value="ค้นหา" onclick="reset()"/>
+                        </div>
+  </div>
+                      <div id="head1" >
+    <div id="map-canvas"></div>
+  </div>
+                      <div id="lt1" >
+    <div id="suggHead" class="headText">สถานที่เเนะนำ</div>
+    <div id="suggBkList" class="scrollbar">
+                          <input type="submit" value="เพิ่มสถานที่ของฉัน" onclick='overlay("Place");
+                                            scrollWin()' style="width:100%;" />
+                          <div id="suggDetail">
+        <div id="recBox"></div>
+      </div>
+                        </div>
+  </div>
+                      <div id="spic1" >
+    <div id="picLocate"></div>
+    <div id="picDisc"> </div>
+    <div id="textInPicDis">Welcome</div>
+    <div id="locateHead" class="headText">รายละเอียดสถานที่</div>
+  </div>
+                      <div id="spic"></div>
+                      <div id="fromUserBG">
+    <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
+                          จากผู้ใช้ท่านอื่นๆ</div>
+    <div id="fromUserDetail"  class="scrollbar">
+                          <input type="submit" value="เพิ่มการเดินทางของฉัน" onclick='overlay("Route");
+                                            scrollWin()' style="width:100%;" id="btn">
+                          <div id="placeName"></div>
+                          <br>
+                          <div id="routebox"></div>
+                        </div>
+    <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช--> 
+  </div>
+                      <div id="BottWeb"></div>
+                    </div>
+<div id="overlayRoute">
+                      <div>
+    <h1>เพิ่มการเดินทางของฉัน</h1>
+    <BR />
+    สถานที่เริ่มต้น <br>
+    <input type="text"  class="form-control" id="source" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress('source')"  style="width:100%;">
+    <br>
+    <br>
+    <!--                                                                    lat : <input type="text" id="latr" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lngr" style="width:30%;" disabled="disabled" > <br><br>--> 
+    รายละเอียด  <br>
+    <input type="text"  class="form-control"  id="detailr">
+    <br>
+    <br>
+    ค่าเดินทางทั้งหมด 
+    <input type="text"  class="form-control" id="costr" value="0">
+    <br>
+    <br>
+    ชื่อของฉัน
+    <input type="text"  class="form-control" id="user">
+    <br>
+    <br>
+    <!--<input type="submit" onclick="insertRoute()"> [<a href='#' onclick='overlay("Route")'>cancel</a>]-->
+    <input class="btn btn-default btn-lg"  style="background-color:#39F;color:#FFF;width:80px" type="submit" onclick="insertRoute()" >
+    <input class="btn btn-default btn-lg"  style="background-color:#C30;color:#FFF" type="submit" onclick='overlay("Route")' value="ยกเลิก">
+  </div>
+                    </div>
+<div id="overlayPlace">
+                      <div>
+    <h1>เพิ่มสถานที่ของฉัน</h1>
+    <BR />
+    ชื่อสถานที่ <br>
+    <input type="text"   class="form-control" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress('address')"  style="width:100%;">
+    <br>
+    <br>
+    <!--                                                                                                        lat : <input type="text" id="lat" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lng" style="width:30%;" disabled="disabled"><br><br>--> 
+    
+    รายละเอียด<br>
+    <input type="text"  class="form-control" id="detail">
+    </textarea>
+    <br>
+    <br>
+    ค่าเข้าชม
+    <input type="text"  class="form-control" id="cost" value="0">
+    <br>
+    <br>
+    ภาพ
+    <center>
+                          <input type="file" class="btn btn-default btn-lg" style="font-size:16px" id="fileUpload" >
+                        </center>
+    <br>
+    <br>
+    <input class="btn btn-default btn-lg"  style="background-color:#39F;color:#FFF;width:80px" type="submit" onclick="insertPlace()" id="add">
+    <input class="btn btn-default btn-lg"  style="background-color:#C30;color:#FFF" type="submit" onclick='overlay("Place")' value="ยกเลิก">
+    <!--[<a href='#' onclick='overlay("Place")'>cancel</a>]--> 
+  </div>
+                    </div>
+</body>
+</html>

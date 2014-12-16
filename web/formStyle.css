@@ -12,7 +12,7 @@
 	box-shadow: 0px 0px 8px #d9d9d9;
 	-moz-box-shadow: 0px 0px 8px #d9d9d9;
 	-webkit-box-shadow: 0px 0px 8px #d9d9d9;
-	margin-bottom:4px
+	margin-bottom: 4px
 }
 .textbox:focus {
 	outline: none;
@@ -21,9 +21,7 @@
 	-moz-box-shadow: 0px 0px 8px #7bc1f7;
 	-webkit-box-shadow: 0px 0px 8px #7bc1f7;
 }
-
-
-#textInPicDis{
+#textInPicDis {
 	position: absolute;
 	left: 40px;
 	top: 406px;
@@ -31,8 +29,7 @@
 	width: 719px;
 	height: 70px;
 }
-
-#fromUserHead{
+#fromUserHead {
 	position: absolute;
 	text-align: center;
 	width: 241px;
@@ -40,10 +37,8 @@
 	left: 52px;
 	top: 53px;
 	z-index: 6;
-	
-	}
-
-#getDirection{
+}
+#getDirection {
 	position: absolute;
 	width: 164px;
 	height: 22px;
@@ -52,74 +47,134 @@
 	background-color: #FFF;
 	z-index: 10;
 	text-align: center;
-	
 }
-
-
-.suggBox{
-	
+.suggBox {
 	margin-bottom: 20px;
 	height: 120px;
 }
-
-
-#sggDet0{
+#sggDet0 {
 	background-image: url(img/ecotourism-128088-1.jpg);
 	background-size: cover;
 	background-position: center;
 }
-
-div.positionSuggName{
-        
-        text-shadow:0px 0px 11px #000000;
-       text-align: center;
-	
+div.positionSuggName {
+	text-shadow: 0px 0px 11px #000000;
+	text-align: center;
 	color: #FFF;
-        height: 120px;
-        background-size: cover;
-        position: relative;
-        padding-left: 10px;
-        padding-right: 10px;
-        border-radius: 11px 11px 11px 11px;
-
-        
+	height: 120px;
+	background-size: cover;
+	position: relative;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 11px 11px 11px 11px;
 }
-
-
-#fromUserDetail{
+#fromUserDetail {
 	position: absolute;
 	width: 251px;
 	height: 348px;
 	left: 49px;
 	top: 124px;
-	
 }
-
-
-
-.headText{
-	text-shadow: 0px 0px 5px #000000,2px 2px 8px #333333;
+.headText {
+	text-shadow: 0px 0px 5px #000000, 2px 2px 8px #333333;
 	font-size: 24px;
 	color: #FFF;
 }
-
-#locateHead{
+#locateHead {
 	position: absolute;
 	left: 51px;
 	top: 56px;
-	z-index:5;
-	}
-
-#suggHead{
+	z-index: 5;
+}
+#suggHead {
 	position: absolute;
 	left: 114px;
 	top: 43px;
 }
-
-#headSearchText{
+#headSearchText {
 	position: absolute;
 	width: 209px;
 	height: 56px;
 	left: 50px;
 	top: 49px;
+}
+#panel {
+	position: absolute;
+	top: 5px;
+	left: 50%;
+	z-index: 5;
+	background-color: #fff;
+	padding: 5px;
+	border: 1px solid #999;
+}
+#directions-panel {
+	height: 100%;
+	float: right;
+	width: 390px;
+	overflow: auto;
+}
+#control {
+	padding: 5px;
+	font-size: 14px;
+	font-family: Arial;
+	z-index: 100;
+	position: absolute;
+	left: 71px;
+	top: 62px;
+	width: 245px;
+	height: 198px;
+}
+#directions-panel {
+	float: none;
+	width: auto;
+}
+#overlayRoute {
+	visibility: hidden;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	z-index: 1000;
+	background-image: url(img/ovbg.png);
+}
+#overlayRoute div {
+	width: 492px;
+	text-align: center;
+	height: 641px;
+	background-image: url(img/bgAddFrom1.png);
+	padding-top: 40px;
+	padding-left: 50px;
+	padding-right: 50px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-left: -246px;
+	margin-top: -320px;
+}
+#overlayPlace {
+	visibility: hidden;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	z-index: 1000;
+	background-image: url(img/ovbg.png);
+}
+#overlayPlace div {
+	width: 492px;
+	text-align: center;
+	background-image: url(img/bgAddFrom1.png);
+	height: 641px;
+	padding-top: 40px;
+	padding-left: 50px;
+	padding-right: 50px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -320px;
+	margin-left: -246px;
 }
