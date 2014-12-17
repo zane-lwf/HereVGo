@@ -398,7 +398,7 @@ function setRecomend() {
     }
     document.getElementById("recBox").innerHTML = temp;
     if (avalible === 0) {
-        alert("ไม่พบสถานที่ ที่เงินของคุณจะใช้จ่ายได้ กรุณาเพิ่มยอดเงินหรือเพิ่มข้อมูลสถานที่ใหม่");
+        alert("เงินแค่นี้อย่าเที่ยวเลย");
     }
     loaded();
 }
