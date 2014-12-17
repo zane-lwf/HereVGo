@@ -407,7 +407,7 @@ function setRecomend() {
 function loaded() {
     document.getElementById('submit').value = "ค้นหา";
     document.getElementById('submit').disabled = false;
-    document.getElementById("textInPicDis").innerHTML = "load data complete";
+    document.getElementById("textInPicDis").innerHTML = "";//load data complete
     document.getElementById("picLocate").style.backgroundImage = "url(img/guide.png)";
 }
 

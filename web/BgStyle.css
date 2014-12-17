@@ -113,9 +113,8 @@ body {
 	height: 436px;
 	left: 35px;
 	top: 41px;
-	background-color: #999;
 	z-index: 2;
-	background-image: url(img/ecotourism-128088-1.jpg);
+	background-image: url(img/picLocateFrist.png);
 	background-size: cover;
 	background-position: center;
 }
@@ -190,8 +189,8 @@ body {
 	position: absolute;
 	width: 209px;
 	height: 103px;
-	left: 17px;
-	top: 17px;
+	left: 21px;
+	top: 42px;
 	padding-left: 5px;
 	padding-right: 5px;
 }
