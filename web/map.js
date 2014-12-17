@@ -121,10 +121,10 @@ function getCurrentLocation() {
             });
             map.setZoom(11);
             map.setCenter(pos);
-            //document.getElementById('start').value = pos;
+            document.getElementById('start').value = pos;
             userlat = pos.lat();
             userlng = pos.lng();
-            codeLatLng();
+            //codeLatLng();
         }, function () {
             handleNoGeolocation(true);
         });
