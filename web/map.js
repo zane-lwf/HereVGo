@@ -135,7 +135,7 @@ function getCurrentLocation() {
 }
 function handleNoGeolocation(errorFlag) {
     if (errorFlag) {
-        var content = 'Error: The Geolocation service failed.';
+        var content = 'กรุณาใส่สถานที่้ต้นทางให้ถูกต้อง';
         alert(content);
     } else {
         var content = 'Error: Your browser doesn\'t support geolocation.';
