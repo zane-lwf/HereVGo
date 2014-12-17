@@ -27,6 +27,7 @@ function insertPlace() {
     console.log("before send param");
     $.post("UploadNewPlace", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "ipic": ipic, "path": picPath}, function (data) {
         alert(data.status);
+        document.getElementById('add').value = "ส่ง";
         console.log(data);
         console.log(ilat);
         console.log(ilng);
@@ -35,6 +36,7 @@ function insertPlace() {
 }
 
 function insertRoute() {
+    document.getElementById('addr').value = "wait";
     iplace_id = place_ids[select];
     var user = document.getElementById('user').value;
     icost = document.getElementById('costr').value;
@@ -43,6 +45,7 @@ function insertRoute() {
     console.log(iplace_id);
     $.post("messenger", {"lat": ilat, "lng": ilng, "name": iname, "place_id": iplace_id, "detail": idetail, "cost": icost, "user": user, "cmd": "add"}, function (data) {
         alert(data.status);
+        document.getElementById('addr').value = "ส่ง";
         console.log(data);
         console.log(ilat);
         console.log(ilng);

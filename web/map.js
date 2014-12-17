@@ -195,12 +195,6 @@ function setInfo() {
 }
 //end desciption & picture
 
-
-
-
-
-
-
 function loading() {
     document.getElementById("textInPicDis").innerHTML = "loading . . .";
     document.getElementById("picLocate").style.backgroundImage = "url(img/spinner.gif)";
@@ -317,7 +311,8 @@ function calTaxi(distance) {
     var g = 0;
     g += 35;
     km -= 1;
-    if(km<0) km=0;
+    if (km < 0)
+        km = 0;
     if (km - 10 < 0) {
         g += km * 5;
     } else {
@@ -395,7 +390,7 @@ function setRecomend() {
                 }
             }
         } catch (err) {
-            console.log( err.message );
+            console.log(err.message);
         }
     }
     document.getElementById("recBox").innerHTML = temp;
@@ -456,13 +451,17 @@ function requestDirection(link, index) {
     var url = servlet + link;
     var distance;
     var time;
-    jQuery.getJSON(url, null, function (data) {
-        distance = data.routes[0].legs[0].distance.value;
-        time = data.routes[0].legs[0].duration.text;
-        taxi[index] = (calTaxi(distance));
-        times[index] = (time);
-        distances[index] = (data.routes[0].legs[0].distance.text);
-    });
+    try {
+        jQuery.getJSON(url, null, function (data) {
+            distance = data.routes[0].legs[0].distance.value;
+            time = data.routes[0].legs[0].duration.text;
+            taxi[index] = (calTaxi(distance));
+            times[index] = (time);
+            distances[index] = (data.routes[0].legs[0].distance.text);
+        });
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 function routeFromUser(lat, lng, id, index) {
@@ -495,10 +494,6 @@ function showRouteFromUser() {
         temp += "<div>No Data</div>";
     }
     document.getElementById("routebox").innerHTML = temp;
-}
-
-function debug() {
-    document.getElementById("picLocate").style.backgroundImage = "url(img/guide.png)";
 }
 
 //parameter for insert database
