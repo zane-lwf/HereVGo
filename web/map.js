@@ -121,9 +121,10 @@ function getCurrentLocation() {
             });
             map.setZoom(11);
             map.setCenter(pos);
-            document.getElementById('start').value = pos;
+            //document.getElementById('start').value = pos;
             userlat = pos.lat();
             userlng = pos.lng();
+            codeLatLng();
         }, function () {
             handleNoGeolocation(true);
         });
@@ -259,8 +260,10 @@ function findPlaces() {
     var radius = document.getElementById('radius').value;
     geocoder.geocode({'address': address}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-            var lat = results[0].geometry.location.lat();
-            var lng = results[0].geometry.location.lng();
+            //var lat = results[0].geometry.location.lat();
+            //var lng = results[0].geometry.location.lng();
+            var lat = userlat;
+            var lng = userlng;
             var request = 'messenger?cmd=radius&lat=' + lat + '&lng=' + lng + '&r=' + radius;
             console.log(request);
             jQuery.getJSON(request, function (place) {
@@ -533,5 +536,22 @@ function placeID() {
         }
     });
 }
+
+
+function codeLatLng() {
+    var latlng = new google.maps.LatLng(userlat, userlng);
+    geocoder.geocode({'latLng': latlng}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+                map.setZoom(11);
+                document.getElementById('start').value = (results[1].formatted_address);
+            } else {
+            }
+        } else {
+            alert('Geocoder failed due to: ' + status);
+        }
+    });
+}
+
 
 google.maps.event.addDomListener(window, 'load', initialize);
