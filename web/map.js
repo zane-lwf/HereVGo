@@ -378,7 +378,7 @@ function setRecomend() {
             if (routes[i] !== "") {
                 if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2] + relate_costs[i])) {
                     temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + (i+1) + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
                     avalible++;
@@ -386,7 +386,7 @@ function setRecomend() {
             } else {
                 if (money >= taxi[i] + relate_costs[i]) {
                     temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + (i+1) + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
                     avalible++;
@@ -398,7 +398,7 @@ function setRecomend() {
     }
     document.getElementById("recBox").innerHTML = temp;
     if (avalible === 0) {
-        alert("เงินแค่นี้อย่าเที่ยวเลย");
+        alert("จำนวนเงินไม่พอต่อการเดินทาง");
     }
     loaded();
 }
