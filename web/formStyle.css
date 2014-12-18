@@ -178,3 +178,15 @@ div.positionSuggName {
 	margin-top: -320px;
 	margin-left: -246px;
 }
+
+#spicText{
+	position: absolute;
+	left: 83px;
+	top: 59px;
+	}
+
+#BottWebText{
+	position: absolute;
+	left: 65px;
+	top: 65px;
+	}
