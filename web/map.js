@@ -135,7 +135,7 @@ function getCurrentLocation() {
 }
 function handleNoGeolocation(errorFlag) {
     if (errorFlag) {
-        var content = 'กรุณาใส่สถานที่้ต้นทางให้ถูกต้อง';
+        var content = 'กรุณาใส่สถานที่ต้นทางให้ถูกต้อง';
         alert(content);
     } else {
         var content = 'Error: Your browser doesn\'t support geolocation.';
@@ -298,7 +298,7 @@ function findPlaces() {
                         routeFromUser(lat, lng, place.array[count].place_id, count);
                     }
                 } else {
-                    alert("ไม่ที่ให้คุณเที่ยว");
+                    alert("ไม่พบสถานที่เที่ยวในบริเวณนี้");
                     loaded();
                 }
             });
@@ -378,7 +378,7 @@ function setRecomend() {
             if (routes[i] !== "") {
                 if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2] + relate_costs[i])) {
                     temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + (i+1) + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
                     avalible++;
@@ -386,7 +386,7 @@ function setRecomend() {
             } else {
                 if (money >= taxi[i] + relate_costs[i]) {
                     temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + i + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + (i+1) + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
                     avalible++;

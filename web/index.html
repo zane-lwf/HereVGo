@@ -5,7 +5,7 @@
                     <title>HereVGo</title>
                     <link rel="stylesheet" type="text/css" href="BgStyle.css">
                     <link rel="stylesheet" type="text/css" href="formStyle.css">
-                    <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
+                    <link rel="shortcut icon" href="img/pin.png">
                     <style></style>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
                     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -14,6 +14,10 @@
                     <script src="insertDB.js"></script>
                     <script>
                         function overlay(n) {
+                            document.getElementById('toAdd').disabled = false;
+                            document.getElementById('toCancle').disabled = false;
+                            document.getElementById('toAdd2').disabled = false;
+                            document.getElementById('toCancle2').disabled = false;
                             el = document.getElementById("overlay" + n);
                             el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
                         }
@@ -27,6 +31,32 @@
                     <link href="css/bootstrap.min.css" rel="stylesheet">
                     <script src="http://code.jquery.com/jquery.js"></script>
                     <script src="js/bootstrap.min.js"></script>
+                    <style>
+                        progress.withText
+{
+    color: inherit; /* Uses the same text color as the page */
+    vertical-align: text-bottom; /* Makes the bottom of the control align with the bottom of its label */
+}
+
+/* Text style for a label for the progress ring */
+.progressRingText
+{
+    font-family: "Segoe UI";
+}
+
+/* Text style for a label for a default size progress ring */
+.progressRingText
+{
+    font-size: 11pt;
+    line-height: 15pt;
+}
+
+/* The margin to separate the ring and its label */
+.progressRingText progress
+{
+    margin-right: 5px;
+}
+                    </style>
                     </head>
                     <body  >
 <div id="all">
@@ -118,10 +148,11 @@
     ชื่อของฉัน
     <input type="text"  class="form-control" id="user">
     <br>
+         <label id="progressShow2" class="progressRingText" style="visibility: hidden" ><progress  class="withText"></progress><br>กำลังดำเนินการ</label>
     <br>
     <!--<input type="submit" onclick="insertRoute()"> [<a href='#' onclick='overlay("Route")'>cancel</a>]-->
-    <input class="btn btn-default btn-lg"  style="background-color:#39F;color:#FFF;width:80px" type="submit" onclick="insertRoute()" id="addr" >
-    <input class="btn btn-default btn-lg"  style="background-color:#C30;color:#FFF" type="submit" onclick='overlay("Route")' value="ยกเลิก">
+     <input class="btn btn-default btn-lg"  style="background-color:#39F;color:#FFF;width:80px" type="submit" onclick="insertRoute()" id="toAdd2" >
+    <input class="btn btn-default btn-lg"  style="background-color:#C30;color:#FFF" type="submit" onclick='overlay("Route")' id="toCancle2" value="ยกเลิก">
   </div>
                     </div>
 <div id="overlayPlace">
@@ -148,10 +179,11 @@
                           <input type="file" class="btn btn-default btn-lg" style="font-size:16px" id="fileUpload" >
                         </center>
     <br>
+        <label id="progressShow" class="progressRingText" style="visibility: hidden" ><progress  class="withText"></progress><br>กำลังดำเนินการ</label>
     <br>
-    <input class="btn btn-default btn-lg"  style="background-color:#39F;color:#FFF;width:80px" type="submit" onclick="insertPlace()" id="add">
-    <input class="btn btn-default btn-lg"  style="background-color:#C30;color:#FFF" type="submit" onclick='overlay("Place")' value="ยกเลิก">
-    <!--[<a href='#' onclick='overlay("Place")'>cancel</a>]--> 
+    <input class="btn btn-default btn-lg"  style="background-color:#39F;color:#FFF;width:80px;" type="submit" onclick="insertPlace()"  id="toAdd">
+    <input class="btn btn-default btn-lg"  style="background-color:#C30;color:#FFF" type="submit" onclick='overlay("Place")' id="toCancle" value="ยกเลิก">
+        <!--[<a href='#' onclick='overlay("Place")'>cancel</a>]--> 
   </div>
                     </div>
 </body>
