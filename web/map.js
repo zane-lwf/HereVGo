@@ -168,7 +168,7 @@ function marker(lat, lng, title, number, pic) {
         position: myLatlng,
         map: map,
         title: title,
-        icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + number + "|FF0000|000000"
+        icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + (number+1) + "|FF0000|000000"
     });
 
     google.maps.event.addListener(marker, 'click', function () {
@@ -361,6 +361,7 @@ window.onload = function () {
 
 function setRecomend() {
     var temp = "";
+    var count = 1;
     var money = parseFloat(document.getElementById("money").value);
     if (isNaN(money)) {
         money = 9999999999999;
@@ -378,7 +379,7 @@ function setRecomend() {
             if (routes[i] !== "") {
                 if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2] + relate_costs[i])) {
                     temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + (i+1) + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + count++ + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
                     avalible++;
@@ -386,7 +387,7 @@ function setRecomend() {
             } else {
                 if (money >= taxi[i] + relate_costs[i]) {
                     temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + (i+1) + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + count++ + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
                     avalible++;

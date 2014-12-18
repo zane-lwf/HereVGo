@@ -24,7 +24,7 @@
 
                         function checkInput(textControl) {
                             var str = textControl.value;
-                            if(!(str.charAt(str.length-1)>='0' && str.charAt(str.length-1)<='9')){
+                            if(!((str.charAt(str.length-1)>=0 && str.charAt(str.length-1)<=9)||str.charAt(str.length-1)=='.')||str.indexOf('.')!=str.lastIndexOf('.')){
                                 
                                 textControl.value = str.slice(0,str.length-1);
                             }
