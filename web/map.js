@@ -489,8 +489,13 @@ function routeFromUser(lat, lng, id, index) {
 
 function showRouteFromUser() {
     var temp = "";
+    var money = parseFloat(document.getElementById("money").value);
+    if (isNaN(money)) {
+        money = 9999999999999;
+    }
     if (routes[select] != "" && routes[select] != []) {
         for (var i = 0; i < routes[select].length; i++) {
+            if(routes[select][i][2]<=money)
             temp += "<div id = \"resultFromUser\">" + routes[select][i][0] + "<br>total cost :" + routes[select][i][2] + "<br>By :" + routes[select][i][1] + "</div><br>";
         }
     } else {

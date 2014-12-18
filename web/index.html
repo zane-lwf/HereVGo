@@ -22,7 +22,14 @@
                             el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
                         }
 
-
+                        function checkInput(textControl) {
+                            var str = textControl.value;
+                            if(!(str.charAt(str.length-1)>='0' && str.charAt(str.length-1)<='9')){
+                                
+                                textControl.value = str.slice(0,str.length-1);
+                            }
+                        }
+                        
                         function scrollWin() {
                             window.scrollTo(0, 0);
                         }
@@ -81,7 +88,7 @@
                           <BR />
                           <!--<input class="textbox"  id="end"  style="width: 190px" type="hidden" placeholder="ปลายทาง" onfocusout="desByUser()"/>
                                     <BR />-->
-                          <input class="textbox"  id="money"  style="width: 190px" type="text" placeholder="เงิน" />
+                          <input class="textbox"  id="money"  style="width: 190px" onkeyup="checkInput(this)" type="text" placeholder="เงิน" />
                           <BR />
                           <select id="radius" class="textbox" style="width: 200px">
         <option value=10>10 km</option>
