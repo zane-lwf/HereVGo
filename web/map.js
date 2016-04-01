@@ -261,9 +261,7 @@ function findPlaces() {
     var address = document.getElementById('start').value;
     var radius = document.getElementById('radius').value;
     geocoder.geocode({'address': address}, function (results, status) {
-        console.log(status);
-        console.log(results);
-        if (true) {
+        if ( userlat && userlng ) {
             //var lat = results[0].geometry.location.lat();
             //var lng = results[0].geometry.location.lng();
             var lat = userlat;
