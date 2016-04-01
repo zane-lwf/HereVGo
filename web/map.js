@@ -230,6 +230,8 @@ function locationByUser() {
     var address = document.getElementById('start').value;
     // console.log(address);
     geocoder.geocode({'address': address}, function (results, status) {
+        //console.log(results);
+        //console.log(status);
         if (status == google.maps.GeocoderStatus.OK) {
             if (infowindow != null) {
                 infowindow.close();
@@ -259,7 +261,9 @@ function findPlaces() {
     var address = document.getElementById('start').value;
     var radius = document.getElementById('radius').value;
     geocoder.geocode({'address': address}, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
+        console.log(status);
+        console.log(results);
+        if (true) {
             //var lat = results[0].geometry.location.lat();
             //var lng = results[0].geometry.location.lng();
             var lat = userlat;
@@ -305,6 +309,7 @@ function findPlaces() {
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
             console.log(status);
+            loaded();
         }
     });
 }
