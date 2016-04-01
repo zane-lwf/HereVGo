@@ -1,53 +1,203 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+                    <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <title>HereVGo</title>
+                    <link rel="stylesheet" type="text/css" href="BgStyle.css">
+                    <link rel="stylesheet" type="text/css" href="formStyle.css">
+                    <link rel="shortcut icon" href="img/pin.png">
+                    <style></style>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
+                    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+                    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+                    <script src="map.js"></script>
+                    <script src="insertDB.js"></script>
+                    <script>
+                        function overlay(n) {
+                            document.getElementById('toAdd').disabled = false;
+                            document.getElementById('toCancle').disabled = false;
+                            document.getElementById('toAdd2').disabled = false;
+                            document.getElementById('toCancle2').disabled = false;
+                            el = document.getElementById("overlay" + n);
+                            el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+                        }
 
-    <title>HereVGo</title>
+                        function checkInput(textControl) {
+                            var str = textControl.value;
+                            if(!((str.charAt(str.length-1)>=0 && str.charAt(str.length-1)<=9)||str.charAt(str.length-1)=='.')||str.indexOf('.')!=str.lastIndexOf('.')){
+                                
+                                textControl.value = str.slice(0,str.length-1);
+                            }
+                        }
+                        
+                        function scrollWin() {
+                            window.scrollTo(0, 0);
+                        }
+                    </script>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="css/bootstrap.min.css" rel="stylesheet">
+                    <script src="http://code.jquery.com/jquery.js"></script>
+                    <script src="js/bootstrap.min.js"></script>
+                    <style>
+                        progress.withText
+{
+    color: inherit; /* Uses the same text color as the page */
+    vertical-align: text-bottom; /* Makes the bottom of the control align with the bottom of its label */
+}
 
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
+/* Text style for a label for the progress ring */
+.progressRingText
+{
+    font-family: "Segoe UI";
+}
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+/* Text style for a label for a default size progress ring */
+.progressRingText
+{
+    font-size: 11pt;
+    line-height: 15pt;
+}
 
-  </head>
-  <body>
+/* The margin to separate the ring and its label */
+.progressRingText progress
+{
+    margin-right: 5px;
+}
+                    </style>
+                    </head>
+                    <body  >
+<div id="all">
 
-    <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-9">
-				</div>
-				<div class="col-md-3">
-					<div class="list-group">
-						 <a href="#" class="list-group-item active">Home</a>
-						<div class="list-group-item">
-							List header
-						</div>
-						<div class="list-group-item">
-							<h4 class="list-group-item-heading">
-								List group item heading
-							</h4>
-							<p class="list-group-item-text">
-								...
-							</p>
-						</div>
-						<div class="list-group-item">
-							<span class="badge">14</span>Help
-						</div> <a class="list-group-item active"><span class="badge">14</span>Help</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
-  </body>
+                      <div id="pin01" class="pinL"></div>
+                      <div id="pin02" class="pinL"></div>
+                      <div id="pin03" class="pinL"></div>
+                      <div id="pin04" class="pinL"></div>
+                      <div id="pin05" class="pinR"></div>
+                      <div id="pin06" class="pinR"></div>
+                      <div id="pin07" class="pinR"></div>
+                      <div id="pin08" class="pinR"></div>
+                      <div id="LogoProj" ></div>
+                      <div id="bgHeadSearch">
+    <div id="headSearchText" class="headText">ค้นหาสถานที่เเนะนำ</div>
+  </div>
+                      <div id="pic02" >
+    <div id="control">
+                          <input class="textbox"  style="width: 200px" type="submit" value="ตำแหน่งของฉัน" onclick="getCurrentLocation();" />
+                          <BR />
+                          <input class="textbox"  id="start" style="width: 190px"  type="text"  placeholder="ต้นทาง" onfocusout="locationByUser();" />
+                          <BR />
+                          <!--<input class="textbox"  id="end"  style="width: 190px" type="hidden" placeholder="ปลายทาง" onfocusout="desByUser()"/>
+                                    <BR />-->
+                          <input class="textbox"  id="money"  style="width: 190px" onkeyup="checkInput(this)" type="text" placeholder="เงิน" />
+                          <BR />
+                          <select id="radius" class="textbox" style="width: 200px">
+        <option value=10>10 km</option>
+        <option value=25>25 km</option>
+        <option value=50>50 km</option>
+        <option value=100>100 km</option>
+        <option value=10000000>unlimit</option>
+      </select>
+                          <BR />
+                          <input class="textbox"  id="submit" style="width: 200px" type="submit" value="ค้นหา" onclick="reset()"/>
+                        </div>
+  </div>
+                      <div id="head1" >
+    <div id="map-canvas"></div>
+  </div>
+                      <div id="lt1" >
+    <div id="suggHead" class="headText">สถานที่เเนะนำ</div>
+    <div id="suggBkList" class="scrollbar">
+      <input type="submit" value="เพิ่มสถานที่ของฉัน" onclick='overlay("Place");
+                                            scrollWin()' style="width:100%;" />
+      <div id="suggDetail">
+        <div id="recBox"></div>
+      </div>
+                        </div>
+  </div>
+                      <div id="spic1" >
+    <div id="picLocate"></div>
+    <div id="picDisc"> </div>
+    <div id="textInPicDis">Welcome</div>
+    <div id="locateHead" class="headText">รายละเอียดสถานที่</div>
+  </div>
+                      <div id="spic" >
+                      	<div id="spicText" class="headText">Here V Go เพียงคุณใส่จำนวนเงินที่คุณมี ก็สามารถหาที่เที่ยวได้</div>
+                      </div>
+                      <div id="fromUserBG">
+    <div id="fromUserHead" class="headText">ค่าเดินทาง<br />
+                        จากผู้ใช้ท่านอื่นๆ</div>
+    <div id="fromUserDetail"  class="scrollbar">
+                          <input type="submit" value="เพิ่มการเดินทางของฉัน" onclick='overlay("Route");
+                                            scrollWin()' style="width:100%;" id="btn">
+                          <div id="placeName"></div>
+                          <br>
+                          <div id="routebox"></div>
+                        </div>
+    <!--ย้ายค่าเดินทางตรงผลการค้นหา กะ ค่าเข้าตรง disc มาใส่ในนี้นะครัชชชช--> 
+  </div>
+                      <div id="BottWeb">
+                      	<div id="BottWebText" class="headText" >
+               UTG Group from IT@KMITL // 55070010 // 55070028 // 55070063 // 55070072 // 55070103
+                        </div>
+  </div>
+                    </div>
+<div id="overlayRoute">
+                      <div>
+    <h1>เพิ่มการเดินทางของฉัน</h1>
+    <BR />
+    สถานที่เริ่มต้น <br>
+    <input type="text"  class="form-control" id="source" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress('source')"  style="width:100%;">
+    <br>
+    <br>
+    <!--                                                                    lat : <input type="text" id="latr" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lngr" style="width:30%;" disabled="disabled" > <br><br>--> 
+    รายละเอียด  <br>
+    <input type="text"  class="form-control"  id="detailr">
+    <br>
+    <br>
+    ค่าเดินทางทั้งหมด 
+    <input type="text"  class="form-control" id="costr" value="0">
+    <br>
+    <br>
+    ชื่อของฉัน
+    <input type="text"  class="form-control" id="user">
+    <br>
+         <label id="progressShow2" class="progressRingText" style="visibility: hidden" ><progress  class="withText"></progress><br>กำลังดำเนินการ</label>
+    <br>
+    <!--<input type="submit" onclick="insertRoute()"> [<a href='#' onclick='overlay("Route")'>cancel</a>]-->
+     <input class="btn btn-default btn-lg"  style="background-color:#39F;color:#FFF;width:80px" type="submit" onclick="insertRoute()" id="toAdd2" >
+    <input class="btn btn-default btn-lg"  style="background-color:#C30;color:#FFF" type="submit" onclick='overlay("Route")' id="toCancle2" value="ยกเลิก">
+  </div>
+                    </div>
+<div id="overlayPlace">
+                      <div>
+    <h1>เพิ่มสถานที่ของฉัน</h1>
+    <BR />
+    ชื่อสถานที่ <br>
+    <input type="text"   class="form-control" id="address" placeholder="ชื่อสถานที่เต็ม" onfocusout="codeAddress('address')"  style="width:100%;">
+    <br>
+    <br>
+    <!--                                                                                                        lat : <input type="text" id="lat" style="width:30%;" disabled="disabled"> lng : <input type="text" id="lng" style="width:30%;" disabled="disabled"><br><br>--> 
+    
+    รายละเอียด<br>
+    <input type="text"  class="form-control" id="detail">
+    </textarea>
+    <br>
+    <br>
+    ค่าเข้าชม
+    <input type="text"  class="form-control" id="cost" value="0">
+    <br>
+    <br>
+    ภาพ
+    <center>
+                          <input type="file" class="btn btn-default btn-lg" style="font-size:16px" id="fileUpload" accept="image/jpeg, image/png">
+                        </center>
+    <br>
+        <label id="progressShow" class="progressRingText" style="visibility: hidden" ><progress  class="withText"></progress><br>กำลังดำเนินการ</label>
+    <br>
+    <input class="btn btn-default btn-lg"  style="background-color:#39F;color:#FFF;width:80px;" type="submit" onclick="insertPlace()"  id="toAdd">
+    <input class="btn btn-default btn-lg"  style="background-color:#C30;color:#FFF" type="submit" onclick='overlay("Place")' id="toCancle" value="ยกเลิก">
+        <!--[<a href='#' onclick='overlay("Place")'>cancel</a>]--> 
+  </div>
+                    </div>
+</body>
 </html>
