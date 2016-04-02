@@ -81,8 +81,9 @@ function initialize() {
 
 //start set direction
 function calcRoute(lat, lng) {
-    var start = document.getElementById('start').value;
-    var end = '(' + lat + ',' + lng + ')';
+    //var start = document.getElementById('start').value;
+    var end =  lat + ',' + lng;
+    var start = userlat + ',' + userlng;;
     var request = {
         origin: start,
         destination: end,
@@ -96,7 +97,9 @@ function calcRoute(lat, lng) {
             directionsDisplay.setMap(map);
             directionsDisplay.setOptions({suppressMarkers: true});
         } else {
-            alert("service fail");
+            alert("Service fail");
+            console.log(status);
+            console.log(response);
         }
     });
     loaded;
@@ -168,7 +171,7 @@ function marker(lat, lng, title, number, pic) {
         position: myLatlng,
         map: map,
         title: title,
-        icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + (number+1) + "|FF0000|000000"
+        icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + (number + 1) + "|FF0000|000000"
     });
 
     google.maps.event.addListener(marker, 'click', function () {
@@ -261,7 +264,7 @@ function findPlaces() {
     var address = document.getElementById('start').value;
     var radius = document.getElementById('radius').value;
     geocoder.geocode({'address': address}, function (results, status) {
-        if ( userlat && userlng ) {
+        if ( ( userlat && userlng ) || status == google.maps.GeocoderStatus.OK) {
             //var lat = results[0].geometry.location.lat();
             //var lng = results[0].geometry.location.lng();
             var lat = userlat;
@@ -286,8 +289,8 @@ function findPlaces() {
                         taxi.push("");
                         times.push("");
                         distances.push("");
-                        var dest = "(" + place.array[count].lat + "," + place.array[count].lng + ")";
-                        var src = "(" + lat + "," + lng + ")";
+                        var dest = place.array[count].lat + "," + place.array[count].lng;
+                        var src =  lat + "," + lng;
                         var requestDistance = "https://maps.googleapis.com/maps/api/directions/json?origin=" + src + "&destination=" + dest + "&avoid=tolls|highways&key=" + apiKeys[count % apiKeys.length];
                         requestDirection(requestDistance, count);
                         place_ids[count] = (place.array[count].place_id);
@@ -456,10 +459,12 @@ function desByUser() {
 function requestDirection(link, index) {
     var servlet = 'ParseJSON?link=';
     var url = servlet + link;
+    console.log(link);
     var distance;
     var time;
     try {
         jQuery.getJSON(url, null, function (data) {
+            console.log(data);
             distance = data.routes[0].legs[0].distance.value;
             time = data.routes[0].legs[0].duration.text;
             taxi[index] = (calTaxi(distance));
@@ -499,8 +504,8 @@ function showRouteFromUser() {
     }
     if (routes[select] != "" && routes[select] != []) {
         for (var i = 0; i < routes[select].length; i++) {
-            if(routes[select][i][2]<=money)
-            temp += "<div id = \"resultFromUser\">" + routes[select][i][0] + "<br>total cost :" + routes[select][i][2] + "<br>By :" + routes[select][i][1] + "</div><br>";
+            if (routes[select][i][2] <= money)
+                temp += "<div id = \"resultFromUser\">" + routes[select][i][0] + "<br>total cost :" + routes[select][i][2] + "<br>By :" + routes[select][i][1] + "</div><br>";
         }
     } else {
         temp += "<div>No Data</div>";
