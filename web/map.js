@@ -207,11 +207,11 @@ function loading() {
 }
 
 function reset() {
-    document.getElementById("recBox").innerHTML = "loading . . .";
+    document.getElementById("recBox").innerHTML = "";
     document.getElementById("placeName").innerHTML = "";
     deleteMarkers();
     directionsDisplay.setMap(null);
-    document.getElementById("routebox").innerHTML = "...";
+    document.getElementById("routebox").innerHTML = "";
     routes.length = 0;
     lats.length = 0;
     lngs.length = 0;
@@ -385,7 +385,7 @@ function setRecomend() {
             if (routes[i] !== "") {
                 if (money >= taxi[i] + relate_costs[i] || money >= (routes[i][0][2] + relate_costs[i])) {
                     temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + count++ + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + count++ + " : " + tempName + " <br> taxi cost : " + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
                     avalible++;
@@ -393,7 +393,7 @@ function setRecomend() {
             } else {
                 if (money >= taxi[i] + relate_costs[i]) {
                     temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
-                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName\"  style = \"background-image: url(" + links[i] + ");\"><B>" + count++ + " : " + tempName + " <br> taxi cost :" + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
+                    temp += "<div id=\"place" + i + "\" class=\"positionSuggName list-group-item\"  style = \"background-image: url(" + links[i] + ");\"><B>" + count++ + " : " + tempName + " <br> taxi cost : " + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
                     avalible++;
@@ -459,7 +459,7 @@ function desByUser() {
 function requestDirection(link, index) {
     var servlet = 'ParseJSON?link=';
     var url = servlet + link;
-    console.log(link);
+    // console.log(link);
     var distance;
     var time;
     try {

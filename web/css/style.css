@@ -2,3 +2,12 @@
 #map-canvas {
 
 }
+
+div.positionSuggName {
+	text-shadow: 0px 0px 11px #000000 !important;
+	color: #FFF !important;
+}
+
+#control input,  #control select{
+  width: 100%;
+}

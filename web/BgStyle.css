@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-	
+
 #all {
 	height: 1500px;
 	width: 1140px;
@@ -151,18 +151,14 @@ body {
 	position: absolute;
 	left: 54px;
 	top: 86px;
-	
-	
+
+
 }
 
 .scrollbar
 {
-	
-	
 	background: #F5F5F5;
 	overflow-y: scroll;
-	
-
 }
 
 .scrollbar::-webkit-scrollbar-track
@@ -246,7 +242,7 @@ body {
 	top: 1329px;
 	left: 19px;
 	background-image: url(img/boxes4.png);
-	}
+}
 
 #fromUserBG{
 	position: absolute;
@@ -271,7 +267,7 @@ body {
 	position: absolute;
 	left: 27px;
 	top: 135px;
-	
+
 }
 
 #pin02{
@@ -284,14 +280,14 @@ body {
 	position: absolute;
 	left: 345px;
 	top: 705px;
-	
+
 }
 
 #pin04{
 	position: absolute;
 	left: 13px;
 	top: 1342px;
-	
+
 }
 
 #pin05{
@@ -311,7 +307,7 @@ body {
 	position: absolute;
 	left: 1094px;
 	top: 706px;
-	
+
 }
 #pin08{
 	position: absolute;
@@ -328,7 +324,7 @@ body {
 	background-position:center;
 	background-repeat:no-repeat;
 	background-image:url(img/mood%201.png);
-	
+
 }
 .pinR{
 	width: 50px;

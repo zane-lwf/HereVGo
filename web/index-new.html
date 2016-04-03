@@ -1,77 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>HereVGo</title>
+  <title>HereVGo</title>
 
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
+  <meta name="description" content="Finding a place near you.">
+  <meta name="author" content="utg">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 
 
-  </head>
-  <body>
+</head>
+<body>
 
-    <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-9">
-                                    <div id="map-canvas">
-                                    </div>
-				</div>
-				<div class="col-md-3">
-					<div class="list-group">
-						 <a href="#" class="list-group-item active">ค้นหาสถานที่</a>
-						<div class="list-group-item">
-							List header
-						</div>
-						<div class="list-group-item">
-							<h4 class="list-group-item-heading">
-								List group item heading
-							</h4>
-							<p class="list-group-item-text">
-								...
-							</p>
-						</div>
-						<div class="list-group-item">
-							<span class="badge">14</span>Help
-                                                </div>
-						<!--</div> <a class="list-group-item active"><span class="badge">14</span>Help</a>-->
-					</div>
-                                    		<div class="list-group">
-						 <a href="#" class="list-group-item active">สถานที่แนะนำ</a>
-						<div class="list-group-item">
-							List header
-						</div>
-						<div class="list-group-item">
-							<h4 class="list-group-item-heading">
-								List group item heading
-							</h4>
-							<p class="list-group-item-text">
-								...
-							</p>
-						</div>
-						<div class="list-group-item">
-							<span class="badge">14</span>Help
-                                                </div>
-						<!--</div> <a class="list-group-item active"><span class="badge">14</span>Help</a>-->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <script src="map.js"></script>
-    <script src="insertDB.js"></script>
-  </body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="list-group">
+              <div href="#" class="list-group-item active">ค้นหาสถานที่</div>
+              <div id="control">
+                <input class="list-group-item" id="start" type="text"  placeholder="ต้นทาง" onfocusout="locationByUser();" />
+                <input class="list-group-item"  id="money" onkeyup="checkInput(this)" type="text" placeholder="เงินที่มี" />
+                <select id="radius" class="list-group-item">
+                  <option value=1>1 km</option>
+                  <option value=5>5 km</option>
+                  <option value=10>10 km</option>
+                  <option value=25>25 km</option>
+                  <option value=50>50 km</option>
+                  <option value=100>100 km</option>
+                  <option value=10000000>unlimit</option>
+                </select>
+                <input class="list-group-item"  id="submit" type="submit" value="ค้นหา" onclick="reset()"/>
+              </div>
+            </div>
+            <div class="list-group">
+              <a href="#" class="list-group-item active" data-toggle="collapse" data-target="#btn">สถานที่แนะนำ</a>
+              <div id="btn">
+                <div id="suggDetail">
+                  <div id="recBox"></div>
+                </div>
+                <div id="placeName" ></div>
+                <div id="routebox" ></div>
+              </div>
+              <div class="list-group-item">
+                <div id="picLocate"></div>
+                <div id="picDisc"> </div>
+                <div id="textInPicDis">Welcome</div>
+                <div id="locateHead" class="headText">รายละเอียดสถานที่</div>
+              </div>
+              <!--</div> <a class="list-group-item active"><span class="badge">14</span>Help</a>-->
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div id="map-canvas">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="map.js"></script>
+  <script src="insertDB.js"></script>
+</body>
 </html>
