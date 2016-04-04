@@ -45,14 +45,6 @@
                 <div id="suggDetail">
                   <div id="recBox"></div>
                 </div>
-                <div id="placeName" ></div>
-                <div id="routebox" ></div>
-              </div>
-              <div class="list-group-item">
-                <div id="picLocate"></div>
-                <div id="picDisc"> </div>
-                <div id="textInPicDis">Welcome</div>
-                <div id="locateHead" class="headText">รายละเอียดสถานที่</div>
               </div>
               <!--</div> <a class="list-group-item active"><span class="badge">14</span>Help</a>-->
             </div>
@@ -65,6 +57,38 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="modal-container-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×
+          </button>
+          <h4 class="modal-title" id="myModalLabel">
+            <div id="placeName" ></div>
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div id="picLocate"></div>
+          <br>
+          <div id="textInPicDis">Welcome</div>
+          <br>
+          การเดินทางจากผู้ใช้ท่านอื่น
+          <div id="routebox"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+          <!-- <button type="button" class="btn btn-primary">
+            Save changes
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiEtqOtMKrFTOkPKdexB0djGKXfxy6xbM&libraries=places"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>

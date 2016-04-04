@@ -11,3 +11,19 @@ div.positionSuggName {
 #control input,  #control select{
   width: 100%;
 }
+
+#btn{
+    max-height: 45em;
+    overflow-y: auto;
+}
+
+#picLocate {
+	display: block;
+	width: 15em;
+	height: 15em;
+	background-image: url(img/picLocateFrist.png);
+	background-size: cover;
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+}

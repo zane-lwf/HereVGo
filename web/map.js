@@ -392,7 +392,7 @@ function setRecomend() {
                 }
             } else {
                 if (money >= taxi[i] + relate_costs[i]) {
-                    temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\">";
+                    temp += "<div class=\"suggBox\" onclick=\"onSelect(" + i + ");\" href=\"#modal-container-info\" role=\"button\" class=\"btn\" data-toggle=\"modal\">";
                     temp += "<div id=\"place" + i + "\" class=\"positionSuggName list-group-item\"  style = \"background-image: url(" + links[i] + ");\"><B>" + count++ + " : " + tempName + " <br> taxi cost : " + taxi[i] + "<br> time : " + times[i] + "<br> Distance : " + distances[i] + "</B></div>";
                     temp += "</div>";
                     marker(lats[i], lngs[i], names[i], i, links[i]);
